@@ -1,0 +1,93 @@
+# Add F12 to the prefix list
+set -g prefix F12
+
+# Keybindings
+bind-key -n F2 new-window \; rename-window ""
+bind-key -n C-F2 display-panes \; split-window -h
+bind-key -n S-F2 display-panes \; split-window -v
+bind-key -n C-S-F2 new-session
+
+bind-key -n F3 previous-window
+bind-key -n F4 next-window
+
+bind-key -n C-S-Left previous-window
+bind-key -n C-S-Right next-window
+
+bind-key -n M-Up choose-session \; send-keys Up \; send-keys Enter
+bind-key -n M-Down choose-session \; send-keys Down \; send-keys Enter
+
+bind-key -n S-F3 display-panes \; select-pane -t :.-
+bind-key -n S-F4 display-panes \; select-pane -t :.+
+bind-key -n S-Up display-panes \; select-pane -U
+bind-key -n S-Down display-panes \; select-pane -D
+bind-key -n S-Left display-panes \; select-pane -L
+bind-key -n S-Right display-panes \; select-pane -R
+
+bind-key -n C-F3 display-panes \; swap-pane -s :. -t :.- \; select-pane -t :.-
+bind-key -n C-F4 display-panes \; swap-pane -s :. -t :.+ \; select-pane -t :.+
+bind-key -n C-S-F3 swap-window -t :-1
+bind-key -n C-S-F4 swap-window -t :+1
+
+bind-key -n C-Up resize-pane -U
+bind-key -n C-Down resize-pane -D
+bind-key -n C-Left resize-pane -L
+bind-key -n C-Right resize-pane -R
+
+bind-key -n F5 source $HOME/.tmuxrc
+bind-key -n F6 detach
+bind-key -n C-F6 kill-pane
+bind-key -n F7 copy-mode
+bind-key -n M-NPage copy-mode \; send-keys NPage
+bind-key -n M-PPage copy-mode \; send-keys PPage
+bind-key -n F8 command-prompt -p "(rename-window)" "rename-window %%"
+
+bind-key -n M-F11 break-pane
+bind-key -n C-F11 join-pane -h -s :. -t :-1
+bind-key -n S-F11 join-pane -v -s :. -t :-1
+bind-key -n M-IC paste-buffer
+
+# Cannot use:
+#  - screen-bce, screen-256color-bce: tmux does not support bce
+#  - screen-256color: vim broken without -bce
+set -g default-terminal "screen"
+
+# The following helps with Shift-PageUp/Shift-PageDown
+set -g terminal-overrides 'xterm*:smcup@:rmcup@'
+
+# Must set default-command to $SHELL, in order to not source ~/.profile
+# BUG: Should *not* hardcode /bin/bash here
+set -g default-command $SHELL
+
+# scrollback buffer n lines
+set -g history-limit 5000
+
+# default statusbar colors
+set -g status-fg cyan
+set -g status-bg default
+set -g status-attr default
+set -g status-left "#[fg=green]host: (#[default]#[fg=yellow]#H#[default]#[fg=green]) | "
+set -g status-left-length 40
+set -g status-right-length 50
+set -g status-right ""
+
+# default window title colors
+set-option -g status-utf8 on
+set-option -g visual-activity on
+set-window-option -g monitor-activity on
+
+# active window title colors
+set-window-option -g window-status-current-fg yellow
+set-window-option -g window-status-current-bg default
+
+# "I' == current window index
+# 'H' == Hostname
+# 'F' == current window flag
+# 'P' == current pane index
+# 'S' == Session name
+# 'T' == current window title
+# 'W' == current window name
+# '#' == a literal "#"
+# Where appropriate, special character sequences may be prefixed with a
+# number to specify the maximum length, in this line "#10W'.
+set-window-option -g window-status-format '#I#F #10W '
+setw -g window-status-current-format '#I#F #10W'
