@@ -9,3 +9,4 @@ code/*
 .viminfo
 .vim/_backup/*
 .vim/_temp/*
+.config/*
