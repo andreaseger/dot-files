@@ -3,7 +3,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
-export ZSH_THEME="gentoo"
+export ZSH_THEME="agnoster"
 
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
@@ -35,7 +35,6 @@ export VISUAL=vim
 export LANGUAGE=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
