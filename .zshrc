@@ -37,6 +37,7 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 export JRUBY_OPTS="-Xcompile.invokedynamic=true -J-Xmn1024m -J-Xms4096m -J-Xmx4096m -J-server"
+export OMP_NUM_THREADS=8
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
