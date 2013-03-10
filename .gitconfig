@@ -1,5 +1,7 @@
 [user]
 	email = dev@eger-andreas.de
 	name = Andreas Eger
-[uer]
-	name = Andreas Eger
+[color]
+	ui = auto
+[merge]
+	ff = false
