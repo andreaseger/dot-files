@@ -1,5 +1,4 @@
 .ssh/*
-code/*
 .rbenv/versions/*
 .cache/*
 .byobu/*
@@ -10,3 +9,13 @@ code/*
 .vim/_backup/*
 .vim/_temp/*
 .config/*
+
+.gem
+.profile
+.pry_history
+.psql_history
+.rbx
+.rvm
+.sqlite_history
+.zprofile
+code/*
