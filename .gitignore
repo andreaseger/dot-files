@@ -12,10 +12,10 @@
 
 .gem
 .profile
-.pry_history
-.psql_history
+.*history
 .rbx
 .rvm
-.sqlite_history
 .zprofile
+.bash*
+.subversion
 code/*
