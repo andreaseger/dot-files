@@ -5,9 +5,11 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-alias gcam='git commit -a -v -m'
-alias gc='git checkout'
-alias gb='git branch'
+alias grb='git rebase -p'
+compdef _git grb=git-rebase
+alias gup='git fetch origin && grb origin/$(current_branch)'
+compdef _git gup=git-rebase
+alias gm='git merge --no-ff'
 
 alias b='bundle '
 alias be='bundle exec '
