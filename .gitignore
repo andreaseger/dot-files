@@ -18,4 +18,8 @@
 .zprofile
 .bash*
 .subversion
-code/*
+code
+master
+pjpp
+*.sublime-project
+*.sublime-workspace
