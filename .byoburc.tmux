@@ -10,3 +10,5 @@ bind-key -n M-i display-panes \; select-pane -U
 bind-key -n M-k display-panes \; select-pane -D
 bind-key -n M-j display-panes \; select-pane -L
 bind-key -n M-l display-panes \; select-pane -R
+
+source '$HOME/.local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf'
