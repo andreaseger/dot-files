@@ -41,3 +41,6 @@ export OMP_NUM_THREADS=4
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+export PATH=$PATH:/opt/vc/bin
+export LD_LIBRARY_PATH=$LD_LIBRARYPATH:/opt/vc/lib

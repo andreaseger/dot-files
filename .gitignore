@@ -9,6 +9,7 @@
 .vim/_backup/*
 .vim/_temp/*
 .config/*
+.zsh-update
 
 .gem
 .profile
