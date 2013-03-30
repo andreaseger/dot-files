@@ -28,6 +28,7 @@ source $HOME/.functions.zsh
 
 #export PATH=$PATH:/home/sch1zo/opt/rbx/bin:/home/sch1zo/opt/rbx/gems/bin
 #export PATH=$PATH:/opt/ruby/bin
+export PATH=$PATH:$HOME/.local/bin
 
 export EDITOR=vim
 export VISUAL=vim
