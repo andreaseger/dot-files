@@ -4,3 +4,6 @@
 [submodule ".vim"]
 	path = .vim
 	url = git://github.com/carlhuda/janus.git
+[submodule ".powerline"]
+	path = .powerline
+	url = git://github.com/Lokaltog/powerline.git
