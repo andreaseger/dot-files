@@ -25,5 +25,6 @@
 !.zlogout
 !.zprofile
 !.zshrc
+!.zshenv
 !agnoster-patched.zsh-theme
 
