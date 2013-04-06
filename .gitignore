@@ -3,7 +3,8 @@
 
 # execpt for important dot-files
 !.oh-my-zsh
-!.vim
+!.vim/backup/.gitkeep
+!.vim/bundle/vundle
 !.aliases.zsh
 !.byoburc.tmux
 !.extract.zsh
@@ -20,8 +21,6 @@
 !.tmux.conf
 !.tmux.keybindings
 !.vimrc
-!.vimrc.after
-!.vimrc.before
 !.zlogout
 !.zprofile
 !.zshrc
