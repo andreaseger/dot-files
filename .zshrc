@@ -46,6 +46,10 @@ export LC_ALL=en_US.UTF-8
 #export PATH=$PATH:/opt/vc/bin
 #export LD_LIBRARY_PATH=$LD_LIBRARYPATH:/opt/vc/lib
 
+# golang
+PATH=$PATH:$HOME/gocode/bin
+GOPATH=$HOME/gocode
+
 # load local settings
 if [ -r "$HOME/.zshrc.local" ]; then
   source "$HOME/.zshrc.local"
