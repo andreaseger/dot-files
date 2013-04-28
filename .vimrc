@@ -32,6 +32,9 @@ Bundle 'jeetsukumaran/vim-buffergator'
 Bundle 'ap/vim-css-color'
 Bundle 'wgibbs/vim-irblack'
 
+" golang
+Bundle 'nsf/gocode', {'rtp': 'vim/'}
+
 filetype plugin indent on
 
 set number
