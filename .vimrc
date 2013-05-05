@@ -85,6 +85,9 @@ au BufNewFile,BufRead *.json set ft=javascript
 
 au BufRead,BufNewFile *.txt call s:setupWrapping()
 
+" golang specific settings
+au FileType go setlocal noexpandtab softtabstop=0
+
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
