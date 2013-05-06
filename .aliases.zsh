@@ -1,6 +1,7 @@
 # my own aliases
 alias sudp='sudo '
 alias sudo='sudo '
+alias l="ls -lah"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
