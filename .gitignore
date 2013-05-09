@@ -2,6 +2,9 @@
 /*
 
 # execpt for important dot-files
+!.config/fish
+!.config/powerline
+!.powerline
 !.oh-my-zsh
 !.vim/backup/.gitkeep
 !.vim/bundle/vundle
@@ -13,18 +16,11 @@
 !.gitconfig
 !.gitignore
 !.gitmodules
-!.gvimrc
-!.gvimrc.after
 !.irbrc
 !.pryrc
 !.screenrc
 !.tmux.conf
 !.tmux.keybindings
 !.vimrc
-!.zlogout
-!.zprofile
-!.zshrc
-!.zshenv
-!agnoster-patched.zsh-theme
 !.git
 

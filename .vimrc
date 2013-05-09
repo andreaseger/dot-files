@@ -35,6 +35,9 @@ Bundle 'wgibbs/vim-irblack'
 " golang
 Bundle 'nsf/gocode', {'rtp': 'vim/'}
 
+"fish
+Bundle 'aliva/vim-fish'
+
 filetype plugin indent on
 
 set number
