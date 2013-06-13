@@ -4,8 +4,6 @@
 # execpt for important dot-files
 !.config/fish
 !.config/powerline
-!.powerline
-!.oh-my-zsh
 !.vim/backup/.gitkeep
 !.vim/bundle/vundle
 !.aliases.zsh

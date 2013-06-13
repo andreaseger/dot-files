@@ -144,7 +144,7 @@ call ToogleRelativeNumber()
 set timeoutlen=1000 ttimeoutlen=10
 
 " powerline
-set rtp+=~/.powerline/powerline/bindings/vim
+" set rtp+=~/.powerline/powerline/bindings/vim
 set laststatus=2
 
 " colorschema
