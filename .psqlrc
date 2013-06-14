@@ -1,0 +1,4 @@
+\encoding utf8
+\timing
+\set ON_ERROR_ROLLBACK interactive
+\set PROMPT1 '%n@%m:%/%x=# '

@@ -1,0 +1,35 @@
+# git.plugin.zsh
+# Aliases
+
+abbreviate g 'git'
+abbreviate gst 'git status'
+abbreviate gbr 'git rebase -p'
+abbreviate gup 'git fetch; and gbr origin/(current_branch)'
+
+abbreviate gc 'git commit -v'
+abbreviate gca 'git commit -v -a'
+abbreviate gco 'git checkout'
+abbreviate gb 'git branch'
+abbreviate gba 'git branch -a'
+
+abbreviate gcount 'git shortlog -sn'
+abbreviate glg 'git log --stat --max-count=5'
+abbreviate glgg 'git log --graph --max-count=5'
+abbreviate glgga 'git log --graph --decorate --all'
+abbreviate gss 'git status -s'
+abbreviate ga 'git add'
+abbreviate gm 'git merge --no-ff'
+abbreviate gmff 'git merge -ff'
+abbreviate gf 'git ls-files | grep'
+
+#abbreviate gpoat 'git push origin --all; and git push origin --tags'
+
+# Will cd into the top of the current repository
+# or submodule.
+abbreviate grt 'cd (git rev-parse --show-toplevel; or echo ".")'
+
+# these aliases take advantage of the previous function
+abbreviate ggpull 'git pull origin (current_branch)'
+abbreviate ggpush 'git push origin (current_branch)'
+abbreviate ggpnp 'git pull origin (current_branch); and git push origin (current_branch)'
+

@@ -2,8 +2,9 @@
 /*
 
 # execpt for important dot-files
-!.config/fish
-!.config/powerline
+!.config/fish/*
+!.config/fish/functions/*.fish
+!.config/fish/load/*.fish
 !.vim/backup/.gitkeep
 !.vim/bundle/vundle
 !.aliases.zsh
@@ -16,6 +17,7 @@
 !.gitmodules
 !.irbrc
 !.pryrc
+!.psqlrc
 !.screenrc
 !.tmux.conf
 !.tmux.keybindings
