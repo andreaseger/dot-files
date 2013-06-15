@@ -46,6 +46,10 @@ function fish_prompt --description 'Write out the prompt'
 
   set -l last_status $status
 
+  if test $USER = root
+    set_color $fish_color_cwd_root
+    echo -n '[root] '
+  end
   set_color $fish_color_cwd
   echo -n (prompt_pwd)
   set_color normal
