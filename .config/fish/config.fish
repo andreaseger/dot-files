@@ -24,6 +24,7 @@ function fish_user_key_bindings
 end
 
 alias !    "sudo"
+alias !!   "sudo su"
 alias tf   "tail -f"
 alias l    'ls -lah'
 alias l.   'ls -d .*'
