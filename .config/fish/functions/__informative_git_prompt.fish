@@ -17,10 +17,14 @@ set -g fish_prompt_git_remote_ahead_of "↑"
 set -g fish_prompt_git_remote_behind  "↓"
 
 set -g fish_prompt_git_status_staged "●"
-set -g fish_prompt_git_status_conflicted '✖'
-set -g fish_prompt_git_status_changed '✚'
+#set -g fish_prompt_git_status_conflicted "﻿✖"
+#set -g fish_prompt_git_status_changed "﻿✚"
+#set -g fish_prompt_git_status_untracked "…"
+#set -g fish_prompt_git_status_clean "﻿✔"
+set -g fish_prompt_git_status_conflicted "×"
+set -g fish_prompt_git_status_changed "±"
 set -g fish_prompt_git_status_untracked "…"
-set -g fish_prompt_git_status_clean "✔"
+set -g fish_prompt_git_status_clean "√"
 
 set -g fish_prompt_git_status_git_dir "*"
 set -g fish_prompt_git_remote_space ""
