@@ -1,5 +1,12 @@
 set fish_greeting ""
 
+if which tmux 2>&1 >/dev/null
+    #if not inside a tmux session, and if no session is started, start a new session
+    if test -z "$TMUX"
+      exec tmux attach
+    end
+end
+
 set fish_path ~/.config/fish
 
 for preload in (ls $fish_path/load)
