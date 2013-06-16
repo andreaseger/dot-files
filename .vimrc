@@ -32,6 +32,7 @@ Bundle 'jeetsukumaran/vim-buffergator'
 
 Bundle 'ap/vim-css-color'
 Bundle 'wgibbs/vim-irblack'
+Bundle 'cometsong/statline.vim'
 
 " golang
 Bundle 'nsf/gocode', {'rtp': 'vim/'}
@@ -144,8 +145,6 @@ call ToogleRelativeNumber()
 " eliminate delay on ESC
 set timeoutlen=1000 ttimeoutlen=10
 
-" powerline
-" set rtp+=~/.powerline/powerline/bindings/vim
 set laststatus=2
 
 " colorschema
