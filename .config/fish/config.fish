@@ -1,10 +1,15 @@
 set fish_greeting ""
 
-if which tmux 2>&1 >/dev/null
-    #if not inside a tmux session, and if no session is started, start a new session
-    if test -z "$TMUX"
-      exec tmux attach
-    end
+if status --is-login
+  if which tmux 2>&1 >/dev/null
+      #if not inside a tmux session, and if no session is started, start a new session
+      if test -z "$TMUX"
+        exec tmux attach
+      end
+  end
+  if test -e ~/.local.fish
+    . ~/.local.fish
+  end
 end
 
 set fish_path ~/.config/fish
