@@ -23,19 +23,19 @@ function fish_user_key_bindings
   bind \n '__fish_expand_abbreviation; commandline -f execute'
 end
 
-abbreviate !    "sudo"
-abbreviate tf   "tail -f"
-abbreviate l    'ls -lah'
-abbreviate l.   'ls -d .*'
-abbreviate ll   'ls -lh'
+alias !    "sudo"
+alias tf   "tail -f"
+alias l    'ls -lah'
+alias l.   'ls -d .*'
+alias ll   'ls -lh'
 
-abbreviate b    'bundle'
+alias b    'bundle'
 abbreviate be   'bundle exec'
 
 alias subl subl3
-abbreviate s 'subl3'
+alias s 'subl3'
 
-abbreviate h '~'
+alias h '~'
 
 
 function terminal_server
