@@ -31,5 +31,5 @@ alias grt 'cd (git rev-parse --show-toplevel; or echo ".")'
 # these aliases take advantage of the previous function
 #alias ggpull 'git pull origin (current_branch)'
 abbreviate ggpush "git push (upstream_branch | sed 's/\// /')"
-alias ggpnp 'git pull (upstream_branch | sed 's/\// /'); and git push (upstream_branch | sed 's/\// /')'
+alias ggpnp "git pull (upstream_branch | sed 's/\// /'); and git push (upstream_branch | sed 's/\// /')"
 
