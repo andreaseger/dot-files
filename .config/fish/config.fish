@@ -1,20 +1,24 @@
 set fish_greeting ""
 
-if status --is-login
-  if which tmux 2>&1 >/dev/null
-      #if not inside a tmux session, and if no session is started, start a new session
-      if test -z "$TMUX"
-        exec tmux attach
-      end
-  end
-  if test -e ~/.local.fish
-    . ~/.local.fish
-  end
-end
+#if status --is-login
+#  if which tmux 2>&1 >/dev/null
+#      #if not inside a tmux session, and if no session is started, start a new session
+#      if test -z "$TMUX"
+#        exec tmux attach
+#      end
+#  end
+#end
 
 set fish_path ~/.config/fish
-set fish_function_path $fish_function_path (find $fish_path/functions/* -type d)
-
+set fish_local_functions_path $fish_path/functions.(hostname)
+set fish_function_path $fish_function_path $fish_local_functions_path (find $fish_path/functions/* -type d)
+# load local config (stuff like PATH)
+begin
+  set -l fish_local_config $fish_path/config.(hostname).fish
+  if test -e $fish_local_config
+    . $fish_local_config
+  end
+end
 for preload in (ls $fish_path/load)
   . $fish_path/load/$preload
 end
