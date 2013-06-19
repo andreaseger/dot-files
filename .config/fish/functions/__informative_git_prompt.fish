@@ -17,14 +17,21 @@ set -g fish_prompt_git_remote_ahead_of "↑"
 set -g fish_prompt_git_remote_behind  "↓"
 
 set -g fish_prompt_git_status_staged "●"
-#set -g fish_prompt_git_status_conflicted "﻿✖"
-#set -g fish_prompt_git_status_changed "﻿✚"
-#set -g fish_prompt_git_status_untracked "…"
-#set -g fish_prompt_git_status_clean "﻿✔"
+set -g fish_prompt_git_status_untracked "…"
+
+#set -g fish_prompt_git_status_conflicted '✖'
+#set -g fish_prompt_git_status_changed '✚'
+#set -g fish_prompt_git_status_clean "✔"
+
 set -g fish_prompt_git_status_conflicted "×"
 set -g fish_prompt_git_status_changed "±"
-set -g fish_prompt_git_status_untracked "…"
 set -g fish_prompt_git_status_clean "√"
+
+set -g fish_prompt_git_show_count_staged "true"
+set -g fish_prompt_git_show_count_conflicted "true"
+set -g fish_prompt_git_show_count_changed "true"
+set -g fish_prompt_git_show_count_untracked "false"
+set -g fish_prompt_git_show_count_clean "true"
 
 set -g fish_prompt_git_status_git_dir "*"
 set -g fish_prompt_git_remote_space ""
@@ -48,8 +55,6 @@ function __informative_git_prompt --description 'Write out the git prompt'
     printf "(%s|%s)" (___fish_git_print_branch_info) $git_status_info
 
 end
-
-
 
 function ___fish_git_print_branch_info
 
@@ -91,7 +96,13 @@ function ___fish_git_print_status_info
                 set -l color_name fish_color_git_$i
                 set -l status_name fish_prompt_git_status_$i
                 set -l color (set_color $$color_name)
-                set -l info $$status_name$$i
+                set -l visible fish_prompt_git_show_count_$i
+                set -l info
+                if [ "true" = $$visible ]
+                    set info $$status_name$$i
+                else
+                    set info $$status_name
+                end
                 set git_status "$git_status$color$info"
             end
         end

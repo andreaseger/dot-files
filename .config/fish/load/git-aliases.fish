@@ -4,7 +4,7 @@
 abbreviate g 'git'
 abbreviate gst 'git status'
 alias gbr 'git rebase -p'
-abbreviate gup 'git fetch; and gbr origin/(current_branch)'
+alias gup 'git fetch; and gbr (upstream_branch)'
 
 abbreviate gc 'git commit -v'
 abbreviate gca 'git commit -v -a'
@@ -30,6 +30,6 @@ alias grt 'cd (git rev-parse --show-toplevel; or echo ".")'
 
 # these aliases take advantage of the previous function
 #alias ggpull 'git pull origin (current_branch)'
-abbreviate ggpush 'git push origin (current_branch)'
-alias ggpnp 'git pull origin (current_branch); and git push origin (current_branch)'
+abbreviate ggpush "git push (upstream_branch | sed 's/\// /')"
+alias ggpnp 'git pull (upstream_branch | sed 's/\// /'); and git push (upstream_branch | sed 's/\// /')'
 

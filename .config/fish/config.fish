@@ -13,6 +13,7 @@ if status --is-login
 end
 
 set fish_path ~/.config/fish
+set fish_function_path $fish_function_path (find $fish_path/functions/* -type d)
 
 for preload in (ls $fish_path/load)
   . $fish_path/load/$preload
@@ -37,30 +38,3 @@ alias subl subl3
 alias s 'subl3'
 
 alias h '~'
-
-
-function terminal_server
-  rdesktop -g 1440x900 -P -z -x l -u aeger@experteer.muc 192.168.100.241
-end
-
-function fish_prompt --description 'Write out the prompt'
-
-  set -l last_status $status
-
-  if test $USER = root
-    set_color $fish_color_cwd_root
-    echo -n '[root] '
-  end
-  set_color $fish_color_cwd
-  echo -n (prompt_pwd)
-  set_color normal
-
-  __informative_git_prompt
-
-  if not test $last_status -eq 0
-    set_color $fish_color_error
-  end
-
-  echo -n ' $ '
-
-end
