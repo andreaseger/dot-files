@@ -11,6 +11,8 @@ set fish_greeting ""
 
 set fish_path ~/.config/fish
 set fish_function_path $fish_function_path (find $fish_path/functions/* -type d)
+set fish_user_paths ~/.local/bin
+
 # load local config (stuff like PATH)
 begin
   set -l fish_local_config $fish_path/config.(hostname).fish
