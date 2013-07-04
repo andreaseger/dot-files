@@ -32,7 +32,10 @@ Bundle 'jeetsukumaran/vim-buffergator'
 
 Bundle 'ap/vim-css-color'
 Bundle 'wgibbs/vim-irblack'
-Bundle 'cometsong/statline.vim'
+"Bundle 'cometsong/statline.vim'
+Bundle 'bling/vim-bufferline'
+Bundle 'bling/vim-airline'
+Bundle 'airblade/vim-gitgutter'
 
 " golang
 Bundle 'nsf/gocode', {'rtp': 'vim/'}
@@ -85,10 +88,13 @@ au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=r
 " md, markdown, and mk are markdown and define buffer-local preview
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
 
-" add json syntax highlighting
-au BufNewFile,BufRead *.json set ft=javascript
+" detect vimrc as vim file
+au BufRead,BufNewFile {.vimrc} set ft=vim
 
-au BufRead,BufNewFile *.txt call s:setupWrapping()
+" add json syntax highlighting
+au BufNewFile,BufRead *.{json} set ft=javascript
+
+au BufRead,BufNewFile *.{txt} call s:setupWrapping()
 
 " golang specific settings
 au FileType go setlocal noexpandtab softtabstop=0
@@ -150,6 +156,7 @@ set laststatus=2
 " colorschema
 color ir_black
 
+"save as sudo trick
 cmap w!! %!sudo tee > /dev/null %
 
 " nicer pasting
@@ -158,25 +165,8 @@ set pastetoggle=<F12>
 " call commands with ; instead of :
 nnoremap ; :
 
-if &term =~ "xterm\\|rxvt"
-    " use an orange cursor in insert mode
-    let &t_SI = "\<Esc>]12;orange\x7"
-    " use a red cursor otherwise
-    let &t_EI = "\<Esc>]12;red\x7"
-    silent !echo -ne "\033]12;red\007"
-    " reset cursor when vim exits
-    autocmd VimLeave * silent !echo -ne "\033]112\007"
-    " use \003]12;gray\007 for gnome-terminal
-endif
+" enable basic mouse support
+set mouse=a
 
-if &term =~ "^xterm"
-  " solid underscore
-  let &t_SI .= "\<Esc>[4 q"
-  " solid block
-  let &t_EI .= "\<Esc>[2 q"
-  " 1 or 0 -> blinking block
-  " 3 -> blinking underscore
-  " Recent versions of xterm (282 or above) also support
-  " 5 -> blinking vertical bar
-  " 6 -> solid vertical bar
-endif
+" show a column indicator at textwidth
+set colorcolumn=+1

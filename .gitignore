@@ -1,16 +1,13 @@
-# Ignore everything
+# Ignore everything except fish config
 /*
+!/.config/
+/.config/*
+!/.config/fish
 
-# execpt for important dot-files
-!.config/fish/*
-!.config/fish/functions/*.fish
-!.config/fish/load/*.fish
+# execptions for more important dot-files
 !.vim/backup/.gitkeep
 !.vim/bundle/vundle
-!.aliases.zsh
 !.byoburc.tmux
-!.extract.zsh
-!.functions.zsh
 !.gemrc
 !.gitconfig
 !.gitignore
