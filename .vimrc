@@ -166,7 +166,19 @@ set pastetoggle=<F12>
 nnoremap ; :
 
 " enable basic mouse support
-set mouse=a
+"set mouse=a
 
 " show a column indicator at textwidth
-set colorcolumn=+1
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
+" highlight the 80th column
+"
+" In Vim >= 7.3, also highlight columns 120+
+if exists('+colorcolumn')
+  " (I picked 120-320 because you have to provide an upper bound and 320 just
+  "  covers a 1080p GVim window in Ubuntu Mono 11 font.)
+  let &colorcolumn="80,".join(range(120,320),",")
+else
+  " fallback for Vim < v7.3
+  autocmd BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+
