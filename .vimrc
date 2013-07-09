@@ -32,8 +32,9 @@ Bundle 'jeetsukumaran/vim-buffergator'
 
 Bundle 'ap/vim-css-color'
 Bundle 'wgibbs/vim-irblack'
+"Bundle 'altercation/vim-colors-solarized'
 "Bundle 'cometsong/statline.vim'
-Bundle 'bling/vim-bufferline'
+"Bundle 'bling/vim-bufferline'
 Bundle 'bling/vim-airline'
 Bundle 'airblade/vim-gitgutter'
 
@@ -156,6 +157,11 @@ set laststatus=2
 " colorschema
 color ir_black
 
+" solarized
+"set background=dark
+"let g:solarized_termcolors=256
+"colorscheme solarized
+
 "save as sudo trick
 cmap w!! %!sudo tee > /dev/null %
 
@@ -181,4 +187,16 @@ else
   " fallback for Vim < v7.3
   autocmd BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
+
+" airline settings
+" remove separators
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+" remove unused modes
+let g:airline_enable_fugitive=0
+let g:airline_enable_syntastic=1
+" set second section to filename
+let g:airline_section_b="%f"
+" empty third sections
+let g:airline_section_c=""
 
