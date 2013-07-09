@@ -1,0 +1,5 @@
+[
+  { "keys": ["ctrl+s"], "command": "toggle_side_bar" },
+  { "keys": ["super+alt+b"], "command": "blame" },
+  { "keys": ["ctrl+w"], "command": "close" }
+]

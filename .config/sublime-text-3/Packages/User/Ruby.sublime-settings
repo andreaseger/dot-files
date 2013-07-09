@@ -1,0 +1,9 @@
+{
+	"extensions":
+	[
+		"ru",
+		"Vagrantfile",
+		"rb",
+		"Guardfile"
+	]
+}

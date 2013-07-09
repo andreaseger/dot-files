@@ -1,0 +1,23 @@
+{
+	"installed_packages":
+	[
+		"All Autocomplete",
+		"CoffeeScript",
+		"CTags",
+		"FileDiffs",
+		"fish-shell",
+		"GitGutter",
+		"Package Control",
+		"RSpec (snippets and syntax)",
+		"Sass",
+		"Solarized Light-Dark Toggle",
+		"SublimeBlockCursor",
+		"Theme - Soda",
+		"TrailingSpaces",
+		"Vintageous"
+	],
+	"repositories":
+	[
+		"https://github.com/guillermooo/Vintageous.git"
+	]
+}
