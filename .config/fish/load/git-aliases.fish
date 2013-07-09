@@ -7,10 +7,11 @@ alias gbr 'git rebase -p'
 alias gup 'git fetch; and gbr (upstream_branch)'
 
 abbreviate gc 'git commit -v'
-abbreviate gca 'git commit -v -a'
+alias gca 'git commit -v -a'
 abbreviate gco 'git checkout'
 abbreviate gb 'git branch'
 abbreviate gba 'git branch -a'
+abbreviate gd 'git diff'
 
 alias gcount 'git shortlog -sn'
 alias glg 'git log --stat --max-count=5'
