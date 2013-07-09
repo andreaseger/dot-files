@@ -32,7 +32,7 @@ Bundle 'jeetsukumaran/vim-buffergator'
 
 Bundle 'ap/vim-css-color'
 Bundle 'wgibbs/vim-irblack'
-Bundle 'altercation/vim-colors-solarized'
+"Bundle 'altercation/vim-colors-solarized'
 "Bundle 'cometsong/statline.vim'
 "Bundle 'bling/vim-bufferline'
 Bundle 'bling/vim-airline'
@@ -155,12 +155,12 @@ set timeoutlen=1000 ttimeoutlen=10
 set laststatus=2
 
 " colorschema
-"color ir_black
+color ir_black
 
 " solarized
-set background=dark
+"set background=dark
 "let g:solarized_termcolors=256
-colorscheme solarized
+"colorscheme solarized
 
 "save as sudo trick
 cmap w!! %!sudo tee > /dev/null %

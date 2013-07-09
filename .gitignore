@@ -15,7 +15,7 @@
 !/.config/sublime-text-3/Packages/User/*.sublime-settings
 !/.config/sublime-text-3/Packages/User/*.tmTheme
 
-# execptions for more important dot-files
+ execptions for more important dot-files
 !.vim/backup/.gitkeep
 !.vim/bundle/vundle
 !.byoburc.tmux
