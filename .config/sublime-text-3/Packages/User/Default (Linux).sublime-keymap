@@ -1,5 +1,6 @@
 [
   { "keys": ["ctrl+s"], "command": "toggle_side_bar" },
   { "keys": ["super+alt+b"], "command": "blame" },
-  { "keys": ["ctrl+w"], "command": "close" }
+  { "keys": ["ctrl+w"], "command": "close" },
+  { "keys": ["ctrl+f5"], "command": "refresh_folder_list" }
 ]
