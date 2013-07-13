@@ -11,7 +11,6 @@ set fish_greeting ""
 
 set fish_path ~/.config/fish
 set fish_function_path $fish_function_path (find $fish_path/functions/* -type d)
-set fish_user_paths ~/.local/bin
 
 # load local config (stuff like PATH)
 begin
@@ -22,6 +21,10 @@ begin
   set -l fish_local_functions $fish_path/functions.(hostname)
   if test -e $fish_local_functions
     set fish_function_path $fish_function_path $fish_local_functions
+  end
+  set -l fish_local_bins $HOME/.local/bin
+  if test -e $fish_local_bins
+    set fish_user_paths $fish_user_bins
   end
 end
 for preload in (ls $fish_path/load)
