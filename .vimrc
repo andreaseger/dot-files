@@ -46,7 +46,6 @@ Bundle 'aliva/vim-fish'
 
 filetype plugin indent on
 
-set number
 set ruler
 syntax on
 
@@ -133,7 +132,7 @@ runtime! macros/matchit.vim
 set showcmd
 
 " source:  http://stackoverflow.com/questions/4387210/vim-how-to-map-two-tasks-under-one-shortcut-key
-let g:relativenumber = 0
+let g:relativenumber = 1
 function! ToogleRelativeNumber()
 	if g:relativenumber == 0
 		let g:relativenumber = 1
@@ -199,4 +198,9 @@ let g:airline_enable_syntastic=1
 let g:airline_section_b="%f"
 " empty third sections
 let g:airline_section_c=""
+
+" relative numbers only in command mode
+set relativenumber
+autocmd InsertEnter,WinLeave * :set norelativenumber
+autocmd InsertLeave,WinEnter * :set relativenumber
 
