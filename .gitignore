@@ -1,5 +1,8 @@
-# Ignore everything except fish config
+# Ignore almost everything
 /*
+!/.local/
+/.local/*
+!/.local/bin
 !/.config/
 /.config/*
 !/.config/fish

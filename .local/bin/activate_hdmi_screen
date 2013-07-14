@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# https://wiki.archlinux.org/index.php/Bumblebee#xf86-video-intel-virtual-crtc_and_hybrid-screenclone
+# https://github.com/liskin/hybrid-screenclone
+
+# activate nvidia
+sudo tee /proc/acpi/bbswitch <<< ON
+
+# start second X on nvidia
+sudo optirun true
+
+# setup second screen
+xrandr --output VIRTUAL1 --mode 1920x1080 --output LVDS1 --auto --rotate normal --right-of VIRTUAL1
+
+# clone
+screenclone -d :8 -x 1 &
+sudo tee /run/screenclone.pid <<< $!

@@ -1,0 +1,22 @@
+#!/bin/env ruby
+
+# https://wiki.archlinux.org/index.php/Bumblebee#xf86-video-intel-virtual-crtc_and_hybrid-screenclone
+# https://github.com/liskin/hybrid-screenclone
+
+# kill screenclone
+if File.exists? '/run/screenclone.pid'
+  `sudo kill #{IO.read('/run/screenclone.pid')}`
+  `sudo rm /run/screenclone.pid`
+end
+
+# kill bumblebee X
+if optirun_pid = `optirun --status`.match(/PID (\d+)/)
+  `sudo kill #{optirun_pid[1]}`
+end
+
+# wait a moment before unloading nvidia
+sleep 2
+
+# unload & deactivate nvidia
+`sudo rmmod nvidia`
+`sudo tee /proc/acpi/bbswitch <<< OFF`
