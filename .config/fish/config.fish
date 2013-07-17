@@ -30,7 +30,7 @@ function fish_user_key_bindings
   bind \n '__fish_expand_abbreviation; commandline -f execute'
 end
 
-alias !    "sudo"
+abbreviate !    "sudo"
 alias !!   "sudo su"
 alias tf   "tail -f"
 alias l    'ls -lah'
