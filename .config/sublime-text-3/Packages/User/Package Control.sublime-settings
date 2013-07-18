@@ -5,6 +5,7 @@
 		"CoffeeScript",
 		"Color Highlighter",
 		"CTags",
+		"EJS",
 		"FileDiffs",
 		"fish-shell",
 		"GitGutter",
@@ -14,8 +15,7 @@
 		"Solarized Light-Dark Toggle",
 		"SublimeBlockCursor",
 		"Theme - Soda",
-		"TrailingSpaces",
-		"Vintageous"
+		"TrailingSpaces"
 	],
 	"repositories":
 	[
