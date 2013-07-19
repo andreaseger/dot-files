@@ -3,6 +3,10 @@
 !/.local/
 /.local/*
 !/.local/bin
+!/.local/share
+/.local/share/*
+!/.local/share/terminfo
+
 !/.config/
 /.config/*
 !/.config/fish
