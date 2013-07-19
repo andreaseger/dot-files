@@ -1,24 +1,24 @@
 # git.plugin.zsh
 # Aliases
 
-abbreviate g 'git'
-abbreviate gst 'git status'
+abbreviate 'g=git'
+abbreviate 'gst=git status'
 alias gbr 'git rebase -p'
 alias gup 'git fetch; and gbr (upstream_branch)'
 
-abbreviate gc 'git commit -v'
+abbreviate 'gc=git commit -v'
 alias gca 'git commit -v -a'
-abbreviate gco 'git checkout'
-abbreviate gb 'git branch'
-abbreviate gba 'git branch -a'
-abbreviate gd 'git diff'
+abbreviate 'gco=git checkout'
+abbreviate 'gb=git branch'
+abbreviate 'gba=git branch -a'
+abbreviate 'gd=git diff'
 
 alias gcount 'git shortlog -sn'
 alias glg 'git log --stat --max-count=5'
 alias glgg 'git log --graph --max-count=5'
 alias glgga 'git log --graph --decorate --all'
 alias gss 'git status -s'
-abbreviate ga 'git add'
+abbreviate 'ga=git add'
 alias gm 'git merge --no-ff'
 alias gmff 'git merge -ff'
 alias gf 'git ls-files | grep'

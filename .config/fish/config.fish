@@ -2,6 +2,8 @@ set fish_greeting ""
 
 set -l fish_path ~/.config/fish
 set fish_function_path $fish_function_path (find $fish_path/functions/* -type d)
+# setup/init fish_user_abbreviations
+set -U fish_user_abbreviations '!=sudo'
 
 # load local config (stuff like PATH)
 begin
@@ -25,12 +27,7 @@ for preload in (ls $fish_path/load)
   . $fish_path/load/$preload
 end
 
-function fish_user_key_bindings
-  bind \  '__fish_expand_abbreviation; commandline -i " "'
-  bind \n '__fish_expand_abbreviation; commandline -f execute'
-end
-
-abbreviate !    "sudo"
+abbreviate '!=sudo'
 alias !!   "sudo su"
 alias tf   "tail -f"
 alias l    'ls -lah'
@@ -38,7 +35,7 @@ alias l.   'ls -d .*'
 alias ll   'ls -lh'
 
 alias b    'bundle'
-abbreviate be   'bundle exec'
+abbreviate 'be=bundle exec'
 
 alias subl subl3
 alias s 'subl3'
