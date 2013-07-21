@@ -7,11 +7,11 @@ set -U fish_user_abbreviations '!=sudo'
 
 # load local config (stuff like PATH)
 begin
-  set -l x $fish_path/config.(hostname).fish
+  set -l x $fish_path/config.(hostname -s).fish
   if test -e $x
     . $x
   end
-  set -l x $fish_path/functions.(hostname)
+  set -l x $fish_path/functions.(hostname -s)
   if test -e $x
     set fish_function_path $fish_function_path $x
   end
