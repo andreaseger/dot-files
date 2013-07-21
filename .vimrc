@@ -93,6 +93,8 @@ au BufRead,BufNewFile {.vimrc} set ft=vim
 
 " add json syntax highlighting
 au BufNewFile,BufRead *.{json} set ft=javascript
+" fix mustache
+au BufNewFile,BufRead *.{mustache} set ft=mustache
 
 au BufRead,BufNewFile *.{txt} call s:setupWrapping()
 
