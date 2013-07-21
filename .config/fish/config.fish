@@ -28,6 +28,7 @@ for preload in (ls $fish_path/load)
 end
 
 abbreviate '!=sudo'
+alias !    'sudo'
 alias !!   "sudo su"
 alias tf   "tail -f"
 alias l    'ls -lah'
