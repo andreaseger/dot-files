@@ -1,3 +1,6 @@
 [submodule ".vim/bundle/vundle"]
 	path = .vim/bundle/vundle
 	url = https://github.com/gmarik/vundle.git
+[submodule ".config/sublime-text-3/Packages/Package Control"]
+	path = .config/sublime-text-3/Packages/Package Control
+	url = https://github.com/wbond/sublime_package_control.git
