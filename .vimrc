@@ -20,7 +20,7 @@ Bundle 'ervandew/supertab'
 Bundle 'juvenn/mustache.vim'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'pangloss/vim-javascript'
-Bundle 'taq/vim-rspec'
+Bundle 'thoughtbot/vim-rspec'
 
 " maybe later
 " Bundle 'Lokaltog/vim-easymotion'
@@ -194,7 +194,7 @@ endif
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 " remove unused modes
-let g:airline_enable_fugitive=0
+let g:airline_enable_branch=0
 let g:airline_enable_syntastic=1
 " set second section to filename
 let g:airline_section_b="%f"
