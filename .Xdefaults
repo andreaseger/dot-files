@@ -1,3 +1,5 @@
+URxvt*loginShell: true
+
 !-- Xft settings -- !
 Xft.dpi:        96
 Xft.antialias:  true
