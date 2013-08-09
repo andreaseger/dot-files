@@ -25,5 +25,6 @@
 	"trim_automatic_white_space": false,
 	"update_check": false,
 	"vintage_start_in_command_mode": true,
+	"open_files_in_new_window": false,
 	"word_wrap": false
 }
