@@ -1,0 +1,5 @@
+#!/bin/env bash
+source "$HOME/.rvm/scripts/rvm"
+rvm use ruby-2.0.0-p247-turbo@global
+
+lolcommits $@
