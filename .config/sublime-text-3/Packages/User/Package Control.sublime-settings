@@ -3,7 +3,6 @@
 	[
 		"All Autocomplete",
 		"CoffeeScript",
-		"Color Highlighter",
 		"CTags",
 		"EJS",
 		"FileDiffs",
@@ -17,7 +16,8 @@
 		"Solarized Toggle",
 		"SublimeBlockCursor",
 		"Theme - Soda",
-		"TrailingSpaces"
+		"TrailingSpaces",
+		"Vintageous"
 	],
 	"repositories":
 	[
