@@ -1,7 +1,7 @@
 {
 	"auto_complete_commit_on_tab": true,
-	"color_scheme": "Packages/User/IR_Black.tmTheme",
-	"font_face": "Consolas",
+	"color_scheme": "Packages/Color Scheme - Default/Solarized (Dark).tmTheme",
+	"font_face": "Source Code Pro",
 	"font_options":
 	[
 		"no_bold",

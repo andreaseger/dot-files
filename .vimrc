@@ -13,6 +13,7 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
+Bundle 'jtratner/vim-flavored-markdown'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-surround'
 
@@ -31,8 +32,8 @@ Bundle 'honza/vim-snippets'
 Bundle 'jeetsukumaran/vim-buffergator'
 
 Bundle 'ap/vim-css-color'
-Bundle 'wgibbs/vim-irblack'
-"Bundle 'altercation/vim-colors-solarized'
+Bundle 'twerth/ir_black'
+Bundle 'altercation/vim-colors-solarized'
 "Bundle 'cometsong/statline.vim'
 "Bundle 'bling/vim-bufferline'
 Bundle 'bling/vim-airline'
@@ -86,7 +87,11 @@ au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
 
 " md, markdown, and mk are markdown and define buffer-local preview
-au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+"au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+augroup markdown
+  au!
+  au BufNewFile,BufRead *.{md,markdown,mdown,mkd,mdkn} setlocal filetype=ghmarkdown
+augroup END
 
 " detect vimrc as vim file
 au BufRead,BufNewFile {.vimrc} set ft=vim
@@ -156,12 +161,12 @@ set timeoutlen=1000 ttimeoutlen=10
 set laststatus=2
 
 " colorschema
-color ir_black
+"color ir_black
 
 " solarized
-"set background=dark
-"let g:solarized_termcolors=256
-"colorscheme solarized
+set background=dark
+let g:solarized_termcolors=256
+colorscheme solarized
 
 "save as sudo trick
 cmap w!! %!sudo tee > /dev/null %
