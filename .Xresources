@@ -110,8 +110,8 @@ Xft.hintstyle:  hintfull
 ! -- Fonts -- !
 !URxvt.font: xft:Consolas:pixelsize=12:style=Regular
 !URxvt.boldFont: xft:Consolas:pixelsize=12:style=Bold
-URxvt.font: xft:Source Code Pro:pixelsize=12:style=Regular
-URxvt.boldFont: xft:Source Code Pro:pixelsize=12:style=Bold
+URxvt.font: xft:Source Code Pro:pixelsize=11:style=Regular
+URxvt.boldFont: xft:Source Code Pro:pixelsize=11:style=Bold
 
 
 URxvt.saveLines: 1000
@@ -121,8 +121,7 @@ URxvt.matcher.button: 1
 URxvt*inheritPixmap: true
 !URxvt*shading: 70
 
-!URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
-URxvt.perl-ext-common:      default,clipboard,url-select
+URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
 URxvt.url-select.launcher:  chromium
 URxvt.url-select.underline: true
 URxvt.keysym.M-u:           perl:url-select:select_next
