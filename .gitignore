@@ -25,6 +25,7 @@
 !/.config/sublime-text-3/Packages/User/*.tmTheme
 
  execptions for more important dot-files
+!.xinitrc
 !.Xdefaults
 !.vim/backup/.gitkeep
 !.vim/bundle/vundle
