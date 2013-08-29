@@ -10,6 +10,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " My Bundles
+Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
@@ -211,3 +212,12 @@ set relativenumber
 autocmd InsertEnter,WinLeave * :set norelativenumber
 autocmd InsertLeave,WinEnter * :set relativenumber
 
+" autoreload vimrc
+augroup reload_vimrc " {
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END " }
+
+" ctrlp settings
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'

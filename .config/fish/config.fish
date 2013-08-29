@@ -43,4 +43,3 @@ abbreviate 's=subl3'
 alias h '~'
 set -g fish_color_host blue
 
-load-ssh-agent
