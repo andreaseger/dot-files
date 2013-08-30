@@ -9,42 +9,40 @@ call vundle#rc()
 " required! 
 Bundle 'gmarik/vundle'
 
-" My Bundles
+" Basics
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-surround'
+Bundle 'mileszs/ack.vim'
+Bundle 'ervandew/supertab'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-commentary'
+
+" Syntax extentions
+Bundle 'tpope/vim-rails'
+"Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
 Bundle 'jtratner/vim-flavored-markdown'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-surround'
-
-Bundle 'ervandew/supertab'
 Bundle 'juvenn/mustache.vim'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'pangloss/vim-javascript'
 Bundle 'thoughtbot/vim-rspec'
+Bundle 'nsf/gocode', {'rtp': 'vim/'}
+Bundle 'aliva/vim-fish'
 
-" maybe later
-" Bundle 'Lokaltog/vim-easymotion'
-
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'honza/vim-snippets'
-Bundle 'jeetsukumaran/vim-buffergator'
-
+" colors/style
 Bundle 'ap/vim-css-color'
 Bundle 'twerth/ir_black'
 Bundle 'altercation/vim-colors-solarized'
-"Bundle 'cometsong/statline.vim'
-"Bundle 'bling/vim-bufferline'
 Bundle 'bling/vim-airline'
 Bundle 'airblade/vim-gitgutter'
 
-" golang
-Bundle 'nsf/gocode', {'rtp': 'vim/'}
+" disabled
+" Bundle 'Lokaltog/vim-easymotion'
+" Bundle 'honza/vim-snippets'
+" Bundle 'jeetsukumaran/vim-buffergator'
 
-"fish
-Bundle 'aliva/vim-fish'
 
 filetype plugin indent on
 
@@ -72,6 +70,14 @@ set smartcase
 " Tab completion
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
+
+" Scrolling
+set scrolloff=8   "Start scrolling when we're 8 lines away from margins
+set sidescrolloff=15
+set sidescroll=1
+
+" lower vims updatetime (default=4000)
+set updatetime=750
 
 " Remember last location in file
 "if has("autocmd")
@@ -121,6 +127,11 @@ map <Leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
 " toggle NerdTree on <Leader>n with the current directory
 nmap <silent> <Leader>n :NERDTreeToggle <CR>
 
+" autoreload vimrc
+augroup reload_vimrc " {
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END " }
 
 " Enable syntastic syntax checking
 let g:syntastic_enable_signs=1
@@ -212,12 +223,20 @@ set relativenumber
 autocmd InsertEnter,WinLeave * :set norelativenumber
 autocmd InsertLeave,WinEnter * :set relativenumber
 
-" autoreload vimrc
-augroup reload_vimrc " {
-    autocmd!
-    autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END " }
-
 " ctrlp settings
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+
+" ZOMG the_silver_searcher is so much faster than ack"
+nmap <leader>a :Ack
+let g:ackprg = 'ag --nogroup --column'
+
+" Fix Cursor in TMUX
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
