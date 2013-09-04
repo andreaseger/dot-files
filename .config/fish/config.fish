@@ -27,19 +27,19 @@ for preload in (ls $fish_path/load)
   . $fish_path/load/$preload
 end
 
-abbreviate '!=sudo'
+alias h '~'
 alias !!   "sudo su"
 alias tf   "tail -f"
 alias l    'ls -lah'
 alias l.   'ls -d .*'
 alias ll   'ls -lh'
-
-alias b    'bundle'
-abbreviate 'be=bundle exec'
-
 alias subl subl3
-abbreviate 's=subl3'
 
-alias h '~'
+# abbreviate '!=sudo'
+abbreviate 'b=bundle'
+abbreviate 'be=bundle exec'
+abbreviate 's=subl3'
+abbreviate 'v=vim'
+
 set -g fish_color_host blue
 
