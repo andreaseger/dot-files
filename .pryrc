@@ -1,7 +1,7 @@
 # add all gems in the global gemset to the $LOAD_PATH so they can be used even
 # in places like 'rails console'.
 if defined?(::Bundler)
-  global_gemset = ENV['GEM_PATH'].split(':').grep(/ruby.*@global/).first
+  global_gemset = ENV['GEM_PATH'].split(':').grep(/(ruby|ree).*@global/).first
   if global_gemset
     all_global_gem_paths = Dir.glob("#{global_gemset}/gems/*")
     all_global_gem_paths.each do |p|
@@ -16,7 +16,7 @@ begin
   Pry.commands.alias_command 'c', 'continue'
   Pry.commands.alias_command 's', 'step'
   Pry.commands.alias_command 'n', 'next'
-rescue
+rescue LoadError
 end
 
 Pry.prompt = [
