@@ -3,25 +3,33 @@
 
 abbreviate 'g=git'
 abbreviate 'gst=git status'
-alias gbr 'git rebase -p'
-alias gup 'git fetch; and gbr (upstream_branch)'
 
+alias gbr 'git rebase -p'
+alias gup 'git fetch; and git rebase -p (upstream_branch)'
+
+abbreviate 'ga=git add --all'
 abbreviate 'gc=git commit -v'
-alias gca 'git commit -v -a'
+abbreviate 'gca=git commit -v -a'
+abbreviate 'gcam=git commit -v --amend'
+
 abbreviate 'gco=git checkout'
 abbreviate 'gb=git branch'
 abbreviate 'gba=git branch -a'
 abbreviate 'gd=git diff'
 
+abbreviate 'gss=git stash save'
+abbreviate 'gsp=git stash pop'
+
 alias gcount 'git shortlog -sn'
+alias gl 'git lg'
 alias glg 'git log --stat --max-count=5'
 alias glgg 'git log --graph --max-count=5'
 alias glgga 'git log --graph --decorate --all'
-alias gss 'git status -s'
-abbreviate 'ga=git add'
+# alias gss 'git status -s'
+
 alias gm 'git merge --no-ff'
 alias gmff 'git merge -ff'
-alias gf 'git ls-files | grep'
+# alias gf 'git ls-files | grep'
 
 #abbreviate gpoat 'git push origin --all; and git push origin --tags'
 

@@ -2,6 +2,7 @@
 	"installed_packages":
 	[
 		"All Autocomplete",
+		"Alternate VIM Navigation",
 		"CoffeeScript",
 		"CTags",
 		"EJS",

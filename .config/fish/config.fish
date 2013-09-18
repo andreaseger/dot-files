@@ -40,6 +40,7 @@ abbreviate 'b=bundle'
 abbreviate 'be=bundle exec'
 abbreviate 's=subl3'
 abbreviate 'v=vim'
+abbreviate 'a=ag --smart-case --literal'
 
 set -g fish_color_host blue
 
