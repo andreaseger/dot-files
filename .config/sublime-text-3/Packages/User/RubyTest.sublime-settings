@@ -1,0 +1,5 @@
+{
+  "save_on_run": false,
+  "check_for_rvm": true,
+  "check_for_bundler": true
+}
