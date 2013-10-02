@@ -4,13 +4,22 @@
 [color]
 	ui = auto
 [merge]
-	ff = false
+  ff = false
+  stat = true
 [alias]
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   commir = commit
 [push]
 	default = simple
 [diff]
-	algorithm = patience
+	; algorithm = patience
+	algorithm = histogram
+  mnemonicprefix = true
 [rerere]
 	enabled = true
+
+[url "git@github.com:"]
+  insteadOf = github:
+[url "git://github.com/"]
+  insteadOf = gitpub:
+

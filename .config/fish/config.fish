@@ -7,13 +7,19 @@ set -U fish_user_abbreviations '!=sudo'
 
 # load local config (stuff like PATH)
 begin
-  set -l x $fish_path/config.(hostname -s).fish
-  if test -e $x
-    . $x
+  set -l __fish_hostnames (hostname -s)
+  if test $__fish_hostnames != (hostname)
+    set -l __fish_hostnames $__fish_hostnames (hostname)
   end
-  set -l x $fish_path/functions.(hostname -s)
-  if test -e $x
-    set fish_function_path $fish_function_path $x
+  for __fish_hostname in $__fish_hostnames
+    set -l x $fish_path/config.(echo $__fish_hostname).fish
+    if test -e $x
+      . $x
+    end
+    set -l x $fish_path/functions.$__fish_hostname
+    if test -e $x
+      set fish_function_path $fish_function_path $x
+    end
   end
 
   # add stuff to path
@@ -27,13 +33,13 @@ for preload in (ls $fish_path/load)
   . $fish_path/load/$preload
 end
 
-alias h '~'
+abbreviate 'h=~'
 alias !!   "sudo su"
 alias tf   "tail -f"
 alias l    'ls -lah'
 alias l.   'ls -d .*'
 alias ll   'ls -lh'
-alias subl subl3
+abbreviate 'subl=subl3'
 
 # abbreviate '!=sudo'
 abbreviate 'b=bundle'
@@ -44,3 +50,6 @@ abbreviate 'a=ag --smart-case --literal'
 
 set -g fish_color_host blue
 
+function fish_user_key_bindings
+  bind \e1 ".runsudo"
+end
