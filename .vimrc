@@ -31,6 +31,7 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'thoughtbot/vim-rspec'
 Bundle 'nsf/gocode', {'rtp': 'vim/'}
 Bundle 'aliva/vim-fish'
+Bundle 'elixir-lang/vim-elixir'
 "Bundle 'tpope/vim-haml'
 
 " colors/style
@@ -39,6 +40,7 @@ Bundle 'ap/vim-css-color'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'bling/vim-airline'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'christoomey/vim-tmux-navigator'
 
 " disabled
 " Bundle 'Lokaltog/vim-easymotion'

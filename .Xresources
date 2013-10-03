@@ -1,4 +1,7 @@
 URxvt*loginShell: true
+XTerm*metaSendsEscape: true
+xterm*termName: xterm-256color
+
 
 !-- Xft settings -- !
 Xft.dpi:        92
@@ -121,15 +124,23 @@ URxvt.matcher.button: 1
 URxvt*inheritPixmap: true
 !URxvt*shading: 70
 
-URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
-URxvt.url-select.launcher:  chromium
-URxvt.url-select.underline: true
-URxvt.keysym.M-u:           perl:url-select:select_next
+URxvt.perl-ext:
+URxvt.perl-ext-common:
+!URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
+!URxvt.url-select.launcher:  chromium
+!URxvt.url-select.underline: true
+!URxvt.keysym.M-u:           perl:url-select:select_next
 
 !URxvt.keysym.M-Escape:      perl:keyboard-select:activate
 !URxvt.keysym.M-s:           perl:keyboard-select:search
 
-URxvt.keysym.M-c:           perl:clipboard:copy
-URxvt.keysym.M-v:           perl:clipboard:paste
-URxvt.keysym.M-C-v:         perl:clipboard:paste_escaped
+!URxvt.keysym.M-c:           perl:clipboard:copy
+!URxvt.keysym.M-v:           perl:clipboard:paste
+!URxvt.keysym.M-C-v:         perl:clipboard:paste_escaped
 
+! Make it old-school.
+URxvt.cursorBlink: true
+
+
+! Sorry Vim, 8th bit meta is just broken.
+URxvt.meta8: false
