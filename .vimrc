@@ -227,5 +227,7 @@ else
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
-
+" open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
 
