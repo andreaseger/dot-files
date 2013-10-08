@@ -10,8 +10,8 @@
 	"font_size": 10,
 	"ignored_packages":
 	[
-		"RubyTest",
-		"Vintage"
+		"Vintage",
+		"RubyTest"
 	],
 	"line_padding_bottom": -1,
 	"line_padding_top": 0,

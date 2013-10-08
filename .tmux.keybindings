@@ -7,6 +7,11 @@ bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iqE 
 bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-l) || tmux select-pane -R"
 bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys 'C-\\') || tmux select-pane -l"
 
+bind -n M-h resize-pane -L
+bind -n M-j resize-pane -D
+bind -n M-k resize-pane -U
+bind -n M-l resize-pane -R
+
 bind-key -n F2 new-window \; rename-window ""
 bind-key -n F3 display-panes \; split-window -h
 bind-key -n F4 display-panes \; split-window -v
