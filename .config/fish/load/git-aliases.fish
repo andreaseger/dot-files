@@ -18,6 +18,7 @@ abbreviate 'gb=git branch'
 abbreviate 'gba=git branch -a'
 abbreviate 'gd=git diff'
 
+abbreviate 'gsh=git show'
 abbreviate 'gss=git stash save'
 abbreviate 'gsp=git stash pop'
 
