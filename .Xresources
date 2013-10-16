@@ -116,7 +116,6 @@ URxvt.boldFont: xft:Consolas:pixelsize=12:style=Bold
 !URxvt.font: xft:Source Code Pro:pixelsize=11:style=Regular
 !URxvt.boldFont: xft:Source Code Pro:pixelsize=11:style=Bold
 
-
 URxvt.saveLines: 1000
 URxvt.scrollBar: false
 URxvt.secondaryScroll: true
