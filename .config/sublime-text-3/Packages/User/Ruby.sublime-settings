@@ -4,6 +4,8 @@
 		"ru",
 		"Vagrantfile",
 		"rb",
-		"Guardfile"
+		"Guardfile",
+    "Gemfile.dev",
+    "Gemfile.local"
 	]
 }
