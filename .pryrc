@@ -93,3 +93,66 @@ Bond.start
 rescue LoadError
 end
 require 'readline'
+
+# rails stuff
+
+if defined? Rails
+  if Rails.version[0..0] == "2"
+    require 'console_app'
+    require 'console_with_helpers'
+  elsif Rails.version[0..0].in?(['3', '4'])
+    require 'rails/console/app'
+    require 'rails/console/helpers'
+  else
+    warn "[WARN] cannot load Rails console commands (Not on Rails2, Rails3 or Rails4?)"
+  end
+  if defined?(Rails::ConsoleMethods)
+    extend Rails::ConsoleMethods
+  end
+  alias_method :r!, :reload!
+
+  # set logging to screen
+  if ENV.include?('RAILS_ENV')
+    # Rails 2.x
+    if !Object.const_defined?('RAILS_DEFAULT_LOGGER')
+      require 'logger'
+      Object.const_set('RAILS_DEFAULT_LOGGER', Logger.new(STDOUT))
+    end
+  else
+    # Rails 3
+    if Rails.logger and defined?(ActiveRecord)
+      Rails.logger = Logger.new(STDOUT)
+      ActiveRecord::Base.logger = Rails.logger
+    end
+  end
+
+  # .details method for pretty printing ActiveRecord's objects attributes
+  class Object
+    def details
+      if self.respond_to?(:attributes) and self.attributes.any?
+        max = self.attributes.keys.sort_by { |k| k.size }.pop.size + 5
+        puts
+        self.attributes.keys.sort.each do |k|
+          puts sprintf("%-#{max}.#{max}s%s", k, self.try(k))
+        end
+        puts
+      end
+    end
+    alias :detailed :details
+  end
+end
+
+# local methods helper
+# http://rakeroutes.com/blog/customize-your-irb/
+class Object
+  def local_methods
+    case self.class
+    when Class
+      self.public_methods.sort - Object.public_methods
+    when Module
+      self.public_methods.sort - Module.public_methods
+    else
+      self.public_methods.sort - Object.new.public_methods
+    end
+  end
+end
