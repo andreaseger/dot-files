@@ -24,6 +24,8 @@
 !/.config/sublime-text-3/Packages/User/*.sublime-snippet
 !/.config/sublime-text-3/Packages/User/*.tmTheme
 
+!/.config/htop
+
  execptions for more important dot-files
 !.xprofile
 !.Xdefaults
