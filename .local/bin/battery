@@ -1,0 +1,134 @@
+#!/bin/sh
+
+linux_get_bat ()
+{
+    bf=$(cat $BAT_FULL)
+    bn=$(cat $BAT_NOW)
+    echo $(( 100 * $bn / $bf ))
+}
+
+freebsd_get_bat ()
+{
+    sysctl -n hw.acpi.battery.life
+}
+
+# Do with grep and awk unless too hard
+
+# TODO Identify which machine we're on from teh script.
+
+battery_level()
+{
+case $(uname -s) in
+    "Linux")
+        BATPATH=${BATPATH:-/sys/class/power_supply/BAT0}
+        STATUS=$BATPATH/status
+        [ "$1" = `cat $STATUS` ] || [ "$1" = "" ] || return 0
+        if [ -f "$BATPATH/energy_full" ]; then
+            naming="energy"
+        elif [ -f "$BATPATH/charge_full" ]; then
+            naming="charge"
+        elif [ -f "$BATPATH/capacity" ]; then
+            cat "$BATPATH/capacity"
+            return 0
+        fi
+        BAT_FULL=$BATPATH/${naming}_full
+        BAT_NOW=$BATPATH/${naming}_now
+        linux_get_bat
+        ;;
+    "FreeBSD")
+        STATUS=`sysctl -n hw.acpi.battery.state`
+        case $1 in
+            "Discharging")
+                if [ $STATUS -eq 1 ]; then
+                    freebsd_get_bat
+                fi
+                ;;
+            "Charging")
+                if [ $STATUS -eq 2 ]; then
+                    freebsd_get_bat
+                fi
+                ;;
+            "")
+                freebsd_get_bat
+                ;;
+        esac
+        ;;
+#    "Darwin")
+#        case $1 in
+#            "Discharging")
+#                ext="No";;
+#            "Charging")
+#                ext="Yes";;
+#        esac
+#
+#        ioreg -c AppleSmartBattery -w0 | \
+#        grep -o '"[^"]*" = [^ ]*' | \
+#        sed -e 's/= //g' -e 's/"//g' | \
+#        sort | \
+#        while read key value; do
+#            case $key in
+#                "MaxCapacity")
+#                    export maxcap=$value;;
+#                "CurrentCapacity")
+#                    export curcap=$value;;
+#                "ExternalConnected")
+#                    if [ -n "$ext" ] && [ "$ext" != "$value" ]; then
+#                        exit
+#                    fi
+#                ;;
+#                "FullyCharged")
+#                    if [ "$value" = "Yes" ]; then
+#                        exit
+#                    fi
+#                ;;
+#            esac
+#            if [[ -n "$maxcap" && -n $curcap ]]; then
+#                echo $(( 100 * $curcap / $maxcap ))
+#                break
+#            fi
+#        done
+esac
+}
+battery_status()
+{
+case $(uname -s) in
+    "Linux")
+        BATPATH=${BATPATH:-/sys/class/power_supply/BAT0}
+        STATUS=$BATPATH/status
+        [ "$1" = `cat $STATUS` ] || [ "$1" = "" ] || return 0
+        status="`cat $STATUS`"
+        if [ "$status" = "Charging" ]; then
+          echo "↑"
+        elif [ "$status" = "Discharging" ]; then
+          echo "↓"
+        else
+          echo "●"
+        fi
+        ;;
+    "FreeBSD")
+        STATUS=`sysctl -n hw.acpi.battery.state`
+        case $1 in
+            "Discharging")
+                if [ $STATUS -eq 1 ]; then
+                  echo "↓"
+                fi
+                ;;
+            "Charging")
+                if [ $STATUS -eq 2 ]; then
+                  echo "↑"
+                fi
+                ;;
+            "")
+                echo "●"
+                ;;
+        esac
+esac
+
+
+}
+
+BATTERY_LEVEL=`battery_level $1`
+BATTERY_STATUS=`battery_status $1`
+[ -z "$BATTERY_LEVEL" ] && exit
+echo ${BATTERY_LEVEL}% ${BATTERY_STATUS}
+
