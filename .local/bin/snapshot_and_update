@@ -10,16 +10,16 @@ exec 2> >(tee -a "$log_file" >&2)
 
 cmd="full-system-update (pacman -Syu && pacaur -Syua)"
 
-snapshot_nbr=$(snapper -c root create --type=pre --cleanup-algorithm=number --print-number --description="${cmd}")
+snapshot_nbr=$(sudo snapper -c root create --type=pre --cleanup-algorithm=number --print-number --description="${cmd}")
 echo -e "> New pre snapshot with number ${snapshot_nbr}."
 echo -e "> Running command \"${cmd}\"."
 
 if hash powerpill 2>/dev/null; then
-  powerpill -Syu
+  sudo powerpill -Syu
 else
-  pacman -Syu
+  sudo pacman -Syu
 fi
 pacaur -Syua
 
-snapshot_nbr=$(snapper -c root create --type=post --cleanup-algorithm=number --print-number --pre-number="$snapshot_nbr")
+snapshot_nbr=$(sudo snapper -c root create --type=post --cleanup-algorithm=number --print-number --pre-number="$snapshot_nbr")
 echo -e "\n> New post snapshot with number ${snapshot_nbr}."
