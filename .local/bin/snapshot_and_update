@@ -22,6 +22,6 @@ else
 fi
 pacaur -Syua
 
-snapshot_nbr_root=$(sudo snapper -c root create --type=post --cleanup-algorithm=number --print-number --pre-number="$snapshot_nbr")
-snapshot_nbr_usr=$(sudo snapper -c usr create --type=post --cleanup-algorithm=number --print-number --pre-number="$snapshot_nbr")
+snapshot_nbr_root=$(sudo snapper -c root create --type=post --cleanup-algorithm=number --print-number --pre-number="$snapshot_nbr_root")
+snapshot_nbr_usr=$(sudo snapper -c usr create --type=post --cleanup-algorithm=number --print-number --pre-number="$snapshot_nbr_usr")
 echo -e "\n> New post snapshot with number root:${snapshot_nbr_root} and usr:${snapshot_nbr_usr}."
