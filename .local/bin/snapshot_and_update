@@ -10,8 +10,9 @@ exec 2> >(tee -a "$log_file" >&2)
 
 cmd="full-system-update (pacman -Syu && pacaur -Syua)"
 
-snapshot_nbr=$(sudo snapper -c root create --type=pre --cleanup-algorithm=number --print-number --description="${cmd}")
-echo -e "> New pre snapshot with number ${snapshot_nbr}."
+snapshot_nbr_root=$(sudo snapper -c root create --type=pre --cleanup-algorithm=number --print-number --description="${cmd}")
+snapshot_nbr_usr=$(sudo snapper -c usr create --type=pre --cleanup-algorithm=number --print-number --description="${cmd}")
+echo -e "> New pre snapshots with number root:${snapshot_nbr_root} and usr:${snapshot_nbr_usr}."
 echo -e "> Running command \"${cmd}\"."
 
 if hash powerpill 2>/dev/null; then
@@ -21,5 +22,6 @@ else
 fi
 pacaur -Syua
 
-snapshot_nbr=$(sudo snapper -c root create --type=post --cleanup-algorithm=number --print-number --pre-number="$snapshot_nbr")
-echo -e "\n> New post snapshot with number ${snapshot_nbr}."
+snapshot_nbr_root=$(sudo snapper -c root create --type=post --cleanup-algorithm=number --print-number --pre-number="$snapshot_nbr")
+snapshot_nbr_usr=$(sudo snapper -c usr create --type=post --cleanup-algorithm=number --print-number --pre-number="$snapshot_nbr")
+echo -e "\n> New post snapshot with number root:${snapshot_nbr_root} and usr:${snapshot_nbr_usr}."
