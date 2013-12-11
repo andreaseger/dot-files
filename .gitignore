@@ -27,6 +27,10 @@
 !/.config/htop
 !/.aria2
 
+!/.ssh/
+/.ssh/*
+!/.ssh/config
+
  execptions for more important dot-files
 !.xprofile
 !.Xdefaults
