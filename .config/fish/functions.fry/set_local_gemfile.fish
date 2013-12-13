@@ -1,4 +1,5 @@
 function set_local_gemfile
-  setenv BUNDLE_GEMFILE 'Gemfile.local'
-  echo "using 'Gemfile.local'"
+  set -l gemfile (pwd)/Gemfile.local
+  setenv BUNDLE_GEMFILE $gemfile
+  echo "using '$gemfile'"
 end
