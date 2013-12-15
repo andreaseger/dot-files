@@ -1,5 +1,5 @@
 function update
-  if test -x snapper
+  if type snapper > /dev/null
     command snapshot_and_update
   else
     sudo powerpill -Syu; and pacaur -Syu
