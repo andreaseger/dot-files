@@ -26,6 +26,7 @@
 
 !/.config/htop
 !/.aria2
+/.aria2/dht.dat
 
 !/.ssh/
 /.ssh/*
