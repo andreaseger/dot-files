@@ -40,3 +40,5 @@ if [ $brightness -gt $((0xff)) ] ; then
   brightness=$((0xff));
 fi
 setpci -s 00:02.0 F4.B=`printf '%x' $brightness`;
+printf '%x' $brightness > /var/local/backlight.state
+# setpci -s 00:02.0 F4.B > /var/local/backlight.state
