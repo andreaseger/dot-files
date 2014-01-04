@@ -15,11 +15,15 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-surround'
 Bundle 'mileszs/ack.vim'
-Bundle 'ervandew/supertab'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-commentary'
 Bundle 'jeetsukumaran/vim-buffergator'
+
+" Completions
+" Bundle 'ervandew/supertab'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'SirVer/ultisnips'
 
 " Syntax extentions
 Bundle 'tpope/vim-rails'
@@ -231,3 +235,10 @@ endif
 set splitbelow
 set splitright
 
+
+" fix YouCompleteMe + UltiSnips
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" extend UltiSnips search path
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]

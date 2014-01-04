@@ -32,11 +32,16 @@
 /.ssh/*
 !/.ssh/config
 
+!/.vim
+/.vim/backup/*
+!/.vim/backup/.gitkeep
+/.vim/bundle/*
+!/.vim/bundle/vundle
+/.vim/view
+
  execptions for more important dot-files
 !.xprofile
 !.Xdefaults
-!.vim/backup/.gitkeep
-!.vim/bundle/vundle
 !.byoburc.tmux
 !.gemrc
 !.gitconfig
