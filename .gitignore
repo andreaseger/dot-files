@@ -6,6 +6,9 @@
 !/.local/share
 /.local/share/*
 !/.local/share/terminfo
+!/.local/share/applications
+/.local/share/applications/*
+!/.local/share/applications/urxvtc_tmux.desktop
 
 !/.config/
 /.config/*
