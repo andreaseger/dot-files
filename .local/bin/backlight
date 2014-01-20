@@ -7,7 +7,7 @@
 #setpci -s 00:02.0 F4.B=${brightness}f
 
 # added per mailing-list post
-STEP=0x6
+STEP=0x2
 # DELAY=200000000
 
 # Hacky Workaround to only use the first of the 4 fired events
