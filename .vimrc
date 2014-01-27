@@ -14,7 +14,7 @@ Bundle 'tpope/vim-sensible'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-surround'
-Bundle 'mileszs/ack.vim'
+" Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-commentary'
@@ -33,10 +33,10 @@ Bundle 'juvenn/mustache.vim'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'pangloss/vim-javascript'
 Bundle 'thoughtbot/vim-rspec'
-Bundle 'nsf/gocode', {'rtp': 'vim/'}
 Bundle 'aliva/vim-fish'
 Bundle 'elixir-lang/vim-elixir'
 "Bundle 'tpope/vim-haml'
+" Bundle 'nsf/gocode', {'rtp': 'vim/'}
 
 " colors/style
 Bundle 'ap/vim-css-color'
@@ -156,10 +156,32 @@ map <Leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
 
 " Opens a tab edit command with the path of the currently edited file filled in
 " Normal mode: <Leader>t
-map <Leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
+" map <Leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 " toggle NerdTree on <Leader>n with the current directory
 nmap <silent> <Leader>n :NERDTreeToggle <CR>
+
+" change buffergator keymap
+let g:buffergator_suppress_keymaps=1
+nnoremap <silent> <Leader>b :BuffergatorOpen<CR>
+nnoremap <silent> <Leader>B :BuffergatorClose<CR>
+" nnoremap <silent> <Leader>t :BuffergatorTabsOpen<CR>
+" nnoremap <silent> <Leader>T :BuffergatorTabsClose<CR>
+
+" buffergator mru_switching_keymaps
+nnoremap <silent> <M-b> :BuffergatorMruCyclePrev<CR>
+nnoremap <silent> <M-S-b> :BuffergatorMruCycleNext<CR>
+nnoremap <silent> [b :BuffergatorMruCyclePrev<CR>
+nnoremap <silent> ]b :BuffergatorMruCycleNext<CR>
+" buffergator mru_switch_into_splits_keymaps
+nnoremap <silent> <Leader><LEFT> :BuffergatorMruCyclePrev leftabove vert sbuffer<CR>
+nnoremap <silent> <Leader><UP> :BuffergatorMruCyclePrev leftabove sbuffer<CR>
+nnoremap <silent> <Leader><RIGHT> :BuffergatorMruCyclePrev rightbelow vert sbuffer<CR>
+nnoremap <silent> <Leader><DOWN> :BuffergatorMruCyclePrev rightbelow sbuffer<CR>
+nnoremap <silent> <Leader><S-LEFT> :BuffergatorMruCycleNext leftabove vert sbuffer<CR>
+nnoremap <silent> <Leader><S-UP> :BuffergatorMruCycleNext leftabove sbuffer<CR>
+nnoremap <silent> <Leader><S-RIGHT> :BuffergatorMruCycleNext rightbelow vert sbuffer<CR>
+nnoremap <silent> <Leader><S-DOWN> :BuffergatorMruCycleNext rightbelow sbuffer<CR>
 
 " Enable syntastic syntax checking
 let g:syntastic_enable_signs=1
@@ -220,17 +242,17 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " ZOMG the_silver_searcher is so much faster than ack"
-nmap <leader>a :Ack
-let g:ackprg = 'ag --nogroup --column'
+" nmap <leader>a :Ack
+" let g:ackprg = 'ag --nogroup --column'
 
 " Fix Cursor in TMUX
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
+" if exists('$TMUX')
+"   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+"   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+" else
+"   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" endif
 
 " open new split panes to right and bottom, which feels more natural
 set splitbelow
@@ -243,3 +265,7 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " extend UltiSnips search path
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
+
+" enable project specific vimrc's
+set exrc
+set secure
