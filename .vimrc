@@ -148,7 +148,12 @@ augroup END
 au BufRead,BufNewFile *.{txt} call s:setupWrapping()
 
 " golang specific settings
-au FileType go setlocal noexpandtab softtabstop=0
+" au FileType go setlocal noexpandtab softtabstop=0
+
+augroup elixir
+  au!
+  au FileType elixir noremap <buffer> <leader>t :!mix test<cr>
+augroup END
 
 " Opens an edit command with the path of the currently edited file filled in
 " Normal mode: <Leader>e
