@@ -14,9 +14,13 @@ abbreviate 'gca=git commit -v -a'
 abbreviate 'gcam=git commit -v --amend'
 
 abbreviate 'gco=git checkout'
+abbreviate 'gco.=git checkout .'
 abbreviate 'gb=git branch'
 abbreviate 'gba=git branch -a'
 abbreviate 'gd=git diff'
+abbreviate 'gdw=git diff --word-diff'
+abbreviate 'gds=git diff --staged'
+
 
 abbreviate 'gsh=git show'
 abbreviate 'gss=git stash save'
