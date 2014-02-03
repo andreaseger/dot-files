@@ -29,8 +29,8 @@ begin
     end
   end
 end
-for preload in (ls $fish_path/load)
-  . $fish_path/load/$preload
+for preload in (find $fish_path/load/* -name '*.fish')
+  . $preload
 end
 
 abbreviate 'h=~'
@@ -54,3 +54,4 @@ set -g fish_color_host blue
 function fish_user_key_bindings
   bind \e1 ".runsudo"
 end
+
