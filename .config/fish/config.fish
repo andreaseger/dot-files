@@ -55,3 +55,4 @@ function fish_user_key_bindings
   bind \e1 ".runsudo"
 end
 
+set -g fish_new_pager 1
