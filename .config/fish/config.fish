@@ -52,7 +52,8 @@ abbreviate 'p=pacaur'
 set -g fish_color_host blue
 
 function fish_user_key_bindings
-  bind \e1 ".runsudo"
+  # bind \e1 ".runsudo"
+  bind \cs ".runsudo"
 end
 
 set -g fish_new_pager 1
