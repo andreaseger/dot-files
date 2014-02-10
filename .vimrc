@@ -19,6 +19,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-commentary'
 Bundle 'jeetsukumaran/vim-buffergator'
+Bundle 'tpope/vim-fugitive'
 
 " Completions
 " Bundle 'ervandew/supertab'
