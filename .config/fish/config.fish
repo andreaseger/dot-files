@@ -29,8 +29,11 @@ begin
     end
   end
 end
-for preload in (find $fish_path/load/* -name '*.fish')
-  . $preload
+#for preload in (find $fish_path/load/* -name '*.fish')
+#  . $preload
+#end
+for preload in env.fish git-aliases.fish
+  . $fish_path/load/$preload
 end
 
 abbreviate 'h=~'
