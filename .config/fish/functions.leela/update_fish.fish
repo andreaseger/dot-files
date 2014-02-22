@@ -1,0 +1,1 @@
+../shared_functions/update_fish.fish
