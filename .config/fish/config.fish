@@ -12,13 +12,14 @@ begin
     set -l __fish_hostnames $__fish_hostnames (hostname)
   end
   for __fish_hostname in $__fish_hostnames
-    set -l x $fish_path/config.(echo $__fish_hostname).fish
-    if test -e $x
-      . $x
-    end
     set -l x $fish_path/functions.$__fish_hostname
     if test -e $x
       set fish_function_path $fish_function_path $x
+    end
+
+    set -l x $fish_path/config.(echo $__fish_hostname).fish
+    if test -e $x
+      . $x
     end
   end
 
