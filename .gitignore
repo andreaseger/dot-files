@@ -13,6 +13,7 @@
 !/.config/
 /.config/*
 !/.config/fish
+/.config/fish/fish_history*
 
 # unignore sublime-text settings
 !/.config/sublime-text-3
