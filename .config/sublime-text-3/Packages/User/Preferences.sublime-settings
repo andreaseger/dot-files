@@ -1,4 +1,5 @@
 {
+	"atomic_save": false,
 	"auto_complete_commit_on_tab": true,
 	"color_scheme": "Packages/Color Scheme - Default/Solarized (Dark).tmTheme",
 	"font_face": "Consolas",
@@ -7,7 +8,7 @@
 		"no_bold",
 		"subpixel_antialias"
 	],
-	"font_size": 11,
+	"font_size": 12,
 	"ignored_packages":
 	[
 		"Vintage"
@@ -27,6 +28,5 @@
 	"trim_automatic_white_space": false,
 	"update_check": false,
 	"vintage_start_in_command_mode": true,
-	"word_wrap": false,
-	"atomic_save": false
+	"word_wrap": false
 }
