@@ -2,7 +2,7 @@
 # Aliases
 
 abbreviate 'g=git'
-abbreviate 'gst=git status'
+abbreviate 'gst=git status -sb'
 
 alias gbr 'git rebase -p'
 alias gup 'git fetch; and git rebase -p (upstream_branch)'
