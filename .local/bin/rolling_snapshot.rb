@@ -47,8 +47,7 @@ def snapshot_filename file
   end
 end
 
-def prepare_snapshot_folder basedir, folder
-  folder = File.join basedir, folder
+def prepare_snapshot_folder folder
   unless File.exists?(folder)
     FileUtils.mkdir_p(folder)
   end
@@ -58,12 +57,22 @@ def prepare_snapshot_folder basedir, folder
   end
 end
 
+def remove_old_snapshots folder, filename, keep
+  files_to_delete = Dir["#{folder}/#{filename}.*"].sort[(keep-1)..-1]
+  if files_to_delete
+    files_to_delete.each { |e| FileUtils.rm e }
+  end
+end
+
 file_to_snapshot = ARGV.shift
 exit 0 unless file_to_snapshot
 
 basedir = File.dirname File.expand_path(file_to_snapshot)
-snapshot_name = File.join basedir, options[:snapshot_folder], snapshot_filename(file_to_snapshot)
+snapshot_folder = File.join basedir, options[:snapshot_folder]
+snapshot_name = File.join snapshot_folder, snapshot_filename(file_to_snapshot)
 
-prepare_snapshot_folder basedir, options[:snapshot_folder]
+prepare_snapshot_folder snapshot_folder
 
-FileUtils.cp(file_to_snapshot, snapshot_name, verbose: true )
+FileUtils.cp(file_to_snapshot, snapshot_name)
+
+remove_old_snapshots snapshot_folder, File.basename(file_to_snapshot, '.'), options[:keep]
