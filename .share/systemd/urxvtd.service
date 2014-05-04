@@ -1,0 +1,13 @@
+[Unit]
+Description=RXVT-Unicode Daemon
+
+[Service]
+User=sch1zo
+After=environment.target
+Wants=environment.target
+ExecStart=/usr/bin/urxvtd -q -o
+Restart=always
+
+[Install]
+WantedBy=default.target
+

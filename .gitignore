@@ -43,6 +43,8 @@
 !/.vim/bundle/vundle
 /.vim/view
 
+!/.share
+
  execptions for more important dot-files
 !.xprofile
 !.Xdefaults
