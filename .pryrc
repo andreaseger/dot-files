@@ -94,13 +94,13 @@ end
 
 
 # autocompletion
-begin
-  require 'bond'
-  Bond.start
-rescue LoadError
-  puts "missing bond"
-end
-require 'readline'
+#begin
+#  require 'bond'
+#  Bond.start
+#rescue LoadError
+#  puts "missing bond"
+#end
+#require 'readline'
 
 # rails stuff
 def extend_for_rails
