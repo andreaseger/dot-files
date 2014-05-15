@@ -4,6 +4,7 @@ load-ssh-agent
 abbreviate 'server=bundle exec rails server'
 abbreviate 'console=bundle exec rails console'
 
-. $fish_path/load/rvm.fish
+. $fish_path/load/rbenv.fish
+
 . $fish_path/load/virtual.fish
 

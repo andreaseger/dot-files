@@ -26,6 +26,8 @@ abbreviate 'gsh=git show'
 abbreviate 'gss=git stash save'
 abbreviate 'gsp=git stash pop'
 
+abbreviate 'gg=git grep'
+
 alias gcount 'git shortlog -sn'
 alias gl 'git lg'
 alias glg 'git log --stat --max-count=5'
