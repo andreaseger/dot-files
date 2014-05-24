@@ -1,3 +1,16 @@
 #!/bin/sh
 
-sudo tee /proc/acpi/bbswitch <<< OFF
+cd /home/sch1zo/build/acpi_call
+make
+make load
+echo '\_SB.PCI0.P0P1.VGA._OFF' > /proc/acpi/call
+result=$(cat /proc/acpi/call)
+case "$result" in                                                                                                                                                     
+  Error*)                                                                                                                                                           
+    echo "failed"                                                                                                                                                 
+    ;;                                                                                                                                                                
+  *)                                                                                                                                                                
+    echo "works!"                                                                                                                                                 
+    # break # try out outher methods too                                                                                                                          
+    ;;                                                                                                                                                                
+esac 

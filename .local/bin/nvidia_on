@@ -1,4 +1,0 @@
-#!/bin/sh
-
-sudo tee /proc/acpi/bbswitch <<< ON
-
