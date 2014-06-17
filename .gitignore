@@ -42,6 +42,7 @@
 /.vim/bundle/*
 !/.vim/bundle/vundle
 /.vim/view
+/.vim/tmp
 
 !/.share
 
