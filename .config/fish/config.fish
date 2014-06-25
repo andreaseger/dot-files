@@ -24,7 +24,7 @@ begin
   end
 
   # add stuff to path
-  for x in $HOME/.local/bin /usr/bin/core_perl
+  for x in $HOME/.local/bin /usr/bin/core_perl /usr/local/bin
     if test -e $x
       set -U fish_user_paths $fish_user_paths $x
     end
