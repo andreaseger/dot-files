@@ -12,14 +12,6 @@ if defined?(::Bundler)
 end
 
 begin
-  require 'pry-nav'
-  Pry.commands.alias_command 'c', 'continue'
-  Pry.commands.alias_command 's', 'step'
-  Pry.commands.alias_command 'n', 'next'
-rescue LoadError
-  puts "missing pry-nav"
-end
-begin
   require 'pry-doc'
 rescue LoadError
   puts "missing pry-doc"

@@ -3,6 +3,7 @@
 	[
 		"All Autocomplete",
 		"Alternate VIM Navigation",
+		"BetterFindBuffer",
 		"CoffeeScript",
 		"Color Highlighter",
 		"CTags",
@@ -15,6 +16,8 @@
 		"HTML Mustache",
 		"Mercurial",
 		"Package Control",
+		"Python 3",
+		"Python PEP8 Autoformat",
 		"Rails Developer Snippets",
 		"RSpec",
 		"RSpec (snippets and syntax)",
