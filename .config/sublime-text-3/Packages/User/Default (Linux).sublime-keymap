@@ -3,5 +3,6 @@
   { "keys": ["super+alt+b"], "command": "blame" },
   { "keys": ["ctrl+w"], "command": "close" },
   { "keys": ["ctrl+f5"], "command": "refresh_folder_list" },
-  { "keys": ["ctrl+shift+t"], "command": "delete_trailing_spaces" }
+  { "keys": ["ctrl+shift+t"], "command": "delete_trailing_spaces" },
+  { "keys": ["ctrl+shift+r"], "command": "goto_symbol_in_project" }
 ]

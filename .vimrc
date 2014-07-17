@@ -275,3 +275,7 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 " enable project specific vimrc's
 set exrc
 set secure
+
+"ctags introgration for ctrlp
+nnoremap <leader>. :CtrlPTag<cr>
+
