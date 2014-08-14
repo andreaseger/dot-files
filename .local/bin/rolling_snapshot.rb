@@ -12,12 +12,12 @@ ARGV.options do |opts|
   opts.separator ""
   opts.separator "Specific Options:"
 
-  opts.on( "-d", "--snapshot-folder", String,
+  opts.on( "-d", "--snapshot-folder FOLDER", String,
            "Folder to put the snapshots" ) do |opt|
     options[:snapshot_folder] = opt
   end
 
-  opts.on( "-k", "--keep", Integer,
+  opts.on( "-k", "--keep NUMBER", Integer,
            "snapshots to keep." ) do |opt|
     options[:keep] = opt.to_i
   end
@@ -58,7 +58,8 @@ def prepare_snapshot_folder folder
 end
 
 def remove_old_snapshots folder, filename, keep
-  files_to_delete = Dir["#{folder}/#{filename}.*"].sort[(keep-1)..-1]
+  basename, _ext = filename.split('.')
+  files_to_delete = Dir["#{folder}/#{basename}.*"].sort.first(keep)
   if files_to_delete
     files_to_delete.each { |e| FileUtils.rm e }
   end
