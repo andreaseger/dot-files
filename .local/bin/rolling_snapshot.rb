@@ -59,10 +59,9 @@ end
 
 def remove_old_snapshots folder, filename, keep
   basename, _ext = filename.split('.')
-  files_to_delete = Dir["#{folder}/#{basename}.*"].sort.first(keep)
-  if files_to_delete
-    files_to_delete.each { |e| FileUtils.rm e }
-  end
+  snapshots = Dir["#{folder}/#{basename}.*"].sort
+  files_to_delete = snapshots[0..-(keep+1)]
+  files_to_delete.each { |e| FileUtils.rm e }
 end
 
 file_to_snapshot = ARGV.shift
@@ -75,5 +74,7 @@ snapshot_name = File.join snapshot_folder, snapshot_filename(file_to_snapshot)
 prepare_snapshot_folder snapshot_folder
 
 FileUtils.cp(file_to_snapshot, snapshot_name)
+FileUtils.chown nil, 'btsync', snapshot_name
+FileUtils.chmod 'g+w', snapshot_name
 
 remove_old_snapshots snapshot_folder, File.basename(file_to_snapshot, '.'), options[:keep]
