@@ -38,11 +38,11 @@ for preload in env.fish git-aliases.fish
 end
 
 abbreviate 'h=~'
-alias !!   "sudo su"
-alias tf   "tail -f"
-alias l    'ls -lah'
-alias l.   'ls -d .*'
-alias ll   'ls -lh'
+function !!; sudo su; end
+abbreviate 'tf=tail -f'
+function l  --wraps ls; ls -lah $argv; end
+function l. --wraps ls; ls -d .* $argv; end
+function ll --wraps ls; ls -lh $argv; end
 abbreviate 'subl=subl3'
 
 # abbreviate '!=sudo'
