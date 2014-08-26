@@ -11,8 +11,8 @@
 	"font_size": 12,
 	"ignored_packages":
 	[
-		"Vintage",
-		"Color Highlighter"
+		"Color Highlighter",
+		"Vintage"
 	],
 	"line_padding_bottom": 1,
 	"line_padding_top": 0,

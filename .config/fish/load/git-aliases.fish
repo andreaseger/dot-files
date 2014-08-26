@@ -28,11 +28,11 @@ abbreviate 'gsp=git stash pop'
 
 abbreviate 'gg=git grep'
 
-function gcount; git shortlog -sn $argv; end
-function gl; git lg $argv; end
-function glg; git log --stat --max-count=5 $argv; end
-function glgg; git log --graph --max-count=5 $argv; end
-function glgga; git log --graph --decorate --all $argv; end
+# alias gcount 'git shortlog -sn'
+# alias gl 'git lg'
+# alias glg 'git log --stat --max-count=5'
+# alias glgg 'git log --graph --max-count=5'
+# alias glgga 'git log --graph --decorate --all'
 # alias gss 'git status -s'
 
 # alias gm 'git merge --no-ff'
