@@ -17,6 +17,8 @@
   out  = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=relative @{upstream}..
   in   = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=relative ..@{upstream}
   hist = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=short --follow --patch
+
+  meld = mergetool -t meld
 [push]
 	default = simple
 [diff]
