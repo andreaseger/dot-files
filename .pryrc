@@ -1,20 +1,21 @@
-# add all gems in the global gemset to the $LOAD_PATH so they can be used even
-# in places like 'rails console'.
-if defined?(::Bundler)
-  global_gemset = ENV['GEM_PATH'].split(':').grep(/(ruby|ree).*@global/).first
-  if global_gemset
-    all_global_gem_paths = Dir.glob("#{global_gemset}/gems/*")
-    all_global_gem_paths.each do |p|
-      gem_path = "#{p}/lib"
-      $LOAD_PATH << gem_path
+if defined? Bundler
+  Gem.post_reset_hooks.reject! { |hook| hook.source_location.first =~ %r{/bundler/} }
+  Bundler.preserve_gem_path
+  Gem.clear_paths
+  Gem::Specification.reset
+  if Gem::VERSION.to_i >= 2
+    load 'rubygems/core_ext/kernel_require.rb'
+  else
+    load 'rubygems/custom_require.rb'
+  end
+  Kernel.module_eval do
+    def gem(gem_name, *requirements) # :doc:
+      skip_list = (ENV['GEM_SKIP'] || "").split(/:/)
+      raise Gem::LoadError, "skipping #{gem_name}" if skip_list.include? gem_name
+      spec = Gem::Dependency.new(gem_name, *requirements).to_spec
+      spec.activate if spec
     end
   end
-end
-
-begin
-  require 'pry-doc'
-rescue LoadError
-  puts "missing pry-doc"
 end
 
 Pry.prompt = [
@@ -41,14 +42,10 @@ begin
   #   Pry.config.print = proc {|output, value| Pry::Helpers::BaseHelpers.stagger_output("=> #{value.ai}", output)}
   #   # If you want awesome_print without automatic pagination, use the line below
   Pry.config.print = proc { |output, value| output.puts value.ai }
-rescue LoadError
-  puts "missing awesome_print"
-end
-
-begin
+#  require 'pry-doc'
   require 'hirb'
 rescue LoadError
-  puts "missing hirb"
+  #puts "missing gems"
 end
 
 if defined? Hirb
