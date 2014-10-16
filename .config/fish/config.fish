@@ -40,6 +40,9 @@ end
 abbreviate 'h=~'
 function !!; sudo su; end
 abbreviate 'tf=tail -f'
+function l ; ls -lah $argv; end
+function l.; ls -d .* $argv; end
+function ll; ls -lh $argv; end
 function l  --wraps ls; ls -lah $argv; end
 function l. --wraps ls; ls -d .* $argv; end
 function ll --wraps ls; ls -lh $argv; end

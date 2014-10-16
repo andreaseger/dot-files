@@ -46,6 +46,8 @@
 
 !/.share
 
+!/.bundle
+
  execptions for more important dot-files
 !.xprofile
 !.Xdefaults
