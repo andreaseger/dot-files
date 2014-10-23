@@ -34,3 +34,5 @@
 [url "git://github.com/"]
   insteadOf = gitpub:
 
+[core]
+	excludesfile = ~/.gitignore.global

@@ -55,6 +55,7 @@
 !.gemrc
 !.gitconfig
 !.gitignore
+!.gitignore.global
 !.gitmodules
 !.irbrc
 !.pryrc
