@@ -54,6 +54,7 @@
 !.byoburc.tmux
 !.gemrc
 !.gitconfig
+!/.config/git
 !.gitignore
 !.gitignore.global
 !.gitmodules

@@ -1,38 +1,3 @@
 [user]
   email = dev@eger-andreas.de
   name = Andreas Eger
-[color]
-  ui = auto
-[merge]
-  ff = false
-  stat = true
-[alias]
-  cp   = cherry-pick
-  gg   = grep --break --heading -n
-  
-  ; better git log
-  ; lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  lg   = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=relative --graph
-  ll   = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=relative --numstat
-  ls   = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=short
-  out  = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=relative @{upstream}..
-  in   = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=relative ..@{upstream}
-  hist = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=short --follow --patch
-
-  meld = mergetool -t meld
-[push]
-  default = simple
-[diff]
-  ; algorithm = patience
-  algorithm = histogram
-  mnemonicprefix = true
-[rerere]
-  enabled = true
-
-[url "git@github.com:"]
-  insteadOf = github:
-[url "git://github.com/"]
-  insteadOf = gitpub:
-
-[core]
-  excludesfile = ~/.gitignore.global
