@@ -1,8 +1,8 @@
 [user]
-	email = dev@eger-andreas.de
-	name = Andreas Eger
+  email = dev@eger-andreas.de
+  name = Andreas Eger
 [color]
-	ui = auto
+  ui = auto
 [merge]
   ff = false
   stat = true
@@ -21,13 +21,13 @@
 
   meld = mergetool -t meld
 [push]
-	default = simple
+  default = simple
 [diff]
-	; algorithm = patience
-	algorithm = histogram
+  ; algorithm = patience
+  algorithm = histogram
   mnemonicprefix = true
 [rerere]
-	enabled = true
+  enabled = true
 
 [url "git@github.com:"]
   insteadOf = github:
@@ -35,4 +35,4 @@
   insteadOf = gitpub:
 
 [core]
-	excludesfile = ~/.gitignore.global
+  excludesfile = ~/.gitignore.global
