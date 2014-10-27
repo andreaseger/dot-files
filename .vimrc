@@ -98,6 +98,7 @@ set pastetoggle=<F12>
 
 " call commands with ; instead of :
 nnoremap ; :
+nnoremap ! :!
 
 " enable basic mouse support
 "set mouse=a
@@ -119,6 +120,7 @@ au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 augroup ruby
   au!
   au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,Guardfile,config.ru} setlocal filetype=ruby
+  au FileType ruby noremap <buffer> <leader>t :!rspec spec<cr>
 augroup END
 
 " md, markdown, and mk are markdown and define buffer-local preview

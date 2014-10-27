@@ -34,3 +34,5 @@ function __handle_rvmrc_stuff --on-variable PWD
     set -e cwd
   end
 end
+
+rvm current 1>/dev/null 2>&1
