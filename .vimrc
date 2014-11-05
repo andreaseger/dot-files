@@ -97,7 +97,7 @@ set directory=~/.vim/backup
 set pastetoggle=<F12>
 
 " call commands with ; instead of :
-nnoremap ; :
+" nnoremap ; :
 nnoremap ! :!
 
 " enable basic mouse support
@@ -120,7 +120,9 @@ au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 augroup ruby
   au!
   au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,Guardfile,config.ru} setlocal filetype=ruby
-  au FileType ruby noremap <buffer> <leader>t :!rspec spec<cr>
+  au FileType ruby noremap <buffer> <leader>a :call RunTests('spec')<cr>
+  au FileType ruby noremap <buffer> <leader>r :call RunTestFile()<cr>
+  au FileType ruby noremap <buffer> <leader>t :call RunNearestTest()<cr>
 augroup END
 
 " md, markdown, and mk are markdown and define buffer-local preview
@@ -227,7 +229,7 @@ highlight ColorColumn ctermbg=235 guibg=#2c2d27
 if exists('+colorcolumn')
   " (I picked 120-320 because you have to provide an upper bound and 320 just
   "  covers a 1080p GVim window in Ubuntu Mono 11 font.)
-  let &colorcolumn="80,".join(range(120,320),",")
+  let &colorcolumn="80,100,".join(range(120,320),",")
 else
   " fallback for Vim < v7.3
   autocmd BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
@@ -281,3 +283,39 @@ set secure
 "ctags introgration for ctrlp
 nnoremap <leader>. :CtrlPTag<cr>
 
+" Test helpers from Gary Bernhardt's screen cast:
+" https://www.destroyallsoftware.com/screencasts/catalog/file-navigation-in-vim
+" https://www.destroyallsoftware.com/file-navigation-in-vim.html
+function! RunTests(filename)
+  " Write the file and run tests for the given filename
+  :w
+  :silent !echo;echo;echo;echo;echo
+  exec ":!time rspec " . a:filename
+endfunction
+
+function! SetTestFile()
+  " Set the spec file that tests will be run for.
+  let t:grb_test_file=@%
+endfunction
+
+function! RunTestFile(...)
+  if a:0
+    let command_suffix = a:1
+  else
+    let command_suffix = ""
+  endif
+
+  " Run the tests for the previously-marked file.
+  let in_spec_file = match(expand("%"), '_spec.rb$') != -1
+  if in_spec_file
+    call SetTestFile()
+  elseif !exists("t:grb_test_file")
+    return
+  end
+  call RunTests(t:grb_test_file . command_suffix)
+endfunction
+
+function! RunNearestTest()
+  let spec_line_number = line('.')
+  call RunTestFile(":" . spec_line_number)
+endfunction

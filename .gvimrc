@@ -7,7 +7,8 @@ set guioptions-=r
 set guioptions-=L
 
 " Sets the font and size
-set guifont=Source\ Code\ Pro\ Medium\ 10
+" set guifont=Source\ Code\ Pro\ Medium\ 10
+set guifont=Consolas\ 12
 set antialias
 
 augroup reload_gvimrc " {
