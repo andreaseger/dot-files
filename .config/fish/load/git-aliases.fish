@@ -48,6 +48,6 @@ function grt; cd (git rev-parse --show-toplevel; or echo "."); end
 # these aliases take advantage of the previous function
 #alias ggpull 'git pull origin (current_branch)'
 #alias ggpush "git push (current_remote) (current_branch)"
-abbreviate "ggpush=git push origin (current_branch)"
+abbreviate "ggpush=git push -u origin (current_branch)"
 # alias ggpnp "git pull (current_remote) (current_branch); and git push (current_remote) (current_branch)"
 

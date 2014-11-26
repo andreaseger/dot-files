@@ -86,8 +86,9 @@ colorscheme solarized
 
 " relative numbers only in command mode
 set relativenumber
-autocmd InsertEnter,WinLeave * :set norelativenumber
-autocmd InsertLeave,WinEnter * :set relativenumber
+set number
+autocmd InsertEnter,WinLeave * :set norelativenumber nonumber
+autocmd InsertLeave,WinEnter * :set relativenumber number
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -290,7 +291,7 @@ function! RunTests(filename)
   " Write the file and run tests for the given filename
   :w
   :silent !echo;echo;echo;echo;echo
-  exec ":!time rspec " . a:filename
+  exec ":!time bundle exec rspec " . a:filename
 endfunction
 
 function! SetTestFile()
