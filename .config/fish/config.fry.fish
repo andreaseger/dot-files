@@ -11,3 +11,4 @@ set -x RUBY_HEAP_FREE_MIN 100000
 
 . $fish_path/load/rbenv.fish
 
+abbreviate 'spec=bundle exec rspec spec'
