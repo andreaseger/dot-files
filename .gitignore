@@ -64,6 +64,7 @@
 !/.config/git
 !.gitignore
 !.gitignore.global
+!.gitattributes.global
 !.gitmodules
 !.irbrc
 !.pryrc

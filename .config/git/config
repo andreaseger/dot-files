@@ -33,5 +33,7 @@
 
 [core]
   excludesfile = ~/.gitignore.global
+[core]
+	attributesfile = ~/.gitattributes.global
 [init]
 	templatedir = ~/.config/git/template
