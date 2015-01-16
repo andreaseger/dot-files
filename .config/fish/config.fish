@@ -53,7 +53,7 @@ abbreviate 'b=bundle'
 abbreviate 'be=bundle exec'
 abbreviate 's=subl3'
 abbreviate 'v=vim'
-abbreviate 'gv=gvim --remote-tab-silent'
+abbreviate 'gv=gvim'
 abbreviate 'a=ag --smart-case --literal'
 abbreviate 'p=pacaur'
 

@@ -8,7 +8,7 @@
   // it will be prefixed with a call to rvm or rbenv.
   // If none of them are enabled, the command will be
   // executed without any additions.
-  "rubocop_command": "RBENV_VERSION=2.1.4 ~/.rbenv/bin/rbenv exec rubocop --display-cop-names --auto-correct",
+  "rubocop_command": "RBENV_VERSION=ruby-2.1.4 ~/.rbenv/bin/rbenv exec rubocop --display-cop-names --auto-correct",
 
   // If you want use RVM to run RuboCop, just
   // set this to true.

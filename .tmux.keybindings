@@ -21,7 +21,7 @@ bind-key -n F6 next-window
 
 bind-key -n F7 copy-mode
 
-bind-key -n F12 detach
+bind-key -n F11 detach
 
 #bind-key -n F2 new-window \; rename-window ""
 #bind-key -n C-F2 display-panes \; split-window -h

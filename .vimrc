@@ -14,7 +14,7 @@ Bundle 'tpope/vim-sensible'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-surround'
-" Bundle 'mileszs/ack.vim'
+Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-commentary'
@@ -85,10 +85,10 @@ let g:solarized_termcolors=256
 colorscheme solarized
 
 " relative numbers only in command mode
-set relativenumber
+" set relativenumber
 set number
-autocmd InsertEnter,WinLeave * :set norelativenumber nonumber
-autocmd InsertLeave,WinEnter * :set relativenumber number
+autocmd InsertEnter,WinLeave * :set nonumber
+autocmd InsertLeave,WinEnter * :set number
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -202,23 +202,6 @@ let g:syntastic_quiet_messages = {'level': 'warnings'}
 " Turn off jslint errors by default
 let g:JSLintHighlightErrorLine = 0
 
-" source:  http://stackoverflow.com/questions/4387210/vim-how-to-map-two-tasks-under-one-shortcut-key
-let g:relativenumber = 1
-function! ToogleRelativeNumber()
-  if g:relativenumber == 0
-    let g:relativenumber = 1
-    set norelativenumber
-    set number
-  elseif g:relativenumber == 1
-    let g:relativenumber = 0
-    set nonumber
-    set relativenumber
-  endif
-endfunction
-map <F9> :call ToogleRelativeNumber()<cr>
-" call it for the first time to initialize it
-call ToogleRelativeNumber()
-
 "save as sudo trick
 cmap w!! %!sudo tee > /dev/null %
 
@@ -253,8 +236,8 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " ZOMG the_silver_searcher is so much faster than ack"
-" nmap <leader>a :Ack
-" let g:ackprg = 'ag --nogroup --column'
+nmap <leader>a :Ack
+let g:ackprg = 'ag --nogroup --column'
 
 " Fix Cursor in TMUX
 " if exists('$TMUX')
