@@ -44,6 +44,13 @@
 /.vim/view
 /.vim/tmp
 
+!/.nvim
+/.nvim/backup/*
+!/.nvim/backup/.gitkeep
+/.nvim/view
+/.nvim/plugged/*
+!/.nvim/autoload/*
+
 !/.share
 
 !/.bundle
