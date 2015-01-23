@@ -12,6 +12,8 @@ bind -n M-j resize-pane -D
 bind -n M-k resize-pane -U
 bind -n M-l resize-pane -R
 
+bind -n M-s set -g synchronize-panes
+
 bind-key -n F2 new-window \; rename-window ""
 bind-key -n F3 display-panes \; split-window -h
 bind-key -n F4 display-panes \; split-window -v
