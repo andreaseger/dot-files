@@ -45,6 +45,7 @@
 /.vim/tmp
 
 !/.nvim
+/.nvim/.netrwhist
 /.nvim/backup/*
 !/.nvim/backup/.gitkeep
 /.nvim/view
@@ -73,6 +74,7 @@
 !.tmux.conf
 !.tmux.keybindings
 !.vimrc
+!.nvimrc
 !.gvimrc
 !.git
 !.config/redshift.conf

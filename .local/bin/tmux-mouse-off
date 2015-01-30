@@ -1,0 +1,6 @@
+#!/bin/sh
+
+tmux set -g mouse-select-pane off
+tmux set -g mouse-select-window off
+tmux set -g mouse-resize-pane off
+tmux setw -g mode-mouse off
