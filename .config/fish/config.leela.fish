@@ -5,3 +5,5 @@ load-ssh-agent
 . $fish_path/load/rbenv.fish
 . $fish_path/load/virtual.fish
 
+abbreviate 'vi=nvim'
+abbreviate 'vim=nvim'
