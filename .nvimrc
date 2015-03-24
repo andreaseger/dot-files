@@ -15,10 +15,11 @@ Plug 'tpope/vim-fugitive'
 
 " Completions
 " Plug 'ervandew/supertab'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
-Plug 'SirVer/ultisnips'
+Plug 'Shougo/neocomplete.vim'
+" Plug 'SirVer/ultisnips'
 
 " Syntax extentions
+Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-markdown'
 Plug 'jtratner/vim-flavored-markdown'
@@ -80,6 +81,38 @@ set smartcase
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
 
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplete#close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+" Close popup by <Space>.
+inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+
+
 " Scrolling
 set scrolloff=8   "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
@@ -93,7 +126,7 @@ set splitbelow
 set splitright
 
 " relative numbers only in command mode
- set relativenumber
+set relativenumber
 set number
 autocmd InsertEnter,WinLeave * :set nonumber norelativenumber
 autocmd InsertLeave,WinEnter * :set number relativenumber
@@ -157,6 +190,8 @@ augroup ruby
   au FileType ruby noremap <buffer> <leader>a :call RunTests('spec')<cr>
   au FileType ruby noremap <buffer> <leader>r :call RunTestFile()<cr>
   au FileType ruby noremap <buffer> <leader>t :call RunNearestTest()<cr>
+  au FileType ruby let g:rubycomplete_buffer_loading = 1 
+  au FileType ruby let g:rubycomplete_classes_in_global = 1
 augroup END
 
 " md, markdown, and mk are markdown and define buffer-local preview
