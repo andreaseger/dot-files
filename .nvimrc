@@ -1,3 +1,5 @@
+set nocompatible               " be iMproved
+
 call plug#begin('~/.nvim/plugged')
 
 Plug 'tpope/vim-sensible'
@@ -6,7 +8,7 @@ Plug 'tpope/vim-sensible'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
-Plug 'mileszs/ack.vim'
+Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-commentary'
@@ -20,25 +22,25 @@ Plug 'bogado/file-line'
 Plug 'Shougo/neocomplete.vim'
 " Plug 'SirVer/ultisnips'
 
-Plug 'kana/vim-textobj-user'
-Plug 'nelstrom/vim-textobj-rubyblock'
-
 " Syntax extentions
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-markdown'
-Plug 'jtratner/vim-flavored-markdown'
-Plug 'juvenn/mustache.vim'
-Plug 'kchmck/vim-coffee-script'
-Plug 'pangloss/vim-javascript'
-Plug 'thoughtbot/vim-rspec'
-Plug 'aliva/vim-fish'
-Plug 'elixir-lang/vim-elixir'
-"Plug 'tpope/vim-haml'
+Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
+Plug 'tpope/vim-rails', {'for': 'ruby'}
+Plug 'thoughtbot/vim-rspec', {'for': 'ruby'}
+Plug 'kana/vim-textobj-user', {'for': 'ruby'}
+Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
+
+Plug 'aliva/vim-fish', {'for': 'fish'}
+Plug 'elixir-lang/vim-elixir', {'for': 'elixir'}
 " Plug 'nsf/gocode', {'rtp': 'vim/'}
 
+Plug 'tpope/vim-markdown', {'for': 'markdown'}
+Plug 'jtratner/vim-flavored-markdown', {'for': 'markdown'}
+Plug 'juvenn/mustache.vim', {'for': 'mustache'}
+Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+Plug 'ap/vim-css-color', {'for': 'css'}
+"Plug 'tpope/vim-haml'
+
 " colors/style
-Plug 'ap/vim-css-color'
 " Plug 'twerth/ir_black'
 Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
@@ -124,7 +126,7 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 " Close popup by <Space>.
-inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+" inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
 
 " Scrolling
@@ -206,9 +208,8 @@ let g:ctrlp_abbrev = {
 
 
 " ZOMG the_silver_searcher is so much faster than ack"
-nmap <leader>a :Ack
-let g:ackprg = 'ag --nogroup --column'
-
+nmap <leader>a :Ag
+let g:agprg="ag --smart-case --literal --column"
 
 " autoreload vimrc
 augroup reload_vimrc " {

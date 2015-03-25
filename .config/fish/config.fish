@@ -48,7 +48,7 @@ abbreviate 'subl=subl3'
 abbreviate 'b=bundle'
 abbreviate 'be=bundle exec'
 abbreviate 's=subl3'
-abbreviate 'v=nvim'
+abbreviate 'v=vim'
 abbreviate 'a=ag --smart-case --literal'
 abbreviate 'p=pacaur'
 
