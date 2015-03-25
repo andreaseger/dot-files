@@ -111,10 +111,10 @@ Xft.hintstyle:  hintfull
 *color15:                 S_base3
 
 ! -- Fonts -- !
-URxvt.font: xft:Consolas:regular:size=12
-URxvt.boldFont: xft:Consolas:bold:size=12
-!URxvt.font: xft:Source Code Pro:pixelsize=11:style=Regular
-!URxvt.boldFont: xft:Source Code Pro:pixelsize=11:style=Bold
+!URxvt.font: xft:Consolas:regular:size=11
+!URxvt.boldFont: xft:Consolas:bold:size=11
+URxvt.font: xft:Source Code Pro:size=11:style=Regular
+URxvt.boldFont: xft:Source Code Pro:size=11:style=Bold
 URxvt.letterSpace: -2
 
 URxvt.saveLines: 1000

@@ -1,8 +1,8 @@
 abbreviate 'server=bundle exec rails server'
 abbreviate 'console=bundle exec rails console'
 
-# set -x JRUBY_OPTS "--1.9 -Xcompile.invokedynamic=false -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1 -J-noverify -Xcompile.mode=OFF"
-set -x JRUBY_OPTS "--1.9 --dev -J-noverify"
+set -x JRUBY_OPTS "--1.9 -Xcompile.invokedynamic=false -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1 -J-noverify -Xcompile.mode=OFF"
+# set -x JRUBY_OPTS "--1.9 --dev -J-noverify"
 
 # TODO: find a better place to set these
 # this is only really needed for runtastic-web

@@ -12,11 +12,16 @@ Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-commentary'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'tpope/vim-fugitive'
+Plug 'bogado/file-line'
+
 
 " Completions
 " Plug 'ervandew/supertab'
 Plug 'Shougo/neocomplete.vim'
 " Plug 'SirVer/ultisnips'
+
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
 
 " Syntax extentions
 Plug 'vim-ruby/vim-ruby'
@@ -59,10 +64,19 @@ set backupdir=~/.nvim/backup
 set directory=~/.nvim/backup
 
 " record and load last view
-" au BufWinLeave * mkview
-" au BufWinEnter * silent loadview
+au BufWinLeave * mkview
+au BufWinEnter * silent! loadview
 " but not for commit msg
-" au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+
+" folding
+
+set foldenable
+set foldlevelstart=10 " open most folds by default
+set foldnestmax=10    " 10 nested fold max
+set foldmethod=syntax
+" space open/closes folds
+nnoremap <space> za
 
 " Whitespace stuff
 set nowrap
@@ -125,6 +139,9 @@ set pastetoggle=<F12>
 set splitbelow
 set splitright
 
+" backspace over autoindent, line breaks and start of insert
+set backspace=indent,eol,start
+
 " relative numbers only in command mode
 set relativenumber
 set number
@@ -141,6 +158,7 @@ map <Leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
 
 " toggle NerdTree on <Leader>n with the current directory
 nmap <silent> <Leader>n :NERDTreeToggle <CR>
+let NERDTreeQuitOnOpen=1
 
 " change buffergator keymap
 let g:buffergator_suppress_keymaps=1
@@ -170,6 +188,21 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 "ctags introgration for ctrlp
 nnoremap <leader>. :CtrlPTag<cr>
+
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+let g:ctrlp_abbrev = {
+    \ 'gmode': 't',
+    \ 'abbrevs': [
+        \ {
+        \ 'pattern': '\(^@.\+\|\\\@<!:.\+\)\@<! ',
+        \ 'expanded': '',
+        \ 'mode': 'pfrz',
+        \ },
+        \ ]
+    \ }
 
 
 " ZOMG the_silver_searcher is so much faster than ack"
