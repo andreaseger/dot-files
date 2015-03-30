@@ -2,6 +2,6 @@
 Comment=
 Terminal=false
 Name=Workbench
-Exec=urxvt -e tmux attach -t main
+Exec=urxvt -e tmux
 Type=Application
 Icon=gnome-terminal
