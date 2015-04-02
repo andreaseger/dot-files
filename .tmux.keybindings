@@ -15,9 +15,9 @@ bind -n M-l resize-pane -R
 
 bind -n M-s set -g synchronize-panes
 
-bind-key -n F2 new-window \; rename-window ""
-bind-key -n F3 display-panes \; split-window -h
-bind-key -n F4 display-panes \; split-window -v
+bind-key -n F2 new-window -c "#{pane_current_path}"
+bind-key -n F3 display-panes \; split-window -h -c "#{pane_current_path}"
+bind-key -n F4 display-panes \; split-window -v -c "#{pane_current_path}"
 
 bind-key -n F5 previous-window
 bind-key -n F6 next-window

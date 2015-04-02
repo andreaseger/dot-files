@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=
 Terminal=false
-Name=Workbench
+Name=TMUX
 Exec=urxvt -e tmux
 Type=Application
 Icon=gnome-terminal

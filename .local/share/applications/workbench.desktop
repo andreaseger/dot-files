@@ -1,0 +1,7 @@
+[Desktop Entry]
+Comment=
+Terminal=false
+Name=Workbench
+Exec=urxvt -e /home/ane/.rbenv/shims/mux start workbench
+Type=Application
+Icon=gnome-terminal

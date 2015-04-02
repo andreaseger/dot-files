@@ -1,0 +1,31 @@
+# ~/.tmuxinator/workbench.yml
+
+name: workbench
+root: ~/
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+pre_window: "set -e RBENV_VERSION; and set -e RBENV_DIR; and clear"
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+tmux_options: -f ~/.tmux.raw.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+windows:
+  - home: ''
+  - web-editor:
+    - cd code/runtastic-web
+  - web-specs:
+    - cd code/runtastic-web
+  - samples-editor:
+    - cd code/backend/samples
+  - samples-specs:
+    - cd code/backend/samples
+    - bundle exec rspec spec
