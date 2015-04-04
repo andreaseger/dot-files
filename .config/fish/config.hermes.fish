@@ -1,4 +1,2 @@
-#. $fish_path/load/rbenv.fish
-
-#abbreviate 'vi=nvim'
-#abbreviate 'vim=nvim'
+. $fish_path/load/rbenv.fish
+. $fish_path/load/exenv.fish
