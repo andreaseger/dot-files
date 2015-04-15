@@ -1,28 +1,115 @@
 set nocompatible               " be iMproved
 
+" VIM-Plug Config {{{
 call plug#begin('~/.nvim/plugged')
 
 Plug 'tpope/vim-sensible'
 
-" Basics
+" Basics {{{
 Plug 'kien/ctrlp.vim'
+  " ctrlp settings {{{
+  let g:ctrlp_map = '<c-p>'
+  let g:ctrlp_cmd = 'CtrlP'
+  "ctags introgration for ctrlp
+  nnoremap <leader>. :CtrlPTag<cr>
+
+  let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+  if executable('ag')
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  endif
+  let g:ctrlp_abbrev = {
+      \ 'gmode': 't',
+      \ 'abbrevs': [
+          \ {
+          \ 'pattern': '\(^@.\+\|\\\@<!:.\+\)\@<! ',
+          \ 'expanded': '',
+          \ 'mode': 'pfrz',
+          \ },
+          \ ]
+      \ }
+  " }}}
+
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
 Plug 'rking/ag.vim'
+  " nmap <leader>a :Ag
+  let g:agprg="ag --smart-case --literal --column" "use a more fuzzy search
+
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  " NerdTree Config {{{
+  " toggle NerdTree on <Leader>n with the current directory
+  nmap <silent> <Leader>n :NERDTreeToggle <CR>
+  let NERDTreeQuitOnOpen=1
+  " }}}
 Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-commentary'
 Plug 'jeetsukumaran/vim-buffergator'
+  " Buffergator Config {{{
+  " change buffergator keymap
+  let g:buffergator_suppress_keymaps=1
+  nnoremap <silent> <Leader>b :BuffergatorOpen<CR>
+  nnoremap <silent> <Leader>B :BuffergatorClose<CR>
+
+  " buffergator mru_switching_keymaps
+  nnoremap <silent> <M-b> :BuffergatorMruCyclePrev<CR>
+  nnoremap <silent> <M-S-b> :BuffergatorMruCycleNext<CR>
+  nnoremap <silent> [b :BuffergatorMruCyclePrev<CR>
+  nnoremap <silent> ]b :BuffergatorMruCycleNext<CR>
+  " buffergator mru_switch_into_splits_keymaps
+  nnoremap <silent> <Leader><LEFT> :BuffergatorMruCyclePrev leftabove vert sbuffer<CR>
+  nnoremap <silent> <Leader><UP> :BuffergatorMruCyclePrev leftabove sbuffer<CR>
+  nnoremap <silent> <Leader><RIGHT> :BuffergatorMruCyclePrev rightbelow vert sbuffer<CR>
+  nnoremap <silent> <Leader><DOWN> :BuffergatorMruCyclePrev rightbelow sbuffer<CR>
+  nnoremap <silent> <Leader><S-LEFT> :BuffergatorMruCycleNext leftabove vert sbuffer<CR>
+  nnoremap <silent> <Leader><S-UP> :BuffergatorMruCycleNext leftabove sbuffer<CR>
+  nnoremap <silent> <Leader><S-RIGHT> :BuffergatorMruCycleNext rightbelow vert sbuffer<CR>
+  nnoremap <silent> <Leader><S-DOWN> :BuffergatorMruCycleNext rightbelow sbuffer<CR>
+  "}}}
+
 Plug 'tpope/vim-fugitive'
 Plug 'bogado/file-line'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-abolish'
+" }}}
 
-
-" Completions
-" Plug 'ervandew/supertab'
+" Completions {{{
 Plug 'Shougo/neocomplete.vim'
-" Plug 'SirVer/ultisnips'
+  " neocomplete Config {{{
+  " Disable AutoComplPop.
+  let g:acp_enableAtStartup = 0
+  " Use neocomplete.
+  let g:neocomplete#enable_at_startup = 1
+  " Use smartcase.
+  let g:neocomplete#enable_smart_case = 1
+  " Set minimum syntax keyword length.
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
 
-" Syntax extentions
+  " Plugin key-mappings.
+  inoremap <expr><C-g>     neocomplete#undo_completion()
+  inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+  " Recommended key-mappings.
+  " <CR>: close popup and save indent.
+  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+  function! s:my_cr_function()
+    return neocomplete#close_popup() . "\<CR>"
+    " For no inserting <CR> key.
+    "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  endfunction
+  " <TAB>: completion.
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  " <C-h>, <BS>: close popup and delete backword char.
+  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+  inoremap <expr><C-y>  neocomplete#close_popup()
+  inoremap <expr><C-e>  neocomplete#cancel_popup()
+  " Close popup by <Space>.
+  " inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+  " }}}
+" Plug 'ervandew/supertab'
+" }}}
+
+" Syntax extentions {{{
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
 Plug 'tpope/vim-rails', {'for': 'ruby'}
 Plug 'thoughtbot/vim-rspec', {'for': 'ruby'}
@@ -39,184 +126,140 @@ Plug 'juvenn/mustache.vim', {'for': 'mustache'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'ap/vim-css-color', {'for': 'css'}
 "Plug 'tpope/vim-haml'
+" }}}
 
-" colors/style
+" colors/style {{{
 " Plug 'twerth/ir_black'
 Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
+  " airline settings {{{
+  " remove separators
+  let g:airline_left_sep=''
+  let g:airline_right_sep=''
+  " change extenstions
+  let g:airline#extensions#branch#enabled = 0
+  let g:airline#extensions#syntastic#enabled = 1
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#left_sep = ' '
+  let g:airline#extensions#tabline#left_alt_sep = '|'
+  " set second section to filename
+  let g:airline_section_b="%f"
+  " empty third sections
+  let g:airline_section_c=""
+  " }}}
+
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
+" }}}
 
 call plug#end()
 
 runtime! plugin/sensible.vim
+" }}}
 
-" solarized
+" Core Config {{{
+" solarized {{{
 set background=dark
 let g:solarized_termcolors=256
 colorscheme solarized
 set laststatus=2
 set ttimeoutlen=50
+" }}}
 
-"Column indicators
+"Column indicators {{{
 let &colorcolumn="80,100,".join(range(120,320),",")
+" }}}
 
-" Directories for swp files
+" Directories for swp files {{{
 set backupdir=~/.nvim/backup
 set directory=~/.nvim/backup
+" }}}
 
-" record and load last view
+" record and load last view {{{
 au BufWinLeave * mkview
 au BufWinEnter * silent! loadview
 " but not for commit msg
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+" }}}
 
-" folding
-
-set foldenable
-set foldlevelstart=10 " open most folds by default
-set foldnestmax=10    " 10 nested fold max
+" Folding {{{
 set foldmethod=syntax
+set foldlevel=99
+set foldnestmax=10      " max 10 depth
+set nofoldenable      " don't fold files by default on open
+set foldlevelstart=1    " start with fold level of 1
 " space open/closes folds
 nnoremap <space> za
+" }}}
 
-" Whitespace stuff
+" Whitespace stuff {{{
 set nowrap
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
 set whichwrap+=<,>,h,l
+" }}}
 
-" Searching
+" Searching {{{
 set hlsearch
 set ignorecase
 set smartcase
+" }}}
 
-" Tab completion
+" Tab completion {{{
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
+" }}}
 
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return neocomplete#close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
-" Close popup by <Space>.
-" inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-
-" Scrolling
+" Scrolling {{{
 set scrolloff=8   "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
+" }}}
 
-" nicer pasting
+" nicer pasting {{{
 set pastetoggle=<F12>
+" }}}
 
-" open new split panes to right and bottom, which feels more natural
+" open new split panes to right and bottom, which feels more natural {{{
 set splitbelow
 set splitright
+" }}}
 
-" backspace over autoindent, line breaks and start of insert
+" backspace over autoindent, line breaks and start of insert {{{
 set backspace=indent,eol,start
+" }}}
 
-" relative numbers only in command mode
+" relative numbers only in command mode {{{
 set relativenumber
 set number
 autocmd InsertEnter,WinLeave * :set nonumber norelativenumber
 autocmd InsertLeave,WinEnter * :set number relativenumber
+" }}}
+" }}}
 
+" keybindings {{{
 " call commands with ; instead of :
 " nnoremap ; :
 nnoremap ! :!
 
-" Opens an edit command with the path of the currently edited file filled in
-" Normal mode: <Leader>e
-map <Leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
-
-" toggle NerdTree on <Leader>n with the current directory
-nmap <silent> <Leader>n :NERDTreeToggle <CR>
-let NERDTreeQuitOnOpen=1
-
-" change buffergator keymap
-let g:buffergator_suppress_keymaps=1
-nnoremap <silent> <Leader>b :BuffergatorOpen<CR>
-nnoremap <silent> <Leader>B :BuffergatorClose<CR>
-
-" buffergator mru_switching_keymaps
-nnoremap <silent> <M-b> :BuffergatorMruCyclePrev<CR>
-nnoremap <silent> <M-S-b> :BuffergatorMruCycleNext<CR>
-nnoremap <silent> [b :BuffergatorMruCyclePrev<CR>
-nnoremap <silent> ]b :BuffergatorMruCycleNext<CR>
-" buffergator mru_switch_into_splits_keymaps
-nnoremap <silent> <Leader><LEFT> :BuffergatorMruCyclePrev leftabove vert sbuffer<CR>
-nnoremap <silent> <Leader><UP> :BuffergatorMruCyclePrev leftabove sbuffer<CR>
-nnoremap <silent> <Leader><RIGHT> :BuffergatorMruCyclePrev rightbelow vert sbuffer<CR>
-nnoremap <silent> <Leader><DOWN> :BuffergatorMruCyclePrev rightbelow sbuffer<CR>
-nnoremap <silent> <Leader><S-LEFT> :BuffergatorMruCycleNext leftabove vert sbuffer<CR>
-nnoremap <silent> <Leader><S-UP> :BuffergatorMruCycleNext leftabove sbuffer<CR>
-nnoremap <silent> <Leader><S-RIGHT> :BuffergatorMruCycleNext rightbelow vert sbuffer<CR>
-nnoremap <silent> <Leader><S-DOWN> :BuffergatorMruCycleNext rightbelow sbuffer<CR>
-
 "save as sudo trick
 cmap w!! %!sudo tee > /dev/null %
 
-" ctrlp settings
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-"ctags introgration for ctrlp
-nnoremap <leader>. :CtrlPTag<cr>
+" Opens an edit command with the path of the currently edited file filled in
+" Normal mode: <Leader>e
+map <Leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
+" }}}
 
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-let g:ctrlp_abbrev = {
-    \ 'gmode': 't',
-    \ 'abbrevs': [
-        \ {
-        \ 'pattern': '\(^@.\+\|\\\@<!:.\+\)\@<! ',
-        \ 'expanded': '',
-        \ 'mode': 'pfrz',
-        \ },
-        \ ]
-    \ }
-
-
-" ZOMG the_silver_searcher is so much faster than ack"
-nmap <leader>a :Ag
-let g:agprg="ag --smart-case --literal --column"
-
-" autoreload vimrc
+" autoreload vimrc {{{
 augroup reload_vimrc " {
     autocmd!
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END " }
+" }}}
 
+" filetype selection and special stuff {{{
 " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
 augroup ruby
   au!
@@ -262,22 +305,9 @@ augroup elixir
   au!
   au FileType elixir noremap <buffer> <leader>t :!mix test<cr>
 augroup END
+" }}}
 
-" airline settings
-" remove separators
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-" change extenstions
-let g:airline#extensions#branch#enabled = 0
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-" set second section to filename
-let g:airline_section_b="%f"
-" empty third sections
-let g:airline_section_c=""
-
+" Ruby Test Helper {{{
 " Test helpers from Gary Bernhardt's screen cast:
 " https://www.destroyallsoftware.com/screencasts/catalog/file-navigation-in-vim
 " https://www.destroyallsoftware.com/file-navigation-in-vim.html
@@ -314,3 +344,6 @@ function! RunNearestTest()
   let spec_line_number = line('.')
   call RunTestFile(":" . spec_line_number)
 endfunction
+" }}}
+
+" vim:foldmethod=marker:foldlevel=0
