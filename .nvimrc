@@ -183,11 +183,12 @@ au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 " }}}
 
 " Folding {{{
+set foldenable
 set foldmethod=syntax
 set foldlevel=99
 set foldnestmax=10      " max 10 depth
-set nofoldenable      " don't fold files by default on open
-set foldlevelstart=1    " start with fold level of 1
+"set nofoldenable        " don't fold files by default on open
+set foldlevelstart=10   " open most folds by default
 " space open/closes folds
 nnoremap <space> za
 " }}}
