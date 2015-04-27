@@ -70,6 +70,11 @@ Plug 'bogado/file-line'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-abolish'
+Plug 'restore_view.vim'
+set viewoptions=cursor,folds,slash,unix
+let g:skipview_files = ['*\.vim', '*\.nvim', '*.git']
+" au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+
 " }}}
 
 " Completions {{{
@@ -175,13 +180,6 @@ set backupdir=~/.nvim/backup
 set directory=~/.nvim/backup
 " }}}
 
-" record and load last view {{{
-au BufWinLeave * mkview
-au BufWinEnter * silent! loadview
-" but not for commit msg
-au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-" }}}
-
 " Folding {{{
 set foldenable
 set foldmethod=syntax
@@ -238,7 +236,7 @@ set number
 autocmd InsertEnter,WinLeave * :set nonumber norelativenumber
 autocmd InsertLeave,WinEnter * :set number relativenumber
 " }}}
-" }}}
+" }}} 
 
 " keybindings {{{
 " call commands with ; instead of :
@@ -261,6 +259,13 @@ augroup END " }
 " }}}
 
 " filetype selection and special stuff {{{
+
+" gitcommit
+augroup git
+  au!
+  au FileType gitcommit setlocal spell
+augroup END
+
 " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
 augroup ruby
   au!
