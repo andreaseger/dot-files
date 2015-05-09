@@ -51,6 +51,7 @@
 /.nvim/view
 /.nvim/plugged/*
 !/.nvim/autoload/*
+/.nvim/tmp
 
 !/.share
 
