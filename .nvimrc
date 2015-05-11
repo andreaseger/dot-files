@@ -181,11 +181,10 @@ set directory=~/.nvim/backup
 " }}}
 
 " Folding {{{
-set foldenable
 set foldmethod=syntax
 set foldlevel=99
 set foldnestmax=10      " max 10 depth
-"set nofoldenable        " don't fold files by default on open
+set nofoldenable        " don't fold files by default on open
 set foldlevelstart=10   " open most folds by default
 " space open/closes folds
 nnoremap <space> za
