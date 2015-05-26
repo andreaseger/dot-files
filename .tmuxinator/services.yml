@@ -41,7 +41,7 @@ windows:
           - cd hubs
           - gup
           - bundle
-          - foreman start
+          - bundle exec foreman start
         - leaderboard:
           - cd leaderboard
           - gup

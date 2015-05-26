@@ -70,10 +70,6 @@ Plug 'bogado/file-line'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-abolish'
-Plug 'restore_view.vim'
-set viewoptions=cursor,folds,slash,unix
-let g:skipview_files = ['*\.vim', '*\.nvim', '*.git']
-" au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
 " }}}
 
@@ -180,11 +176,19 @@ set backupdir=~/.nvim/backup
 set directory=~/.nvim/backup
 " }}}
 
+" Automatic Views {{{
+set viewoptions-=options
+autocmd BufWinLeave ?* mkview!
+autocmd BufWinEnter ?* silent loadview
+let g:skipview_files = ['*\.vim', '*\.nvim', '*.git']
+au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+" }}}
+
 " Folding {{{
 set foldmethod=syntax
 set foldlevel=99
 set foldnestmax=10      " max 10 depth
-set nofoldenable        " don't fold files by default on open
+set foldenable          " do fold files by default on open
 set foldlevelstart=10   " open most folds by default
 " space open/closes folds
 nnoremap <space> za
