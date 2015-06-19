@@ -35,12 +35,6 @@ Plug 'rking/ag.vim'
   " nmap <leader>a :Ag
   let g:agprg="ag --smart-case --literal --column" "use a more fuzzy search
 
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-  " NerdTree Config {{{
-  " toggle NerdTree on <Leader>n with the current directory
-  nmap <silent> <Leader>n :NERDTreeToggle <CR>
-  let NERDTreeQuitOnOpen=1
-  " }}}
 Plug 'scrooloose/syntastic'
 Plug 'jeetsukumaran/vim-buffergator'
   " Buffergator Config {{{
@@ -116,6 +110,7 @@ Plug 'tpope/vim-rails', {'for': 'ruby'}
 Plug 'thoughtbot/vim-rspec', {'for': 'ruby'}
 Plug 'kana/vim-textobj-user', {'for': 'ruby'}
 Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
+Plug 'skwp/vim-ruby-conque', {'for': 'ruby'}
 
 Plug 'aliva/vim-fish', {'for': 'fish'}
 Plug 'elixir-lang/vim-elixir', {'for': 'elixir'}
@@ -252,6 +247,9 @@ cmap w!! %!sudo tee > /dev/null %
 " Opens an edit command with the path of the currently edited file filled in
 " Normal mode: <Leader>e
 map <Leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
+
+" open file browser in vertical split
+nmap <silent> <Leader>n :Sex! <CR>
 " }}}
 
 " autoreload vimrc {{{
