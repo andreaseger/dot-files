@@ -4,6 +4,7 @@ set -l fish_path ~/.config/fish
 set fish_function_path $fish_function_path (find $fish_path/functions/* -type d)
 # setup/init fish_user_abbreviations
 set -U fish_user_abbreviations '!=sudo'
+eval sh $fish_path/load/base16-default.dark.sh
 
 # load local config (stuff like PATH)
 begin

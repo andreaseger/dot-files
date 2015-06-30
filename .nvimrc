@@ -110,7 +110,7 @@ Plug 'tpope/vim-rails', {'for': 'ruby'}
 Plug 'thoughtbot/vim-rspec', {'for': 'ruby'}
 Plug 'kana/vim-textobj-user', {'for': 'ruby'}
 Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
-Plug 'skwp/vim-ruby-conque', {'for': 'ruby'}
+Plug 'skwp/vim-spec-finder', {'for': 'ruby'}
 
 Plug 'aliva/vim-fish', {'for': 'fish'}
 Plug 'elixir-lang/vim-elixir', {'for': 'elixir'}
@@ -127,6 +127,7 @@ Plug 'ap/vim-css-color', {'for': 'css'}
 " colors/style {{{
 " Plug 'twerth/ir_black'
 Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/base16-vim'
 Plug 'bling/vim-airline'
   " airline settings {{{
   " remove separators
@@ -154,13 +155,17 @@ runtime! plugin/sensible.vim
 " }}}
 
 " Core Config {{{
-" solarized {{{
-set background=dark
-let g:solarized_termcolors=256
-colorscheme solarized
+" " solarized {{{
+" set background=dark
+" let g:solarized_termcolors=256
+" colorscheme solarized
+" " }}}
+" base16 {{{
+let base16colorspace=256
+colorscheme base16-default
+" }}}
 set laststatus=2
 set ttimeoutlen=50
-" }}}
 
 "Column indicators {{{
 let &colorcolumn="80,100,".join(range(120,320),",")
