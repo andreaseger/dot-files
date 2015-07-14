@@ -1,0 +1,12 @@
+"*":
+  welcome:
+    showOnStartup: false
+  core:
+    themes: [
+      "one-dark-ui"
+      "base16-tomorrow-dark-theme"
+    ]
+  editor:
+    invisibles: {}
+    showInvisibles: true
+  "vim-mode": {}

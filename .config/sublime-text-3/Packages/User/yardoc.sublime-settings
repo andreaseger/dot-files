@@ -1,6 +1,0 @@
-{
-// Determines if empty comment lines have a trailing space
-"trailing_spaces": false,
-// Add an initial empty line at the beginning of the comment
-"initial_empty_line": true
-}

@@ -155,8 +155,8 @@ runtime! plugin/sensible.vim
 " }}}
 
 " Core Config {{{
+set background=dark
 " " solarized {{{
-" set background=dark
 " let g:solarized_termcolors=256
 " colorscheme solarized
 " " }}}
