@@ -6,6 +6,9 @@
       "one-dark-ui"
       "base16-tomorrow-dark-theme"
     ]
+    disabledPackages: [
+      "vim-mode"
+    ]
   editor:
     invisibles: {}
     showInvisibles: true
