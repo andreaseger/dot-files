@@ -2,6 +2,6 @@
 Comment=
 Terminal=false
 Name=TMUX
-Exec=urxvt -e tmux
+Exec=urxvt -e tmux attach
 Type=Application
 Icon=gnome-terminal
