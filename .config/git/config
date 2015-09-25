@@ -19,6 +19,7 @@
   meld = mergetool -t meld
 [push]
   default = simple
+  followTags = true
 [diff]
   ; algorithm = patience
   algorithm = histogram

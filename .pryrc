@@ -18,19 +18,21 @@ if defined? Bundler
   end
 end
 
-Pry.prompt = [
-    proc {
-        |obj, nest_level, _|
-            prompt = ""
-            prompt += "\001\e[01;38;5;202m\002"
-            prompt += "#{RUBY_VERSION} "
-            prompt += "\001\e[0m\002"
-    },
-    proc {
-        |obj, nest_level, _|
-            prompt = "#{RUBY_VERSION} (#{obj}):#{nest_level} *"
-    }
-]
+unless defined? JRUBY_VERSION
+  Pry.prompt = [
+      proc {
+          |obj, nest_level, _|
+              prompt = ""
+              prompt += "\001\e[01;38;5;202m\002"
+              prompt += "#{RUBY_VERSION} "
+              prompt += "\001\e[0m\002"
+      },
+      proc {
+          |obj, nest_level, _|
+              prompt = "#{RUBY_VERSION} (#{obj}):#{nest_level} *"
+      }
+  ]
+end
 
 # == PLUGINS ===
 # awesome_print gem: great syntax colorized printing
