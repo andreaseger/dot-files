@@ -13,7 +13,7 @@ set -x RUBY_HEAP_FREE_MIN 100000
 . $fish_path/load/rbenv.fish
 
 abbreviate 'spec=bundle exec rspec spec'
-abbreviate 'pr=env RBENV_VERSION=ruby-2.2.2 stash pull-request -o (current_branch) master'
+abbreviate 'pr=env RBENV_VERSION=ruby-2.2.3 stash pull-request -o (current_branch) master'
 # abbreviate 'vi=nvim'
 # abbreviate 'vim=nvim'
 
