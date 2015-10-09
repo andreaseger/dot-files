@@ -1,6 +1,9 @@
 function fish_prompt --description 'Write out the prompt'
 	set -l last_status $status
 
+  set_color $fish_color_host
+  echo -n (date +'%R')
+
   if test $USER = root
     set_color $fish_color_cwd_root
     echo -n (whoami)
