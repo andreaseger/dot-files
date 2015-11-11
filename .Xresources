@@ -135,11 +135,11 @@ Xft.hintstyle:  hintfull
 ! }}}
 
 ! -- Fonts -- ! {{{
-! URxvt.font: xft:Consolas:regular:size=11
-! URxvt.boldFont: xft:Consolas:bold:size=11
-URxvt.font: xft:Source Code Pro:size=11:style=Regular
-URxvt.boldFont: xft:Source Code Pro:size=11:style=Bold
-URxvt.letterSpace: -2
+URxvt.font: xft:Consolas:regular:size=11
+URxvt.boldFont: xft:Consolas:bold:size=11
+! URxvt.font: xft:Source Code Pro:size=11:style=Regular
+! URxvt.boldFont: xft:Source Code Pro:size=11:style=Bold
+! URxvt.letterSpace: -2
 ! }}}
 
 URxvt.saveLines: 5000

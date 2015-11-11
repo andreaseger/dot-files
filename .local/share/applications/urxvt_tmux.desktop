@@ -1,7 +1,0 @@
-[Desktop Entry]
-Comment=
-Terminal=false
-Name=TMUX
-Exec=urxvt -e tmux attach
-Type=Application
-Icon=gnome-terminal
