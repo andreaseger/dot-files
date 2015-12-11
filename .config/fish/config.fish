@@ -64,3 +64,4 @@ function fish_user_key_bindings
 end
 
 set -g fish_new_pager 1
+fish_vi_mode
