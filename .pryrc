@@ -148,9 +148,9 @@ class Object
   end
 end
 
-if defined?(PryByebug)
+if defined?(PryByebug) || defined?(PryNav)
   Pry.commands.alias_command 'c', 'continue'
   Pry.commands.alias_command 's', 'step'
   Pry.commands.alias_command 'n', 'next'
-  Pry.commands.alias_command 'f', 'finish'
+  # Pry.commands.alias_command 'f', 'finish'
 end

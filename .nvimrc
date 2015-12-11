@@ -64,6 +64,7 @@ Plug 'bogado/file-line'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-abolish'
+Plug 'dbakker/vim-projectroot'
 
 " }}}
 
@@ -357,5 +358,19 @@ function! RunNearestTest()
   call RunTestFile(":" . spec_line_number)
 endfunction
 " }}}
+
+"{{{ autoset current directory to project root
+function! <SID>AutoProjectRootCD()
+  try
+    if &ft != 'help'
+      ProjectRootCD
+    endif
+  catch
+    " Silently ignore invalid buffers
+  endtry
+endfunction
+
+autocmd BufEnter * call <SID>AutoProjectRootCD()
+"}}}
 
 " vim:foldmethod=marker:foldlevel=0
