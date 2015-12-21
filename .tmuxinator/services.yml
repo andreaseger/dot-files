@@ -24,6 +24,7 @@ windows:
       panes:
         - appendix:
           - cd appendix
+          - set -x JRUBY_OPTS "--1.9 -Xcompile.invokedynamic=false -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1 -J-noverify -Xcompile.mode=OFF"
           - gup
           - bundle
           - bundle exec foreman start
@@ -49,6 +50,7 @@ windows:
           - bundle exec foreman start
         - restore:
           - cd restore
+          - set -x JRUBY_OPTS "--1.9 -Xcompile.invokedynamic=false -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1 -J-noverify -Xcompile.mode=OFF"
           - gup
           - bundle
           - bundle exec foreman start
@@ -67,5 +69,8 @@ windows:
           - gup
           - bundle
           - bundle exec foreman start
+  - syncthing:
+    - syncthing
+
 
 

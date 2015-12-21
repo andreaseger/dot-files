@@ -38,14 +38,14 @@
 /.vim/view
 /.vim/tmp
 
-!/.nvim
-/.nvim/.netrwhist
-/.nvim/backup/*
-!/.nvim/backup/.gitkeep
-/.nvim/view
-/.nvim/plugged/*
-!/.nvim/autoload/*
-/.nvim/tmp
+!/.vim
+/.vim/.netrwhist
+/.vim/backup/*
+!/.vim/backup/.gitkeep
+/.vim/view
+/.vim/plugged/*
+!/.vim/autoload/*
+/.vim/tmp
 
 !/.share
 
@@ -69,7 +69,6 @@
 !.tmux.conf
 !.tmux.keybindings
 !.vimrc
-!.nvimrc
 !.gvimrc
 !.git
 !.config/redshift.conf
