@@ -1,7 +1,7 @@
 set nocompatible               " be iMproved
 
 " VIM-Plug Config {{{
-call plug#begin('~/.nvim/plugged')
+call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-sensible'
 
@@ -184,8 +184,8 @@ let &colorcolumn="80,100,".join(range(120,320),",")
 " }}}
 
 " Directories for swp files {{{
-set backupdir=~/.nvim/backup
-set directory=~/.nvim/backup
+set backupdir=~/.vim/backup
+set directory=~/.vim/backup
 " }}}
 
 " Automatic Views {{{
