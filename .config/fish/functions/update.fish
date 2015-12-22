@@ -4,7 +4,7 @@ function update
     if type snapper > /dev/null
       command snapshot_and_update
     else
-      sudo powerpill -Syu; and pacaur -Syu
+      pacaur -Syua
     end
   else
     #assuming ubuntu for now

@@ -1,7 +1,7 @@
 # ~/.tmuxinator/workbench.yml
 
 name: workbench
-root: ~/
+root: ~/runtastic
 
 # Optional tmux socket
 # socket_name: foo
@@ -21,11 +21,11 @@ tmux_options: -f ~/.tmux.raw.conf
 windows:
   - home: ''
   - web-editor:
-    - cd code/runtastic-web
+    - cd runtastic-web
   - web-specs:
-    - cd code/runtastic-web
+    - cd runtastic-web
   - samples-editor:
-    - cd code/backend/samples
+    - cd services/samples
   - samples-specs:
-    - cd code/backend/samples
+    - cd services/samples
     - bundle exec rspec spec
