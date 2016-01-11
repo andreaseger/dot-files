@@ -1,27 +1,103 @@
 #!/usr/bin/env bash
-# Runs a command wrapped with btrfs pre-post snapshots.
-log_path="/var/local/log/snp"
+log_path="/var/log/snapper_upgrade"
 date=$(date "+%Y-%m-%d-%H%M%S")
-log_file="${log_path}/snp_${date}.log"
+log_file="${log_path}/snapper_upgrade_${date}.log"
 
-# Log stdout and stderr. Reference: http://stackoverflow.com/questions/3173131/redirect-copy-of-stdout-to-log-file-from-within-bash-script-itself
-exec >  >(tee -a "$log_file")
-exec 2> >(tee -a "$log_file" >&2)
+msg(){
+  echo -en "\e[0;32m$(tput bold)> "${@}"$(tput sgr0)\e[0m"
+}
 
-cmd="full-system-update (pacman -Syu && pacaur -Syua)"
+warn(){
+	echo -en "\e[0;31m$(tput bold)! "${@}"$(tput sgr0)\e[0m"
+}
 
-snapshot_nbr_root=$(sudo snapper -c root create --type=pre --cleanup-algorithm=number --print-number --description="${cmd}")
-snapshot_nbr_usr=$(sudo snapper -c usr create --type=pre --cleanup-algorithm=number --print-number --description="${cmd}")
-echo -e "> New pre snapshots with number root:${snapshot_nbr_root} and usr:${snapshot_nbr_usr}."
-echo -e "> Running command \"${cmd}\"."
 
-if hash powerpill 2>/dev/null; then
-  sudo powerpill -Syu
-else
-  sudo pacman -Syu
+aur(){
+	builddir=${builddir:-/tmp/pacaurtmp-$USER}
+
+	msg "Checking for updates...\n"
+	aurpkgs=$(pacaur --color never --check | awk -F'aur  ' '{print $2}')
+	if [[ -z $aurpkgs ]]; then
+		msg "No AUR packages to upgrade.\n"
+		return 2
+	fi
+
+	rm -rf "$builddir" && mkdir "$builddir"
+	if eval "pacaur --color always -Syuw $devel"; then
+		buildpkgs=$(find $builddir -type f -regex ".*\.pkg\.\(tar\|tar\.[gx]z\)")
+		if [[ -n $buildpkgs ]]; then
+			eval "in_block=1"
+			# Take snapshot and store snapshot number in $pre
+			pre_root=$(sudo snapper -c root create --type=pre --cleanup-algorithm=number --print-number --description="AUR upgrade") 
+			pre_opt=$(sudo snapper -c opt create --type=pre --cleanup-algorithm=number --print-number --description="AUR upgrade") 
+			msg "New pre snapshot with number root/${pre_root} opt/${pre_opt}\n"
+			sudo pacman -U --noconfirm $ignoreopts $buildpkgs && msg "Packages upgraded\n" || return 1
+
+			msg "Taking post snapshot\n"
+			# Take post snapshot and store number in $post
+			post_root=$(sudo snapper create --type=post --cleanup-algorithm=number --print-number --pre-number="$pre_root") 
+			post_opt=$(sudo snapper create --type=post --cleanup-algorithm=number --print-number --pre-number="$pre_opt") 
+			for pkg in "$buildpkgs"; do 
+				rm $pkg
+			done
+
+      msg "Snapshot block complete: root/${pre_root}..${post_root} opt/${pre_opt}..${post_opt}\n"
+			echo -e "\nAUR packages upgraded: \n\n$aurpkgs" | sudo tee -a $log_file > /dev/null
+			eval "in_block=0"
+			msg "Log of upgraded packages available at ${log_file}\n\n"
+			return 0
+		else
+			return 2
+		fi
+	else
+		warn "Download/build failed. Aborting.\n"
+		return 1
+	fi
+
+}
+
+
+quit() { # Run cleanup code upon exit or error
+    if [[ "$in_block" = "1" ]]; then
+        warn "WARNING: Aborting from pre/post snapshot block Do you want to remove pre snapshot ${pre}? [Y/n]: "
+        read remshot
+        case $remshot in 
+            ""|[Yy]|[Yy][Ee][Ss])sudo snapper delete $pre; msg "Snapshot removed\n"; in_block=0; exit;; 
+            [Nn]|[Nn][Oo]) msg "Okay. Leaving empty pre snapshot\n"; in_block=0 ;;
+        esac 
+    fi
+} 
+trap quit EXIT ERR 15 1 2
+
+#------------------------------------------------------------------------------
+
+msg "Retrieving packages...\n"
+sudo pacman -Syuw && msg "Done\n" || exit 2 # Only pull down needed packages. Don't install
+
+pkgs=$(package-query -SQuf "%n  %l  ->  %V\n")
+if [[ -z $pkgs ]]; then
+  aur
+  msg "Nothing to update. Aborting.\n" && exit 2
 fi
-pacaur -Syua
 
-snapshot_nbr_root=$(sudo snapper -c root create --type=post --cleanup-algorithm=number --print-number --pre-number="$snapshot_nbr_root")
-snapshot_nbr_usr=$(sudo snapper -c usr create --type=post --cleanup-algorithm=number --print-number --pre-number="$snapshot_nbr_usr")
-echo -e "\n> New post snapshot with number root:${snapshot_nbr_root} and usr:${snapshot_nbr_usr}."
+if pacman -Qqu | grep -q "^linux$";  then # There's a linux kernel upgrade
+  snapComment=" + kernel upgrade"
+fi
+
+in_block=1 # This allows quit() to know if we are in a snapshot
+# Take snapshot and store snapshot number in $pre
+pre=$(sudo snapper -c root create --type=pre --cleanup-algorithm=number --print-number --description="Package upgrade${snapComment}")
+msg "New pre snapshot with number root/${pre}\n"
+sudo pacman -Su --noconfirm # Upgrade packages
+echo
+
+# Take post snapshot and store number in $post
+post=$(sudo snapper -c root create --type=post --cleanup-algorithm=number --print-number --pre-number="$pre") 
+msg "Snapshot[root] block complete: root/${pre}..${post}\n"
+echo -e "Packages upgraded: \n\n$pkgs" | sudo tee -a $log_file > /dev/null
+# Remove pacman junk from logfile
+sudo sed -i '/Proceed with installation/d' $log_file 
+in_block=0
+
+aur
+exit
