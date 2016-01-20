@@ -19,11 +19,12 @@ tmux_options: -f ~/.tmux.raw.conf
 # tmux_command: byobu
 
 windows:
-  - home: ''
-  - web-editor:
-    - cd runtastic-web
-  - web-specs:
-    - cd runtastic-web
+  - home: 'cd ~'
+  - lb-editor:
+    - cd services/leaderboard
+  - lb-specs:
+    - cd services/leaderboard
+    - bundle exec rspec spec
   - samples-editor:
     - cd services/samples
   - samples-specs:
