@@ -1,7 +1,8 @@
 [Desktop Entry]
 Comment=
 Terminal=false
-Name=Workbench
-Exec=urxvt -e /home/ane/.rbenv/shims/mux start workbench
+Name=tmux
+Exec=urxvt -e tmux attach
 Type=Application
 Icon=utilities-terminal
+
