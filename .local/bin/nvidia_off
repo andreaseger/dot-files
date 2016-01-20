@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /home/sch1zo/build/acpi_call
+cd /home/ane/build/acpi_call
 make
 make load
 echo '\_SB.PCI0.P0P1.VGA._OFF' > /proc/acpi/call
