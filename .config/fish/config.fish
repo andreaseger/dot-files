@@ -45,12 +45,10 @@ function ll; ls -lh $argv; end
 function l  --wraps ls; ls -lah $argv; end
 function l. --wraps ls; ls -d .* $argv; end
 function ll --wraps ls; ls -lh $argv; end
-abbreviate 'subl=subl3'
 
 # abbreviate '!=sudo'
 abbreviate 'b=bundle'
 abbreviate 'be=bundle exec'
-abbreviate 's=subl3'
 abbreviate 'v=vim'
 abbreviate 'a=ag --smart-case --literal'
 abbreviate 'p=pacaur'
@@ -64,4 +62,3 @@ function fish_user_key_bindings
 end
 
 set -g fish_new_pager 1
-fish_vi_mode

@@ -1,7 +1,7 @@
 # ~/.tmuxinator/services.yml
 
 name: services
-root: ~/code/backend
+root: ~/runtastic/services
 
 # Optional tmux socket
 # socket_name: foo
@@ -24,7 +24,7 @@ windows:
       panes:
         - appendix:
           - cd appendix
-          - set -x JRUBY_OPTS "--1.9 -Xcompile.invokedynamic=false -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1 -J-noverify -Xcompile.mode=OFF"
+          - set -x JRUBY_OPTS "--1.9 -Xcompile.invokedynamic=false -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1 -J-noverify -Xcompile.mode=OFF -J-Xmx256m"
           - gup
           - bundle
           - bundle exec foreman start
@@ -50,7 +50,7 @@ windows:
           - bundle exec foreman start
         - restore:
           - cd restore
-          - set -x JRUBY_OPTS "--1.9 -Xcompile.invokedynamic=false -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1 -J-noverify -Xcompile.mode=OFF"
+          - set -x JRUBY_OPTS "--1.9 -Xcompile.invokedynamic=false -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1 -J-noverify -Xcompile.mode=OFF -J-Xmx256m"
           - gup
           - bundle
           - bundle exec foreman start
@@ -69,8 +69,3 @@ windows:
           - gup
           - bundle
           - bundle exec foreman start
-  - syncthing:
-    - syncthing
-
-
-
