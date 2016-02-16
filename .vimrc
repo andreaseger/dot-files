@@ -15,7 +15,7 @@ Plug 'kien/ctrlp.vim'
 
   let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
   if executable('ag')
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    let g:ctrlp_user_command = 'ag --path-to-agignore=~/.agignore.global %s -l --nocolor -g ""'
   endif
   let g:ctrlp_abbrev = {
       \ 'gmode': 't',
@@ -33,7 +33,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
 Plug 'rking/ag.vim'
   " nmap <leader>a :Ag
-  let g:agprg="ag --smart-case --literal --column" "use a more fuzzy search
+  let g:agprg="ag --path-to-agignore=~/.agignore.global --smart-case --literal --column" "use a more fuzzy search
 
 Plug 'scrooloose/syntastic'
 Plug 'jeetsukumaran/vim-buffergator'
@@ -123,6 +123,7 @@ Plug 'thoughtbot/vim-rspec', {'for': 'ruby'}
 Plug 'kana/vim-textobj-user', {'for': 'ruby'}
 Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
 Plug 'skwp/vim-spec-finder', {'for': 'ruby'}
+Plug 'vim-utils/vim-ruby-fold', {'for': 'ruby'}
 
 Plug 'aliva/vim-fish', {'for': 'fish'}
 Plug 'elixir-lang/vim-elixir', {'for': 'elixir'}
@@ -199,7 +200,7 @@ au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 " Folding {{{
 set foldmethod=syntax
 set foldlevel=99
-set foldnestmax=10      " max 10 depth
+set foldnestmax=5       " max 10 depth
 set foldenable          " do fold files by default on open
 set foldlevelstart=10   " open most folds by default
 " space open/closes folds

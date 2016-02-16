@@ -35,8 +35,8 @@ aur(){
 
 			msg "Taking post snapshot\n"
 			# Take post snapshot and store number in $post
-			post_root=$(sudo snapper create --type=post --cleanup-algorithm=number --print-number --pre-number="$pre_root") 
-			post_opt=$(sudo snapper create --type=post --cleanup-algorithm=number --print-number --pre-number="$pre_opt") 
+			post_root=$(sudo snapper -c root create --type=post --cleanup-algorithm=number --print-number --pre-number="$pre_root") 
+			post_opt=$(sudo snapper -c opt create --type=post --cleanup-algorithm=number --print-number --pre-number="$pre_opt") 
 			for pkg in "$buildpkgs"; do 
 				rm $pkg
 			done

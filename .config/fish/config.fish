@@ -46,6 +46,8 @@ function l  --wraps ls; ls -lah $argv; end
 function l. --wraps ls; ls -d .* $argv; end
 function ll --wraps ls; ls -lh $argv; end
 
+function agg --wraps ag; ag --path-to-agignore=~/.agignore.global $argv;end
+
 # abbreviate '!=sudo'
 abbreviate 'b=bundle'
 abbreviate 'be=bundle exec'

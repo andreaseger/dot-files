@@ -20,11 +20,6 @@ tmux_options: -f ~/.tmux.raw.conf
 
 windows:
   - home: 'cd ~'
-  - lb-editor:
-    - cd services/leaderboard
-  - lb-specs:
-    - cd services/leaderboard
-    - bundle exec rspec spec
   - samples-editor:
     - cd services/samples
   - samples-specs:
