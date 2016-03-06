@@ -294,6 +294,8 @@ augroup ruby
   au FileType ruby noremap <buffer> <leader>t :call RunNearestTest()<cr>
   au FileType ruby let g:rubycomplete_buffer_loading = 1 
   au FileType ruby let g:rubycomplete_classes_in_global = 1
+  " puts the caller
+  au FileType ruby nnoremap <buffer> <leader>wtf oputs "#" * 90<c-m>puts caller<c-m>puts "#" * 90<esc>
 augroup END
 
 " md, markdown, and mk are markdown and define buffer-local preview
