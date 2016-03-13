@@ -1,9 +1,7 @@
 set nocompatible               " be iMproved
 
 " VIM-Plug Config {{{
-call plug#begin('~/.vim/plugged')
-
-Plug 'tpope/vim-sensible'
+call plug#begin('~/.config/nvim/plugged')
 
 " Basics {{{
 Plug 'kien/ctrlp.vim'
@@ -127,14 +125,12 @@ Plug 'vim-utils/vim-ruby-fold', {'for': 'ruby'}
 
 Plug 'aliva/vim-fish', {'for': 'fish'}
 Plug 'elixir-lang/vim-elixir', {'for': 'elixir'}
-" Plug 'nsf/gocode', {'rtp': 'vim/'}
 
 Plug 'tpope/vim-markdown', {'for': 'markdown'}
 Plug 'jtratner/vim-flavored-markdown', {'for': 'markdown'}
 Plug 'juvenn/mustache.vim', {'for': 'mustache'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'ap/vim-css-color', {'for': 'css'}
-"Plug 'tpope/vim-haml'
 " }}}
 
 " colors/style {{{
@@ -163,8 +159,6 @@ Plug 'christoomey/vim-tmux-navigator'
 " }}}
 
 call plug#end()
-
-runtime! plugin/sensible.vim
 " }}}
 
 " Core Config {{{
@@ -185,8 +179,8 @@ let &colorcolumn="80,100,".join(range(120,320),",")
 " }}}
 
 " Directories for swp files {{{
-set backupdir=~/.vim/backup
-set directory=~/.vim/backup
+set backupdir=~/.config/nvim/backup
+set directory=~/.config/nvim/backup
 " }}}
 
 " Automatic Views {{{

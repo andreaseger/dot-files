@@ -6,5 +6,4 @@ load-ssh-agent
 #. $fish_path/load/exenv.fish
 # . $fish_path/load/virtual.fish
 
-abbreviate 'vi=vim'
-# abbreviate 'vim=vim'
+abbr -a vi='vim'

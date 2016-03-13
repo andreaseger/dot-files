@@ -2,11 +2,6 @@ set fish_greeting ""
 
 set -l fish_path ~/.config/fish
 set fish_function_path $fish_function_path (find $fish_path/functions/* -type d)
-# setup/init fish_user_abbreviations
-set -U fish_user_abbreviations '!=sudo'
-if status --is-interactive
-  eval sh $fish_path/load/base16-default.dark.sh
-end
 
 # load local config (stuff like PATH)
 begin
@@ -29,31 +24,27 @@ begin
   # add stuff to path
   add_uniquely_to_user_paths $HOME/.local/bin /usr/bin/core_perl /usr/local/bin
 end
-#for preload in (find $fish_path/load/* -name '*.fish')
-#  . $preload
-#end
+
 for preload in env.fish git-aliases.fish less.fish
   . $fish_path/load/$preload
 end
 
-abbreviate 'h=~'
+set -gx XDG_CONFIG_HOME $HOME/.config
+
+abbr -a !=sudo
+abbr -a h=~
 function !!; sudo su; end
-abbreviate 'tf=tail -f'
-function l ; ls -lah $argv; end
-function l.; ls -d .* $argv; end
-function ll; ls -lh $argv; end
+abbr -a tf="tail -f"
 function l  --wraps ls; ls -lah $argv; end
 function l. --wraps ls; ls -d .* $argv; end
 function ll --wraps ls; ls -lh $argv; end
 
 function agg --wraps ag; ag --path-to-agignore=~/.agignore.global $argv;end
 
-# abbreviate '!=sudo'
-abbreviate 'b=bundle'
-abbreviate 'be=bundle exec'
-abbreviate 'v=vim'
-abbreviate 'a=ag --smart-case --literal'
-abbreviate 'p=pacaur'
+abbr -e b=bundle
+abbr -e be='bundle exec'
+abbr -e v=vim
+abbr -e a='ag --smart-case --literal'
 
 set -g fish_color_host blue
 

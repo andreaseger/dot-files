@@ -15,13 +15,15 @@
 /.config/*
 !/.config/fish
 /.config/fish/fish_history*
+!/.config/nvim
+/.config/nvim/*
+!/.config/nvim/init.vim
+!/.config/nvim/autoload
+!/.config/nvim/backup
+/.config/nvim/backup/*
+!/.config/nvim/backup/.gitkeep
 
-!/.atom
-/.atom/*
-!/.atom/config.cson
-!/.atom/keymap.cson
-!/.atom/init.cson
-!/.atom/snippets.cson
+
 
 !/.config/htop
 !/.aria2
@@ -30,14 +32,6 @@
 !/.ssh/
 /.ssh/*
 !/.ssh/config
-
-!/.vim
-/.vim/backup/*
-!/.vim/backup/.gitkeep
-/.vim/bundle/*
-!/.vim/bundle/vundle
-/.vim/view
-/.vim/tmp
 
 !/.vim
 /.vim/.netrwhist

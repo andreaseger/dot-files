@@ -1,5 +1,5 @@
-abbreviate 'server=bundle exec rails server'
-abbreviate 'console=bundle exec rails console'
+abbr -a server='bundle exec rails server'
+abbr -a console='bundle exec rails console'
 
 # set -x JRUBY_OPTS "--1.9 -Xcompile.invokedynamic=false -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1 -J-noverify -Xcompile.mode=OFF"
 set -x JRUBY_OPTS "--dev -J-noverify"
@@ -12,12 +12,5 @@ set -x RUBY_HEAP_FREE_MIN 100000
 
 . $fish_path/load/rbenv.fish
 
-abbreviate 'spec=bundle exec rspec spec'
-abbreviate 'pr=env RBENV_VERSION=ruby-2.2.3 stash pull-request -o (current_branch) master'
-# abbreviate 'vi=nvim'
-# abbreviate 'vim=nvim'
-
-# function jrspec
-#   command jruby --1.9 --dev -G ~/.rbenv/versions/(cat .ruby-version)/bin/rspec $argv
-# end
-
+abbr -a spec='bundle exec rspec spec'
+abbr -a pr='env RBENV_VERSION=ruby-2.2.3 stash pull-request -o (current_branch) master'
