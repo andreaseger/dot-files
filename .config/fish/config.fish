@@ -3,6 +3,21 @@ set fish_greeting ""
 set -l fish_path ~/.config/fish
 set fish_function_path $fish_function_path (find $fish_path/functions/* -type d)
 
+abbr -a !=sudo
+abbr -a h=~
+function !!; sudo su; end
+abbr -a tf="tail -f"
+function l  --wraps ls; ls -lah $argv; end
+function l. --wraps ls; ls -d .* $argv; end
+function ll --wraps ls; ls -lh $argv; end
+
+function agg --wraps ag; ag --path-to-agignore=~/.agignore.global $argv;end
+
+abbr -a b=bundle
+abbr -a be='bundle exec'
+abbr -a v=vim
+abbr -a a='ag --smart-case --literal'
+
 # load local config (stuff like PATH)
 begin
   set -l __fish_hostnames (hostname -s)
@@ -30,21 +45,6 @@ for preload in env.fish git-aliases.fish less.fish
 end
 
 set -gx XDG_CONFIG_HOME $HOME/.config
-
-abbr -a !=sudo
-abbr -a h=~
-function !!; sudo su; end
-abbr -a tf="tail -f"
-function l  --wraps ls; ls -lah $argv; end
-function l. --wraps ls; ls -d .* $argv; end
-function ll --wraps ls; ls -lh $argv; end
-
-function agg --wraps ag; ag --path-to-agignore=~/.agignore.global $argv;end
-
-abbr -e b=bundle
-abbr -e be='bundle exec'
-abbr -e v=vim
-abbr -e a='ag --smart-case --literal'
 
 set -g fish_color_host blue
 

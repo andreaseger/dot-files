@@ -6,4 +6,7 @@ load-ssh-agent
 #. $fish_path/load/exenv.fish
 # . $fish_path/load/virtual.fish
 
-abbr -a vi='vim'
+abbr -e v
+abbr -a v=nvim
+abbr -a vi=nvim
+abbr -a vim=nvim
