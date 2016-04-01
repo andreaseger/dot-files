@@ -1,3 +1,4 @@
 [user]
   email = dev@eger-andreas.de
   name = Andreas Eger
+	useconfigonly = true

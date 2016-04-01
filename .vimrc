@@ -127,6 +127,8 @@ Plug 'vim-utils/vim-ruby-fold', {'for': 'ruby'}
 
 Plug 'aliva/vim-fish', {'for': 'fish'}
 Plug 'elixir-lang/vim-elixir', {'for': 'elixir'}
+Plug 'slashmili/alchemist.vim', {'for': 'elixir'}
+Plug 'powerman/vim-plugin-AnsiEsc', {'for': 'elixir'}
 " Plug 'nsf/gocode', {'rtp': 'vim/'}
 
 Plug 'tpope/vim-markdown', {'for': 'markdown'}
@@ -386,7 +388,7 @@ function! <SID>AutoProjectRootCD()
   endtry
 endfunction
 
-autocmd BufEnter * call <SID>AutoProjectRootCD()
+" autocmd BufEnter * call <SID>AutoProjectRootCD()
 "}}}
 
 " vim:foldmethod=marker:foldlevel=0
