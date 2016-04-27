@@ -1,15 +1,24 @@
 "*":
-  welcome:
-    showOnStartup: false
   core:
-    themes: [
-      "one-dark-ui"
-      "base16-tomorrow-dark-theme"
-    ]
     disabledPackages: [
       "vim-mode"
+      "spell-check"
+    ]
+    packagesWithKeymapsDisabled: [
+      "vim-mode"
+    ]
+    themes: [
+      "atom-light-ui"
+      "solarized-light-syntax"
     ]
   editor:
+    fontFamily: "Consolas"
     invisibles: {}
-    showInvisibles: true
+    showIndentGuide: true
+    tabType: "soft"
+  "exception-reporting":
+    userId: "a67477e5-5031-fc0a-1e5b-32719ae80d90"
+  "spell-check": {}
   "vim-mode": {}
+  welcome:
+    showOnStartup: false

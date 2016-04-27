@@ -79,7 +79,7 @@ else
   " YouCompleteMe Config {{{
   let g:ycm_collect_identifiers_from_tags_files = 1
   " }}}
-  Plug 'Shougo/neocomplete.vim'
+  " Plug 'Shougo/neocomplete.vim'
   " neocomplete Config {{{
   "" Disable AutoComplPop.
   "let g:acp_enableAtStartup = 0
@@ -123,7 +123,7 @@ Plug 'thoughtbot/vim-rspec', {'for': 'ruby'}
 Plug 'kana/vim-textobj-user', {'for': 'ruby'}
 Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
 Plug 'skwp/vim-spec-finder', {'for': 'ruby'}
-Plug 'vim-utils/vim-ruby-fold', {'for': 'ruby'}
+Plug 'bruno-/vim-ruby-fold', {'for': 'ruby'}
 
 Plug 'aliva/vim-fish', {'for': 'fish'}
 Plug 'elixir-lang/vim-elixir', {'for': 'elixir'}
@@ -390,5 +390,20 @@ endfunction
 
 " autocmd BufEnter * call <SID>AutoProjectRootCD()
 "}}}
+
+"{{{ creating missing parent directories on save
+function s:MkNonExDir(file, buf)
+    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+        let dir=fnamemodify(a:file, ':h')
+        if !isdirectory(dir)
+            call mkdir(dir, 'p')
+        endif
+    endif
+endfunction
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
+" }}}
 
 " vim:foldmethod=marker:foldlevel=0
