@@ -45,6 +45,8 @@
 !/.share
 
 !/.bundle
+/.bundle/cache
+/.bundle/config
 
  execptions for more important dot-files
 !.xprofile
