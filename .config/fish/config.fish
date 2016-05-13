@@ -15,7 +15,10 @@ function agg --wraps ag; ag --path-to-agignore=~/.agignore.global $argv;end
 
 abbr -a b=bundle
 abbr -a be='bundle exec'
-abbr -a v=vim
+# abbr -a v=vim
+abbr -a v=emacsclient -ct
+abbr -a e=emacsclient -ct
+abbr -a ee=emacsclient -nc
 abbr -a a='ag --smart-case --literal'
 
 # load local config (stuff like PATH)
