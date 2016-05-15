@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+set -euf -o pipefail
+
+sudo pacman -Syu
+pacaur -Syua --color always --noedit
