@@ -256,8 +256,15 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (setq fci-rule-column 100) ; show column rule at 100 characters
+  ; set fill column to 100 and enable it for all buffers
+  (setq fci-rule-column 100)
+  (add-hook 'after-change-major-mode-hook 'fci-mode)
+  ; start in fullscreen
   (add-to-list 'default-frame-alist '(fullscreen . fullboth))
+  ; set nowrap
+  (add-hook 'hack-local-variables-hook (lambda () (setq truncate-lines t)))
+  ; _ as word character in ruby
+  (add-hook 'ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

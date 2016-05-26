@@ -21,38 +21,51 @@ aur(){
 		msg "No AUR packages to upgrade.\n"
 		return 2
 	fi
+	eval "in_block=1"
+  # Take snapshot and store snapshot number in $pre
+  pre_root=$(sudo snapper -c root create --type=pre --cleanup-algorithm=number --print-number --description="AUR upgrade") 
+  pre_opt=$(sudo snapper -c opt create --type=pre --cleanup-algorithm=number --print-number --description="AUR upgrade") 
+  msg "New pre snapshot with number root/${pre_root} opt/${pre_opt}\n"
+  pacaur -Syua && msg "Packages upgraded\n" || return 1
 
-	rm -rf "$builddir" && mkdir "$builddir"
-	if eval "pacaur --color always -Syuw $devel"; then
-		buildpkgs=$(find $builddir -type f -regex ".*\.pkg\.\(tar\|tar\.[gx]z\)")
-		if [[ -n $buildpkgs ]]; then
-			eval "in_block=1"
-			# Take snapshot and store snapshot number in $pre
-			pre_root=$(sudo snapper -c root create --type=pre --cleanup-algorithm=number --print-number --description="AUR upgrade") 
-			pre_opt=$(sudo snapper -c opt create --type=pre --cleanup-algorithm=number --print-number --description="AUR upgrade") 
-			msg "New pre snapshot with number root/${pre_root} opt/${pre_opt}\n"
-			sudo pacman -U --noconfirm $ignoreopts $buildpkgs && msg "Packages upgraded\n" || return 1
+  msg "Taking post snapshot\n"
+  # Take post snapshot and store number in $post
+  post_root=$(sudo snapper -c root create --type=post --cleanup-algorithm=number --print-number --pre-number="$pre_root") 
+  post_opt=$(sudo snapper -c opt create --type=post --cleanup-algorithm=number --print-number --pre-number="$pre_opt") 
+	echo -e "\nAUR packages upgraded: \n\n$aurpkgs" | sudo tee -a $log_file > /dev/null
+	eval "in_block=0"
 
-			msg "Taking post snapshot\n"
-			# Take post snapshot and store number in $post
-			post_root=$(sudo snapper -c root create --type=post --cleanup-algorithm=number --print-number --pre-number="$pre_root") 
-			post_opt=$(sudo snapper -c opt create --type=post --cleanup-algorithm=number --print-number --pre-number="$pre_opt") 
-			for pkg in "$buildpkgs"; do 
-				rm $pkg
-			done
+	# rm -rf "$builddir" && mkdir "$builddir"
+	# if eval "pacaur --color always -Syuw $devel"; then
+	# 	buildpkgs=$(find $builddir -type f -regex ".*\.pkg\.\(tar\|tar\.[gx]z\)")
+	# 	if [[ -n $buildpkgs ]]; then
+	# 		eval "in_block=1"
+	# 		# Take snapshot and store snapshot number in $pre
+	# 		pre_root=$(sudo snapper -c root create --type=pre --cleanup-algorithm=number --print-number --description="AUR upgrade") 
+	# 		pre_opt=$(sudo snapper -c opt create --type=pre --cleanup-algorithm=number --print-number --description="AUR upgrade") 
+	# 		msg "New pre snapshot with number root/${pre_root} opt/${pre_opt}\n"
+	# 		sudo pacman -U --noconfirm $ignoreopts $buildpkgs && msg "Packages upgraded\n" || return 1
 
-      msg "Snapshot block complete: root/${pre_root}..${post_root} opt/${pre_opt}..${post_opt}\n"
-			echo -e "\nAUR packages upgraded: \n\n$aurpkgs" | sudo tee -a $log_file > /dev/null
-			eval "in_block=0"
-			msg "Log of upgraded packages available at ${log_file}\n\n"
-			return 0
-		else
-			return 2
-		fi
-	else
-		warn "Download/build failed. Aborting.\n"
-		return 1
-	fi
+	# 		msg "Taking post snapshot\n"
+	# 		# Take post snapshot and store number in $post
+	# 		post_root=$(sudo snapper -c root create --type=post --cleanup-algorithm=number --print-number --pre-number="$pre_root") 
+	# 		post_opt=$(sudo snapper -c opt create --type=post --cleanup-algorithm=number --print-number --pre-number="$pre_opt") 
+	# 		for pkg in "$buildpkgs"; do 
+	# 			rm $pkg
+	# 		done
+
+      # msg "Snapshot block complete: root/${pre_root}..${post_root} opt/${pre_opt}..${post_opt}\n"
+	# 		echo -e "\nAUR packages upgraded: \n\n$aurpkgs" | sudo tee -a $log_file > /dev/null
+	# 		eval "in_block=0"
+	# 		msg "Log of upgraded packages available at ${log_file}\n\n"
+	# 		return 0
+	# 	else
+	# 		return 2
+	# 	fi
+	# else
+	# 	warn "Download/build failed. Aborting.\n"
+	# 	return 1
+	# fi
 
 }
 
