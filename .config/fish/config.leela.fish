@@ -6,6 +6,4 @@ load-ssh-agent
 #. $fish_path/load/exenv.fish
 # . $fish_path/load/virtual.fish
 
-abbr -e vi
-abbr -e vim
-abbr -a vi=vim
+add_uniquely_to_user_paths $HOME/code/go/bin
