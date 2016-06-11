@@ -1,4 +1,4 @@
-#setenv __local_identities $HOME/.ssh/experteer_rsa
+setenv __local_identities ~/.ssh/id_rsa
 load-ssh-agent
 set -x JRUBY_OPTS "--dev -J-noverify"
 

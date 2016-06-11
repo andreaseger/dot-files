@@ -1,7 +1,7 @@
 [color]
   ui = auto
 [merge]
-  ff = false
+  ; ff = false
   stat = true
 [alias]
   cp   = cherry-pick
@@ -17,6 +17,14 @@
   hist = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=short --follow --patch
 
   meld = mergetool -t meld
+
+	assume = update-index --assume-unchanged
+	unassume = update-index --no-assume-unchanged
+	assumed = "!git ls-files -v | grep ^h | cut -c 3-"
+	ours = "!f() { git co --ours $@ && git add $@; }; f"
+	theirs = "!f() { git co --theirs $@ && git add $@; }; f"
+
+	aliases = "!git config -l | grep alias | cut -c 7-"
 [push]
   default = simple
   followTags = true
@@ -34,7 +42,7 @@
 
 [core]
   excludesfile = ~/.gitignore.global
-[core]
 	attributesfile = ~/.gitattributes.global
+  pager = less -r
 [init]
 	templatedir = ~/.config/git/template

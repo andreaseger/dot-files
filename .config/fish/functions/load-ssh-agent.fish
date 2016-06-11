@@ -4,6 +4,7 @@ function load-ssh-agent
   #set -l gnome_keyring_sockets (find /run/user/(id -u) -type s -name ssh 2> /dev/null | grep 'keyring-.*/ssh$')
   #set -l sockets $gnome_keyring_sockets $ssh_agent_sockets
   set -l socket $ssh_agent_sockets[1]
+
   if test $socket
     echo "setting SSH_AUTH_SOCK to $socket"
     if test (grep $socket $ssh_env)
@@ -17,6 +18,13 @@ function load-ssh-agent
     chmod 600 $ssh_env
     . $ssh_env
   end
+
+  for x in $__local_identities
+    if not test (ssh-add -l | grep $x)
+      ssh-add $x
+    end
+  end
+
   if test (ssh-add -l | grep "The agent has no identities")
     echo 'loading identities'
     ssh-add
