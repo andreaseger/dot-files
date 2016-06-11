@@ -70,4 +70,6 @@
 !.git
 !.config/redshift.conf
 !/.tmuxinator
+
 !/.spacemacs
+!/.spacemacs.d

@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: jruby profiling boilerplate
+# key: jprof
+# binding: direct-keybinding
+# --
+#!/usr/bin/env ruby
+# run with --profile.api in JRUBY_OPTS
+require 'jruby/profiler'
+PROFILE_NAME = "$1"
+
+GC.disable
+profile_data = JRuby::Profiler.profile do
+  $0
+end
+
+
+profile_printer = JRuby::Profiler::GraphProfilePrinter.new(profile_data)
+profile_printer.printProfile(File.open("#{PROFILE_NAME}.graph.profile", "w+"))
+profile_printer.printProfile(STDOUT)
+
+profile_printer = JRuby::Profiler::FlatProfilePrinter.new(profile_data)
+profile_printer.printProfile(File.open("#{PROFILE_NAME}.flat.profile", "w+"))

@@ -75,7 +75,7 @@ if has('nvim')
   let g:deoplete#enable_at_startup = 1
   " }}}
 else
-  Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py' }
+  " Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py' }
   " YouCompleteMe Config {{{
   let g:ycm_collect_identifiers_from_tags_files = 1
   " }}}
