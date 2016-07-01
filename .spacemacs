@@ -268,7 +268,12 @@ you should place your code here."
   (add-hook 'hack-local-variables-hook (lambda () (setq truncate-lines t)))
   ; _ as word character in ruby
   (add-hook 'ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+  ; change indentation for javascript to 2 spaces
+  (setq-default
+   js2-basic-offset 2
+   js-indent-level 2
   )
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
