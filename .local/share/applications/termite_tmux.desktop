@@ -2,7 +2,7 @@
 Comment=
 Terminal=false
 Name=tmux
-Exec=urxvt -e tmux attach
+Exec=termite -e tmux attach
 Type=Application
 Icon=utilities-terminal
 

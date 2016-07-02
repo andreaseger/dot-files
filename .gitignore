@@ -8,7 +8,7 @@
 !/.local/share/terminfo
 !/.local/share/applications
 /.local/share/applications/*
-!/.local/share/applications/urxvtc_tmux.desktop
+!/.local/share/applications/termite_tmux.desktop
 !/.local/share/applications/bender.oho.io.desktop
 
 !/.config/
@@ -22,6 +22,7 @@
 !/.config/nvim/backup
 /.config/nvim/backup/*
 !/.config/nvim/backup/.gitkeep
+!/.config/termite
 
 
 
