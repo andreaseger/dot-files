@@ -43,8 +43,10 @@ values."
      (ruby :variables
             ruby-version-manager 'rbenv
             ruby-test-runner 'rspec)
+     yaml
      erlang
      elixir
+     ;; go
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -116,7 +118,7 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("Consolas for Powerline"
                                :size 15
                                :weight normal
                                :width normal
@@ -198,7 +200,7 @@ values."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -263,7 +265,7 @@ you should place your code here."
   (setq fci-rule-column 100)
   (add-hook 'after-change-major-mode-hook 'fci-mode)
   ; start in fullscreen
-  (add-to-list 'default-frame-alist '(fullscreen . fullboth))
+  ;; (add-to-list 'default-frame-alist '(fullscreen . fullboth))
   ; set nowrap
   (add-hook 'hack-local-variables-hook (lambda () (setq truncate-lines t)))
   ; _ as word character in ruby

@@ -2,6 +2,6 @@
 Comment=
 Terminal=false
 Name=Workbench
-Exec=urxvt -e /home/ane/.rbenv/shims/tmuxinator start workbench
+Exec=termite -e /home/ane/.rbenv/shims/tmuxinator start workbench
 Type=Application
 Icon=utilities-terminal
