@@ -1,5 +1,7 @@
 # Ignore almost everything
 /*
+!/README.md
+
 !/.local/
 /.local/*
 !/.local/bin
@@ -9,19 +11,11 @@
 !/.local/share/applications
 /.local/share/applications/*
 !/.local/share/applications/termite_tmux.desktop
-!/.local/share/applications/bender.oho.io.desktop
 
 !/.config/
 /.config/*
 !/.config/fish
 /.config/fish/fish_history*
-!/.config/nvim
-/.config/nvim/*
-!/.config/nvim/init.vim
-!/.config/nvim/autoload
-!/.config/nvim/backup
-/.config/nvim/backup/*
-!/.config/nvim/backup/.gitkeep
 !/.config/termite
 
 
@@ -35,24 +29,14 @@
 !/.ssh/config
 
 !/.vim
-/.vim/.netrwhist
-/.vim/backup/*
-!/.vim/backup/.gitkeep
-/.vim/view
-/.vim/plugged/*
-!/.vim/autoload/*
 /.vim/tmp
+/.vim/.netrwhist
 
 !/.share
 
-!/.bundle
-/.bundle/cache
-/.bundle/config
-
- execptions for more important dot-files
+# execptions for more important dot-files
 !.xprofile
 !.Xdefaults
-!.byoburc.tmux
 !.gemrc
 !.gitconfig
 !/.config/git
@@ -63,14 +47,14 @@
 !.irbrc
 !.pryrc
 !.psqlrc
-!.screenrc
 !.tmux.conf
 !.tmux.keybindings
 !.vimrc
-!.gvimrc
 !.git
 !.config/redshift.conf
 !/.tmuxinator
 
+#emacs
+!/.emacs.d
 !/.spacemacs
 !/.spacemacs.d
