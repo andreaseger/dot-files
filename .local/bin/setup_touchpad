@@ -1,3 +1,0 @@
-#!/bin/sh
-
-synclient TapButton2=2 TapButton3=3
