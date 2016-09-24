@@ -22,6 +22,7 @@ rm /tmp/dot-files -rf
 cd ~
 git reset HEAD
 git checkout .
+git submodule update --init
 ```
 
 
