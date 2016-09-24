@@ -35,11 +35,6 @@
 [rerere]
   enabled = true
 
-[url "git@github.com:"]
-  insteadOf = github:
-[url "git://github.com/"]
-  insteadOf = gitpub:
-
 [core]
   excludesfile = ~/.gitignore.global
 	attributesfile = ~/.gitattributes.global

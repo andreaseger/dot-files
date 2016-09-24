@@ -16,7 +16,6 @@ function fish_prompt --description 'Write out the prompt'
   set_color normal
 
   __fish_git_prompt_new
-  #__informative_git_prompt
 
   if not test $last_status -eq 0
     set_color $fish_color_error

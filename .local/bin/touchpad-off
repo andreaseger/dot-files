@@ -1,5 +1,0 @@
-#!/bin/bash
-
-touchpad_id=$(xinput | grep -i "touchpad" | cut -f2 | cut -d '=' -f2);
-xinput set-prop $touchpad_id "Device Enabled" 0 | notify-send "Disabling the touchpad..." ""
-

@@ -11,8 +11,6 @@ function l  --wraps ls; ls -lah $argv; end
 function l. --wraps ls; ls -d .* $argv; end
 function ll --wraps ls; ls -lh $argv; end
 
-function agg --wraps ag; ag --path-to-agignore=~/.agignore.global $argv;end
-
 abbr -a b=bundle
 abbr -a be='bundle exec'
 # abbr -a v=vim
