@@ -2,7 +2,6 @@
   core:
     disabledPackages: [
       "vim-mode"
-      "spell-check"
     ]
     packagesWithKeymapsDisabled: [
       "vim-mode"
@@ -13,6 +12,7 @@
     ]
   editor:
     fontFamily: "Consolas"
+    fontSize: 12
     invisibles: {}
     showIndentGuide: true
     tabType: "soft"
