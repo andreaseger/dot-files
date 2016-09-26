@@ -1,7 +1,0 @@
-[Desktop Entry]
-Comment=
-Terminal=false
-Name=Workbench
-Exec=termite -e /home/ane/.rbenv/shims/tmuxinator start workbench
-Type=Application
-Icon=utilities-terminal
