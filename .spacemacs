@@ -61,6 +61,7 @@ values."
      erlang
      elixir
      go
+     gtags
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -147,7 +148,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Consolas for Powerline"
-                               :size 26
+                               :size 28
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -332,7 +333,6 @@ you should place your code here."
           (append '("bundle" "exec") command)))
   ;; (setq rubocop-check-command "bundle exec rubocop --format emacs")
   ;; (setq rubocop-autocorrect-command "bundle exec rubocop -a --format emacs")
-
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -342,9 +342,10 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (pcache uuidgen rake org-projectile org org-download link-hint parent-mode request gitignore-mode git-link fringe-helper git-gutter+ git-gutter flycheck-mix flycheck flx eyebrowse evil-visual-mark-mode evil-unimpaired magit-popup git-commit with-editor smartparens evil-ediff anzu evil goto-chg undo-tree highlight eshell-z dumb-jump f diminish pos-tip go-mode column-enforce-mode inf-ruby bind-map bind-key yasnippet packed company elixir-mode pkg-info epl avy helm-core async auto-complete popup package-build powerline pcre2el hydra spinner alert log4e gntp s markdown-mode iedit projectile helm magit yaml-mode xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe use-package toc-org spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle shell-pop rvm ruby-tools ruby-test-mode ruby-end rubocop rspec-mode robe restart-emacs rbenv rainbow-delimiters quelpa popwin persp-mode paradox page-break-lines orgit org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative leuven-theme info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-eldoc gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eval-sexp-fu eshell-prompt-extras esh-help erlang elisp-slime-nav diff-hl define-word company-statistics company-quickhelp company-go clean-aindent-mode chruby bundler buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+    (ob-elixir minitest hide-comnt go-guru helm-gtags ggtags pcache uuidgen rake org-projectile org org-download link-hint parent-mode request gitignore-mode git-link fringe-helper git-gutter+ git-gutter flycheck-mix flycheck flx eyebrowse evil-visual-mark-mode evil-unimpaired magit-popup git-commit with-editor smartparens evil-ediff anzu evil goto-chg undo-tree highlight eshell-z dumb-jump f diminish pos-tip go-mode column-enforce-mode inf-ruby bind-map bind-key yasnippet packed company elixir-mode pkg-info epl avy helm-core async auto-complete popup package-build powerline pcre2el hydra spinner alert log4e gntp s markdown-mode iedit projectile helm magit yaml-mode xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe use-package toc-org spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle shell-pop rvm ruby-tools ruby-test-mode ruby-end rubocop rspec-mode robe restart-emacs rbenv rainbow-delimiters quelpa popwin persp-mode paradox page-break-lines orgit org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative leuven-theme info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-eldoc gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eval-sexp-fu eshell-prompt-extras esh-help erlang elisp-slime-nav diff-hl define-word company-statistics company-quickhelp company-go clean-aindent-mode chruby bundler buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
