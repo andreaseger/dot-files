@@ -44,7 +44,7 @@ for preload in env.fish git-aliases.fish less.fish
 end
 
 set -gx XDG_CONFIG_HOME $HOME/.config
-set -gx GTAGSLABEL=pygments
+set -gx GTAGSLABEL pygments
 
 set -g fish_color_host blue
 
