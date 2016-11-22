@@ -140,9 +140,9 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(solarized-light
+                         solarized-dark
                          spacemacs-dark
-                         spacemacs-light
-                         solarized-dark)
+                         spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -268,11 +268,11 @@ values."
    dotspacemacs-folding-method 'evil
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode nil
+   dotspacemacs-smartparens-strict-mode t
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc…
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
-   dotspacemacs-smart-closing-parenthesis nil
+   dotspacemacs-smart-closing-parenthesis t
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
@@ -330,9 +330,12 @@ you should place your code here."
   ; override rubocop command
   (setq flycheck-command-wrapper-function
         (lambda (command)
-          (append '("bundle" "exec") command)))
+          (append '("bundle" "exec") command)
+          )
+        )
   ;; (setq rubocop-check-command "bundle exec rubocop --format emacs")
   ;; (setq rubocop-autocorrect-command "bundle exec rubocop -a --format emacs")
+  ;;(fset 'xterm-color-unfontify-region 'font-lock-default-unfontify-region)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will

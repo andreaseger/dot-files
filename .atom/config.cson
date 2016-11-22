@@ -6,6 +6,7 @@
     packagesWithKeymapsDisabled: [
       "vim-mode"
     ]
+    telemetryConsent: "no"
     themes: [
       "atom-light-ui"
       "solarized-light-syntax"
