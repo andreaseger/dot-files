@@ -54,4 +54,14 @@ function fish_user_key_bindings
   bind \cb ".bundle_exec"
 end
 
+# emacs ansi-term support
+if test -n "$EMACS"
+  set -x TERM eterm-color
+end
+
+# this function may be required
+function fish_title
+  true
+end
+
 set -g fish_new_pager 1
