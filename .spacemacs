@@ -150,7 +150,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Consolas for Powerline"
-                               :size 30
+                               :size 14
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -306,7 +306,7 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq exec-path-from-shell-check-startup-files nil)
-  )
+)
 
 (defun dotspacemacs/user-config ()
   ; set fill column to 100 and enable it for all buffers

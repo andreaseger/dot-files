@@ -17,7 +17,6 @@ abbr -a b bundle
 abbr -a be 'bundle exec'
 abbr -a v emacsclient -t
 abbr -a e emacsclient -t
-abbr -a vim emacsclient -t
 abbr -a ee emacsclient -nc
 abbr -a a 'ag --smart-case --literal'
 
