@@ -334,6 +334,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
         )
 
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
+
+  ;; make emacs usable for git commit messages
+  (global-git-commit-mode t)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
