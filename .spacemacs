@@ -31,8 +31,6 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     shell-scripts
-     lua
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -49,7 +47,7 @@ values."
      markdown
      org
      (shell :variables
-            shell-default-shell 'term
+            shell-default-shell 'ansi-term
             shell-default-term-shell "/usr/bin/fish"
             shell-default-height 30
             shell-default-position 'bottom)
@@ -64,6 +62,8 @@ values."
      elixir
      go
      gtags
+     shell-scripts
+     lua
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -242,7 +242,7 @@ values."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -295,7 +295,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup 'changed
    ))
 
 (defun dotspacemacs/user-init ()
@@ -305,25 +305,22 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  (setq exec-path-from-shell-check-startup-files nil)
   )
 
 (defun dotspacemacs/user-config ()
-  "Configuration function for user code.
-This function is called at the very end of Spacemacs initialization after
-layers configuration.
-This is the place where most of your configurations should be done. Unless it is
-explicitly specified that a variable should be set before a package is loaded,
-you should place your code here."
   ; set fill column to 100 and enable it for all buffers
   (setq fci-rule-column 100)
-  (add-hook 'after-change-major-mode-hook 'fci-mode)
-  ; start in fullscreen
-  ;; (add-to-list 'default-frame-alist '(fullscreen . fullboth))
+  (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+  (global-fci-mode 1)
+
   ; set nowrap
   (add-hook 'hack-local-variables-hook (lambda () (setq truncate-lines t)))
+
   ; _ as word character in ruby & elixir
   (add-hook 'ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
   (add-hook 'elixir-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+
   ; change indentation for javascript to 2 spaces
   (setq-default
    js2-basic-offset 2
@@ -335,9 +332,8 @@ you should place your code here."
           (append '("bundle" "exec") command)
           )
         )
-  ;; (setq rubocop-check-command "bundle exec rubocop --format emacs")
-  ;; (setq rubocop-autocorrect-command "bundle exec rubocop -a --format emacs")
-  ;;(fset 'xterm-color-unfontify-region 'font-lock-default-unfontify-region)
+
+  (add-hook 'term-mode-hook 'toggle-truncate-lines)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
