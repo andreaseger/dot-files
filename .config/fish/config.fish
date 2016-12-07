@@ -1,7 +1,10 @@
 set fish_greeting ""
 
-set -l fish_path ~/.config/fish
+set -l fish_path $HOME/.config/fish
+
+# load functions also from subdirectories in functions folder
 set fish_function_path $fish_function_path (find $fish_path/functions/* -type d)
+
 
 abbr -a ! sudo
 abbr -a h ~
@@ -29,8 +32,9 @@ begin
       set fish_function_path $fish_function_path $x
     end
 
-    set -l x $fish_path/config.(echo $__fish_hostname).fish
+    set -l x $fish_path/config.$__fish_hostname.fish
     if test -e $x
+      echo load $x
       . $x
     end
   end
@@ -43,18 +47,19 @@ for preload in env.fish git-aliases.fish less.fish
   . $fish_path/load/$preload
 end
 
-set -gx XDG_CONFIG_HOME $HOME/.config
-set -gx GTAGSLABEL pygments
+#------------------------------------------------
 
 set -g fish_color_host blue
 
+# add keybindings:
+# C-s prefix line with `sudo`
+# C-b prefix line with `bundle exec`
 function fish_user_key_bindings
-  # bind \e1 ".runsudo"
-  bind \cs ".runsudo"
-  bind \cb ".bundle_exec"
+  bind \cs ".prefix_sudo"
+  bind \cb ".prefix_bundle_exec"
 end
 
-# emacs ansi-term support
+## emacs ansi-term support
 if test -n "$EMACS"
   set -x TERM eterm-color
 end
@@ -63,5 +68,3 @@ end
 function fish_title
   true
 end
-
-set -g fish_new_pager 1

@@ -17,11 +17,11 @@
 !/.config/fish
 /.config/fish/fish_history*
 !/.config/termite
+!/.config/htop
+!/.config/systemd
 
 !/.rbenv
 
-
-!/.config/htop
 !/.aria2
 /.aria2/dht.dat
 

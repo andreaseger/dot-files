@@ -1,13 +1,15 @@
-setenv EDITOR vim
-setenv VISUAL vim
+set -x EDITOR vim
+set -x VISUAL vim
 
-setenv LANGUAGE en_US.UTF-8
-setenv LANG en_US.UTF-8
-setenv LC_ALL en_US.UTF-8
+set -x LANGUAGE en_US.UTF-8
+set -x LANG en_US.UTF-8
+set -x LC_ALL en_US.UTF-8
 
-setenv PAGER less
-setenv LESS "-iMSx4 -R"
+set -x PAGER less
+set -x LESS "-iMSx4 -R"
+set -x XDG_CONFIG_HOME $HOME/.config
+set -x GTAGSLABEL pygments
 
-# setenv PAGER vimpager
+
 alias less $PAGER
 alias zless $PAGER
