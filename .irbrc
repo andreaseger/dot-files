@@ -1,3 +1,5 @@
+# -*- mode: ruby; -*-
+
 # Make gems available
 require 'irb/completion'
 require 'irb/ext/save-history'

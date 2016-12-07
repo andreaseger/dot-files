@@ -1,8 +1,28 @@
+[core]
+	excludesfile = ~/.gitignore.global
+	attributesfile = ~/.gitattributes.global
+	pager = less -r
+[user]
+	name = Andreas Eger
+	useconfigonly = true
 [color]
   ui = auto
+[init]
+	templatedir = ~/.config/git/template
 [merge]
   ; ff = false
   stat = true
+[push]
+	default = simple
+	followTags = true
+[diff]
+	algorithm = histogram
+	mnemonicprefix = true
+[rerere]
+	enabled = true
+[status]
+	submoduleSummary = true
+	relativePaths = false
 [alias]
   cp   = cherry-pick
   gg   = grep --break --heading -n
@@ -25,19 +45,6 @@
 	theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
 
 	aliases = "!git config -l | grep alias | cut -c 7-"
-[push]
-  default = simple
-  followTags = true
-[diff]
-  ; algorithm = patience
-  algorithm = histogram
-  mnemonicprefix = true
-[rerere]
-  enabled = true
 
-[core]
-  excludesfile = ~/.gitignore.global
-	attributesfile = ~/.gitattributes.global
-  pager = less -r
-[init]
-	templatedir = ~/.config/git/template
+	personal = "config user.email 'dev@eger-andreas.de'"
+	work = "config user.email 'andreas.eger@runtastic.com'"

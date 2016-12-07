@@ -1,3 +1,5 @@
+# -*- mode: ruby; -*-
+
 unless defined? JRUBY_VERSION
   Pry.prompt = [
       proc {
