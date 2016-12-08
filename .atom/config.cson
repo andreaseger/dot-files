@@ -12,7 +12,7 @@
       "solarized-light-syntax"
     ]
   editor:
-    fontFamily: "Consolas"
+    fontFamily: "Consolas for Powerline"
     fontSize: 12
     invisibles: {}
     showIndentGuide: true

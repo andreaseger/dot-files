@@ -7,7 +7,6 @@
 !/.local/bin
 !/.local/share
 /.local/share/*
-!/.local/share/terminfo
 !/.local/share/applications
 /.local/share/applications/*
 !/.local/share/applications/termite_tmux.desktop
@@ -37,7 +36,6 @@
 
 # execptions for more important dot-files
 !.xprofile
-!.Xdefaults
 !.gemrc
 !.gitconfig
 !/.config/git
