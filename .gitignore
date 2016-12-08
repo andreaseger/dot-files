@@ -18,6 +18,7 @@
 !/.config/termite
 !/.config/htop
 !/.config/systemd
+!/.config/git
 
 !/.rbenv
 
@@ -38,7 +39,6 @@
 !.xprofile
 !.gemrc
 !.gitconfig
-!/.config/git
 !.gitignore
 !.gitignore.global
 !.gitattributes.global
