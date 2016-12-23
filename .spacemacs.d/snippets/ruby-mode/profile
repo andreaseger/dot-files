@@ -1,3 +1,4 @@
+# -*- mode: snippet -*-
 #name: ruby profiling poilerplate
 # key: profile
 # --
@@ -7,10 +8,8 @@ require 'ruby-prof'
 PROFILE_NAME = "$1"
 
 GC.disable
-result = RubyProf.profile do
+results = RubyProf.profile do
   $0
 end
 
-printer = RubyProf::CallTreePrinter.new(results)
-printer.print(File.open("callgrind.out.#{PROFILE_NAME}", "w+"))
-
+RubyProf::CallTreePrinter.new(results).print(PROFILE_NAME)
