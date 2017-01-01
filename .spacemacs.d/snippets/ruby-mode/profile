@@ -1,6 +1,5 @@
 #name: ruby profiling poilerplate
 # key: profile
-# binding: direkt-keybinding
 # --
 #!/usr/bin/env ruby
 

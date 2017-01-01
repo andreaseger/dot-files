@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: bundle inline boilerplate
+# key: binline
+# --
+#!/usr/bin/env ruby
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+  gem "$1"
+end
+
+$0

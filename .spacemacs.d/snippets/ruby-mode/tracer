@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: method_tracer
-# key: tracer
-# binding: direkt-keybinding
-# --
-Tracer.add_method_tracer(:$1, "Custom/$0/$1")

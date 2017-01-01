@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
 # name: ruby benchmark boilerplate
 # key: bench
-# binding: direkt-keybinding
 # --
 #!/usr/bin/env ruby
 require "bundler/inline"

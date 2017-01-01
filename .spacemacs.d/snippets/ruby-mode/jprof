@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
 # name: jruby profiling boilerplate
-# key: jprof
-# binding: direct-keybinding
+# key: jprofile
 # --
 #!/usr/bin/env ruby
 # run with --profile.api in JRUBY_OPTS
