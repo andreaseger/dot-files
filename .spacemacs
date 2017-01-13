@@ -45,10 +45,12 @@ values."
      emacs-lisp
      git
      gtags
-     markdown
+     (markdown :variables
+               markdown-command "/usr/bin/pandoc"
+               markdown-live-preview-engine 'vmd)
      (org :variables
           org-enable-github-support t)
-     spell-checking
+     (spell-checking :variables =enable-flyspell-auto-completion= t)
      (shell :variables
             shell-default-shell 'ansi-term
             shell-default-term-shell "/usr/bin/fish"
@@ -65,6 +67,7 @@ values."
      elixir
      go
      lua
+     html
      javascript
      )
    ;; List of additional packages that will be installed without being
@@ -329,13 +332,28 @@ before packages are loaded. If you are unsure, you should try in setting them in
    js-indent-level 2
   )
   ; override rubocop command
-  (setq flycheck-command-wrapper-function
-        (lambda (command)
-          (append '("bundle" "exec") command)
-          )
-        )
+  ;; (setq flycheck-command-wrapper-function
+  ;;       (lambda (command)
+  ;;         (append '("bundle" "exec") command)
+  ;;         )
+  ;;       )
 
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
+
+  ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
+  (defun unfill-paragraph (&optional region)
+    "Takes a multi-line paragraph and makes it into a single line of text."
+    (interactive (progn (barf-if-buffer-read-only) '(t)))
+    (let ((fill-column (point-max))
+          ;; This would override `fill-column' if it's an integer.
+          (emacs-lisp-docstring-fill-column t))
+      (fill-paragraph nil region)))
+  ;; Handy key definition
+  (define-key global-map "\M-Q" 'unfill-paragraph)
+
+  ;; font zooming via Ctrl+mousewheel
+  (global-set-key [C-mouse-4] 'text-scale-increase)
+  (global-set-key [C-mouse-5] 'text-scale-decrease)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -348,12 +366,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (vmd-mode ox-gfm web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data flyspell-correct-helm flyspell-correct auto-dictionary web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode insert-shebang fish-mode company-shell lua-mode ob-elixir minitest hide-comnt go-guru helm-gtags ggtags pcache uuidgen rake org-projectile org org-download link-hint parent-mode request gitignore-mode git-link fringe-helper git-gutter+ git-gutter flycheck-mix flycheck flx eyebrowse evil-visual-mark-mode evil-unimpaired magit-popup git-commit with-editor smartparens evil-ediff anzu evil goto-chg undo-tree highlight eshell-z dumb-jump f diminish pos-tip go-mode column-enforce-mode inf-ruby bind-map bind-key yasnippet packed company elixir-mode pkg-info epl avy helm-core async auto-complete popup package-build powerline pcre2el hydra spinner alert log4e gntp s markdown-mode iedit projectile helm magit yaml-mode xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe use-package toc-org spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle shell-pop rvm ruby-tools ruby-test-mode ruby-end rubocop rspec-mode robe restart-emacs rbenv rainbow-delimiters quelpa popwin persp-mode paradox page-break-lines orgit org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative leuven-theme info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-eldoc gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eval-sexp-fu eshell-prompt-extras esh-help erlang elisp-slime-nav diff-hl define-word company-statistics company-quickhelp company-go clean-aindent-mode chruby bundler buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
- '(safe-local-variable-values
-   (quote
-    ((ruby-test-runner . minitest)
-     (elixir-enable-compilation-checking . t)
-     (elixir-enable-compilation-checking)))))
+    (vmd-mode ox-gfm web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data flyspell-correct-helm flyspell-correct auto-dictionary web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode insert-shebang fish-mode company-shell lua-mode ob-elixir minitest hide-comnt go-guru helm-gtags ggtags pcache uuidgen rake org-projectile org org-download link-hint parent-mode request gitignore-mode git-link fringe-helper git-gutter+ git-gutter flycheck-mix flycheck flx eyebrowse evil-visual-mark-mode evil-unimpaired magit-popup git-commit with-editor smartparens evil-ediff anzu evil goto-chg undo-tree highlight eshell-z dumb-jump f diminish pos-tip go-mode column-enforce-mode inf-ruby bind-map bind-key yasnippet packed company elixir-mode pkg-info epl avy helm-core async auto-complete popup package-build powerline pcre2el hydra spinner alert log4e gntp s markdown-mode iedit projectile helm magit yaml-mode xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe use-package toc-org spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle shell-pop rvm ruby-tools ruby-test-mode ruby-end rubocop rspec-mode robe restart-emacs rbenv rainbow-delimiters quelpa popwin persp-mode paradox page-break-lines orgit org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative leuven-theme info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-eldoc gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eval-sexp-fu eshell-prompt-extras esh-help erlang elisp-slime-nav diff-hl define-word company-statistics company-quickhelp company-go clean-aindent-mode chruby bundler buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -13,7 +13,7 @@
     ]
   editor:
     fontFamily: "Consolas for Powerline"
-    fontSize: 12
+    fontSize: 11
     invisibles: {}
     showIndentGuide: true
     tabType: "soft"
