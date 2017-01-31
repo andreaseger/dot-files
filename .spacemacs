@@ -50,7 +50,8 @@ values."
                markdown-live-preview-engine 'vmd)
      (org :variables
           org-enable-github-support t)
-     (spell-checking :variables =enable-flyspell-auto-completion= t)
+     (spell-checking :variables
+                     =enable-flyspell-auto-completion= t)
      (shell :variables
             shell-default-shell 'ansi-term
             shell-default-term-shell "/usr/bin/fish"
@@ -155,7 +156,6 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Consolas for Powerline"
-                               :size 14
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -314,7 +314,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 )
 
 (defun dotspacemacs/user-config ()
-  ; set fill column to 100 and enable it for all buffers
+  ; set rule column to 100 and enable it for all buffers
   (setq fci-rule-column 100)
   (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
   (global-fci-mode 1)
