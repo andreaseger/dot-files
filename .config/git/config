@@ -23,6 +23,8 @@
 [status]
 	submoduleSummary = true
 	relativePaths = false
+[rebase]
+  autosquash = true
 [alias]
   cp   = cherry-pick
   gg   = grep --break --heading -n
