@@ -315,7 +315,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
 (defun dotspacemacs/user-config ()
   ; set rule column to 100 and enable it for all buffers
-  (setq fci-rule-column 100)
+  (setq fci-rule-column 80)
   (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
   (global-fci-mode 1)
 
