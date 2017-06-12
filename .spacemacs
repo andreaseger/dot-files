@@ -345,11 +345,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
    js-indent-level 2
   )
   ; override rubocop command
-  ;; (setq flycheck-command-wrapper-function
-  ;;       (lambda (command)
-  ;;         (append '("bundle" "exec") command)
-  ;;         )
-  ;;       )
+  (setq flycheck-command-wrapper-function
+        (lambda (command)
+          (append '("bundle" "exec") command)
+          )
+        )
 
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
 
