@@ -48,6 +48,7 @@ for preload in env.fish git-aliases.fish less.fish
 end
 
 #------------------------------------------------
+set -x ERL_AFLAGS "-kernel shell_history enabled"
 
 set -g fish_color_host blue
 

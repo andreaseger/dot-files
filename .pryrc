@@ -64,57 +64,6 @@ class Hash
   end
 end
 
-
-# autocompletion
-#begin
-#  require 'bond'
-#  Bond.start
-#rescue LoadError
-#  puts "missing bond"
-#end
-#require 'readline'
-
-# rails stuff
-def extend_for_rails
-  if Rails.version.first == "2"
-    require 'console_app'
-    require 'console_with_helpers'
-  elsif Rails.version.first.in?(['3', '4'])
-    require 'rails/console/app'
-    require 'rails/console/helpers'
-  else
-    warn "[WARN] cannot load Rails console commands (Not on Rails2, Rails3 or Rails4?)"
-  end
-  if defined?(Rails::ConsoleMethods)
-    extend Rails::ConsoleMethods
-  end
-  # alias_method :r!, :reload!
-
-  # set logging to screen
-  # Rails 3
-  if Rails.logger and defined?(ActiveRecord)
-    Rails.logger = Logger.new(STDOUT)
-    ActiveRecord::Base.logger = Rails.logger
-  end
-
-  # .details method for pretty printing ActiveRecord's objects attributes
-  Object.send(:define_method, :details) do
-    if self.respond_to?(:attributes) and self.attributes.any?
-      max = self.attributes.keys.sort_by { |k| k.size }.pop.size + 5
-      puts
-      self.attributes.keys.sort.each do |k|
-        puts sprintf("%-#{max}.#{max}s%s", k, self.try(k))
-      end
-      puts
-    end
-  end
-  #Object.send(:alias, :detailed, :details)
-end
-
-if defined? Rails
-  extend_for_rails
-end
-
 # local methods helper
 # http://rakeroutes.com/blog/customize-your-irb/
 class Object
