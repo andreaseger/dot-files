@@ -24,4 +24,4 @@ bind-key -n F6 next-window
 
 bind-key -n F7 copy-mode
 
-bind-key -n F11 detach
+bind-key -n F12 detach
