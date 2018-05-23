@@ -1,5 +1,6 @@
 set nocompatible
 runtime! plugin/sensible.vim
+let &t_ut=''
 
 set background=light
 colorscheme solarized

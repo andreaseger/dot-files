@@ -10,6 +10,14 @@ function __fish_oc_pods
   oc get pods -o name
 end
 
+function __fish_oc_pods_no_prefix
+  oc get pods -o name | cut -d/ -f2
+end
+
+function __fish_oc_buildconfigs
+  oc get bc -o name | cut -d/ -f2
+end
+
 
 function __fish_oc_needs_command
   set cmd (commandline -opc)
@@ -103,6 +111,9 @@ complete -f -c oc -n '__fish_oc_using_command project' -a '(__fish_oc_projects)'
 complete -f -c oc -n '__fish_oc_using_command describe' -a '(__fish_oc_all)'
 
 complete -f -c oc -n '__fish_oc_using_command rsh' -a '(__fish_oc_pods)'
+complete -f -c oc -n '__fish_oc_using_command rsync' -a '(__fish_oc_pods_no_prefix)'
+
+complete -f -c oc -n '__fish_oc_using_command start-build' -a '(__fish_oc_buildconfigs)'
 
 complete -f -c oc -n '__fish_oc_using_command logs' -a '(__fish_oc_all)'
 complete -f -c oc -n '__fish_oc_using_command logs' -s f -d "logs should be streamed."

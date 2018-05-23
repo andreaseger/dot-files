@@ -56,3 +56,6 @@
 !/.emacs.d
 !/.spacemacs
 !/.spacemacs.d
+.local/bin/oc
+.local/bin/setup_input
+.local/bin/battery.bkp

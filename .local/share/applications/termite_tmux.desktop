@@ -1,8 +1,8 @@
 [Desktop Entry]
 Comment=
 Terminal=false
-Name=tmux
-Exec=termite -e 'tmux attach'
+Name=tmux(kitty)
+Exec=kitty tmux attach
 Type=Application
 Icon=utilities-terminal
 
