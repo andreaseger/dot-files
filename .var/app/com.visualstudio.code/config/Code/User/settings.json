@@ -1,0 +1,25 @@
+// Place your settings in this file to overwrite the default settings
+{
+    // The number of spaces a tab is equal to.
+  "editor.tabSize": 2,
+  "workbench.colorTheme": "Solarized Light",
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "update.channel": "none",
+  "extensions.ignoreRecommendations": false,
+  "git.autofetch": true,
+  "telemetry.enableTelemetry": false,
+  "telemetry.enableCrashReporter": false,
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  "window.zoomLevel": 0,
+  "workbench.statusBar.visible": true,
+  "files.associations": {
+    "**/tasks/*.yml": "ansible"
+  },
+  "editor.renderWhitespace": "none",
+  "files.autoSave": "afterDelay",
+  "[ansible]": {
+    
+  }
+}

@@ -16,7 +16,7 @@ git checkout .
 git submodule update --init
 ```
 
-Features
+Feature
 ---
 
 highlighting some features of my dot-files
@@ -60,7 +60,28 @@ overkill or to copy to root (`sudo cp .vim* /root/ -R`)
 
 [rbenv] is included as submodule in `.rbenv` also an alias to install rubies with
 [ruby-install] for rbenv is included
-(
+
+```
+wget -O ruby-install-0.7.0.tar.gz https://github.com/postmodern/ruby-install/archive/v0.7.0.tar.gz
+tar -xzvf ruby-install-0.7.0.tar.gz
+cd ruby-install-0.7.0/
+env PREFIX=~/.local make install
+```
+
+### Flatpak
+```
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub com.getpostman.Postman
+flatpak install flathub com.slack.Slack
+flatpak install flathub com.visualstudio.code
+flatpak install flathub org.gnu.emacs
+flatpak install flathub org.keepassxc.KeePassXC
+flatpak install flathub org.videolan.VLC
+
+flatpak remote-add --from org.mozilla.FirefoxRepo https://firefox-flatpak.mojefedora.cz/org.mozilla.FirefoxRepo.flatpakrepo
+flatpak install org.mozilla.FirefoxRepo org.mozilla.FirefoxDevEdition
+```
+
 ### other things
 
 - vendored copy of [tmux-cssh] (57d9634c3807f15ac6b94f98a206bdc9933f55e2)

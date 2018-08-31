@@ -19,6 +19,22 @@
 !/.config/htop
 !/.config/systemd
 !/.config/git
+!/.config/kitty
+
+!/.var
+/.var/*
+!/.var/app
+/.var/app/*
+!/.var/app/com.visualstudio.code
+/.var/app/com.visualstudio.code/*
+!/.var/app/com.visualstudio.code/config
+/.var/app/com.visualstudio.code/config/*
+!/.var/app/com.visualstudio.code/config/Code
+/.var/app/com.visualstudio.code/config/Code/*
+!/.var/app/com.visualstudio.code/config/Code/User
+/.var/app/com.visualstudio.code/config/Code/User/*
+!/.var/app/com.visualstudio.code/config/Code/User/settings.json 
+
 
 !/.rbenv
 
@@ -52,10 +68,13 @@
 !.git
 !.config/redshift.conf
 
+!.bundle
+/.bundle/cache
+
 #emacs
 !/.emacs.d
 !/.spacemacs
 !/.spacemacs.d
 .local/bin/oc
-.local/bin/setup_input
-.local/bin/battery.bkp
+.local/bin/svcat
+.local/bin/ruby-install
