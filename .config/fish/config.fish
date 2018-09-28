@@ -1,3 +1,9 @@
+# skip all config if fish in non interactive shells
+if not status --is-interactive
+  echo "no interactive"
+  exit
+end
+
 set fish_greeting ""
 
 set -l fish_path $HOME/.config/fish

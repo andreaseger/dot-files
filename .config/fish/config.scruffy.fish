@@ -1,6 +1,6 @@
 set -x __local_identities $HOME/.ssh/id_rsa
 
-#load-ssh-agent
+load-ssh-agent
 set -x JRUBY_OPTS "--dev -J-noverify"
 . $fish_path/load/rbenv.fish
 
@@ -9,3 +9,4 @@ abbr -a ds 'git status -sb | grep "spec.rb" | cut -c4- | xargs bundle exec rspec
 
 set -x GOPATH $HOME/code/go
 add_uniquely_to_user_paths $GOPATH/bin
+add_uniquely_to_user_paths $HOME/.cargo/bin
