@@ -1,0 +1,37 @@
+{
+  // The number of spaces a tab is equal to.
+  "editor.tabSize": 2,
+  "workbench.colorTheme": "Solarized Light",
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "update.channel": "none",
+  "extensions.ignoreRecommendations": false,
+  "git.autofetch": true,
+  "telemetry.enableTelemetry": false,
+  "telemetry.enableCrashReporter": false,
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  "window.zoomLevel": 0,
+  "workbench.statusBar.visible": true,
+  "files.associations": {
+    "*.yml": "yaml",
+    "Dangerfile": "ruby"
+  },
+  "editor.renderWhitespace": "none",
+  "files.autoSave": "afterDelay",
+  "workbench.startupEditor": "newUntitledFile",
+  "codebucket.bitbucketServerHosts": [
+    {
+        "webHost": "https://stash.runtastic.com",
+        "gitHost": "stash.runtastic.com:7999"
+    }
+  ],
+  "solargraph.checkGemVersion": false,
+  "solargraph.commandPath": "/var/home/ane/.rbenv/versions/jruby-9.2.4.0/bin/solargraph",
+  "solargraph.bundlerPath": "/var/home/ane/.rbenv/versions/jruby-9.2.4.0/bin/bundle",
+  "window.titleBarStyle": "custom",
+  "merge-conflict.autoNavigateNextConflict.enabled": true,
+  "extensions.showRecommendationsOnlyOnDemand": true,
+  "terminal.external.linuxExec": "kitty",
+  "terminal.integrated.fontFamily": "Fira Code"
+}
