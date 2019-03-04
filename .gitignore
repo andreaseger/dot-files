@@ -20,21 +20,11 @@
 !/.config/systemd
 !/.config/git
 !/.config/kitty
-
-!/.var
-/.var/*
-!/.var/app
-/.var/app/*
-!/.var/app/com.visualstudio.code
-/.var/app/com.visualstudio.code/*
-!/.var/app/com.visualstudio.code/config
-/.var/app/com.visualstudio.code/config/*
-!/.var/app/com.visualstudio.code/config/Code
-/.var/app/com.visualstudio.code/config/Code/*
-!/.var/app/com.visualstudio.code/config/Code/User
-/.var/app/com.visualstudio.code/config/Code/User/*
-!/.var/app/com.visualstudio.code/config/Code/User/settings.json 
-
+!/.config/Code
+/.config/Code/*
+!/.config/Code/User
+/.config/Code/User/*
+!/.config/Code/User/settings.json
 
 !/.rbenv
 

@@ -112,6 +112,7 @@ complete -f -c oc -n '__fish_oc_using_command describe' -a '(__fish_oc_all)'
 
 complete -f -c oc -n '__fish_oc_using_command rsh' -a '(__fish_oc_pods)'
 complete -f -c oc -n '__fish_oc_using_command rsync' -a '(__fish_oc_pods_no_prefix)'
+complete -f -c oc -n '__fish_oc_using_command attach' -a '(__fish_oc_pods_no_prefix)'
 
 complete -f -c oc -n '__fish_oc_using_command start-build' -a '(__fish_oc_buildconfigs)'
 

@@ -33,5 +33,8 @@
   "merge-conflict.autoNavigateNextConflict.enabled": true,
   "extensions.showRecommendationsOnlyOnDemand": true,
   "terminal.external.linuxExec": "kitty",
-  "terminal.integrated.fontFamily": "Fira Code"
+  "terminal.integrated.fontFamily": "Fira Code",
+  "markdown.extension.toc.githubCompatibility": true,
+  "markdown.extension.toc.orderedList": true,
+  "markdown.extension.tableFormatter.normalizeIndentation": true
 }

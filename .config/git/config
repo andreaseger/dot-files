@@ -26,6 +26,8 @@
 	relativePaths = false
 [rebase]
   autosquash = true
+[fetch]
+  prune = true
 [alias]
   cp   = cherry-pick
   gg   = grep --break --heading -n
