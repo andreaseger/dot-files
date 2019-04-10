@@ -6,4 +6,6 @@ GTAGS
 GPATH
 GRTAGS
 
+.vscode
+
 .\#*

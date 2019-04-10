@@ -1,8 +1,8 @@
 [Desktop Entry]
 Comment=
 Terminal=false
-Name=tmux(kitty)
-Exec=kitty tmux attach
+Name=tmux(alacritty)
+Exec=/home/ane/.cargo/bin/alacritty -e tmux attach
 Type=Application
 Icon=utilities-terminal
 
