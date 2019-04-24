@@ -21,10 +21,7 @@ function ll --wraps ls; ls -lh $argv; end
 
 abbr -a b bundle
 abbr -a be 'bundle exec'
-abbr -a v emacsclient -t
-abbr -a e emacsclient -t
-abbr -a ee emacsclient -nc
-abbr -a a 'ag --smart-case --literal'
+abbr -a a rg --hidden -p -i --fixed-strings
 
 # load local config (stuff like PATH)
 begin

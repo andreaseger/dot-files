@@ -1,1 +1,0 @@
-../shared_functions/snapper-history.fish

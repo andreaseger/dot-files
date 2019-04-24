@@ -2,7 +2,7 @@
 Comment=
 Terminal=false
 Name=tmux(alacritty)
-Exec=/home/ane/.cargo/bin/alacritty -e tmux attach
+Exec=kitty -e tmux attach
 Type=Application
 Icon=utilities-terminal
 
