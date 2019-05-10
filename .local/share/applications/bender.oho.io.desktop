@@ -1,8 +1,0 @@
-[Desktop Entry]
-Comment=
-Terminal=false
-Name=bender.oho.io
-Exec=urxvt -e ssh -t sch1zo@bender.oho.io -- 'tmux attach'
-Type=Application
-Icon=utilities-terminal
-

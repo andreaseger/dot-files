@@ -1,7 +1,0 @@
-\encoding utf8
-\timing
-\set ON_ERROR_ROLLBACK interactive
-\set PROMPT1 '%n@%m:%/%x=# '
-\pset null 'NULL'
-\set HISTFILE ~/.psql_history- :HOST - :DBNAME
-\set HISTSIZE 2000
