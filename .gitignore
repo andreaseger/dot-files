@@ -68,3 +68,4 @@
 .local/bin/oc
 .local/bin/svcat
 .local/bin/ruby-install
+.config/fish/fish_variables
