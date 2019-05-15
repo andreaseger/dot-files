@@ -1,3 +1,3 @@
 . $fish_path/load/rbenv.fish
 
-abbr -a vi='vim'
+abbr -a vi 'vim'
