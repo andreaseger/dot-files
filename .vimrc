@@ -2,7 +2,7 @@ set nocompatible
 runtime! plugin/sensible.vim
 let &t_ut=''
 
-set background=dark
+set background=light
 colorscheme solarized
 
 let mapleader = "\<Space>"
