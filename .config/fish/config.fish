@@ -1,6 +1,5 @@
 # skip all config if fish in non interactive shells
 if not status --is-interactive
-  #echo "no interactive"
   exit
 end
 
@@ -10,7 +9,6 @@ set -l fish_path $HOME/.config/fish
 
 # load functions also from subdirectories in functions folder
 set fish_function_path $fish_function_path (find $fish_path/functions/* -type d)
-
 
 abbr -a ! sudo
 abbr -a h ~
@@ -46,12 +44,11 @@ begin
   add_uniquely_to_user_paths $HOME/.local/bin /usr/bin/core_perl /usr/local/bin
 end
 
-for preload in env.fish git-aliases.fish less.fish
+for preload in env.fish git-aliases.fish less.fish init-ssh-agent.fish rbenv.fish
   . $fish_path/load/$preload
 end
 
 #------------------------------------------------
-set -x ERL_AFLAGS "-kernel shell_history enabled"
 
 set -g fish_color_host blue
 
@@ -61,11 +58,6 @@ set -g fish_color_host blue
 function fish_user_key_bindings
   bind \cs ".prefix_sudo"
   bind \cb ".prefix_bundle_exec"
-end
-
-## emacs ansi-term support
-if test -n "$EMACS"
-  set -x TERM eterm-color
 end
 
 # this function may be required

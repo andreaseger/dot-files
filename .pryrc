@@ -1,24 +1,20 @@
 # -*- mode: ruby; -*-
 
-unless defined? JRUBY_VERSION
-  Pry.prompt = [
-      proc {
-          |obj, nest_level, _|
-              prompt = ""
-              prompt += "\001\e[01;38;5;202m\002"
-              prompt += "#{RUBY_VERSION} "
-              prompt += "\001\e[0m\002"
-      },
-      proc {
-          |obj, nest_level, _|
-              prompt = "#{RUBY_VERSION} (#{obj}):#{nest_level} *"
-      }
-  ]
-end
+Pry.prompt = [
+    proc {
+        |obj, nest_level, _|
+            prompt = ""
+            prompt += "\001\e[01;38;5;202m\002"
+            prompt += "#{RUBY_VERSION} "
+            prompt += "\001\e[0m\002"
+    },
+    proc {
+        |obj, nest_level, _|
+            prompt = "#{RUBY_VERSION} (#{obj}):#{nest_level} *"
+    }
+]
 
 # == PLUGINS ===
-# awesome_print gem: great syntax colorized printing
-# look at ~/.aprc for more settings for awesome_print
 begin
   require 'awesome_print'
   AwesomePrint.defaults = {
@@ -30,24 +26,6 @@ begin
 rescue LoadError
   #puts "missing gems"
 end
-
-if defined? Hirb
-  # Dirty hack to support in-session Hirb.disable/enable
-  Hirb::View.instance_eval do
-    def enable_output_method
-      @output_method = true
-      Pry.config.print = proc do |output, value|
-        Hirb::View.view_or_page_output(value) || output.puts(value.ai)
-      end
-    end
-
-    def disable_output_method
-      Pry.config.print = proc { |output, value| output.puts(value.ai) }
-      @output_method = nil
-    end
-  end
-end
-
 
 # === CONVENIENCE METHODS ===
 # Stolen from https://gist.github.com/807492

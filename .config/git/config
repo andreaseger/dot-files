@@ -1,29 +1,29 @@
 [core]
-	excludesfile = ~/.gitignore.global
-	attributesfile = ~/.gitattributes.global
-	pager = less -r
+  excludesfile = ~/.gitignore.global
+  attributesfile = ~/.gitattributes.global
+  pager = less -r
 [user]
-	name = Andreas Eger
-	useconfigonly = true
+  name = Andreas Eger
+  useconfigonly = true
 [color]
   ui = auto
 [init]
-	templatedir = ~/.config/git/template
+  templatedir = ~/.config/git/template
 [merge]
   ; ff = false
   stat = true
 [push]
-	default = simple
-	followTags = true
+  default = simple
+  followTags = true
 [diff]
-	algorithm = histogram
-	mnemonicprefix = true
+  algorithm = histogram
+  mnemonicprefix = true
   renameLimit = 800
 [rerere]
-	enabled = true
+  enabled = true
 [status]
-	submoduleSummary = true
-	relativePaths = false
+  submoduleSummary = true
+  relativePaths = false
 [rebase]
   autosquash = true
 [fetch]
@@ -41,20 +41,18 @@
   in   = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=relative ..@{upstream}
   hist = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=short --follow --patch
 
-  meld = mergetool -t meld
+  assume = update-index --assume-unchanged
+  unassume = update-index --no-assume-unchanged
+  assumed = "!git ls-files -v | grep ^h | cut -c 3-"
+  ours = "!f() { git checkout --ours $@ && git add $@; }; f"
+  theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
 
-	assume = update-index --assume-unchanged
-	unassume = update-index --no-assume-unchanged
-	assumed = "!git ls-files -v | grep ^h | cut -c 3-"
-	ours = "!f() { git checkout --ours $@ && git add $@; }; f"
-	theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+  aliases = "!git config -l | grep alias | cut -c 7-"
 
-	aliases = "!git config -l | grep alias | cut -c 7-"
-
-	personal = "config user.email 'dev@eger-andreas.de'"
-	work = "config user.email 'andreas.eger@runtastic.com'"
+  personal = "config user.email 'dev@eger-andreas.de'"
+  work = "config user.email 'andreas.eger@runtastic.com'"
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true

@@ -11,6 +11,17 @@ set -x LESS "-iMSx4 -R"
 set -x XDG_CONFIG_HOME $HOME/.config
 set -x GTAGSLABEL pygments
 
+set -x ERL_AFLAGS "-kernel shell_history enabled"
+
+## emacs ansi-term support
+if test -n "$EMACS"
+  set -x TERM eterm-color
+end
+
+set -x GOPATH $HOME/code/go
+set -x GOBIN $GOPATH/bin
+
+add_uniquely_to_user_paths $GOBIN $HOME/.cargo/bin
 
 alias less $PAGER
 alias zless $PAGER
