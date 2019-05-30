@@ -2,8 +2,8 @@ function __compact_fish_user_paths --description "remove missing directories fro
   set -l tmp_user_paths
   for x in $fish_user_paths
     if test -d $x
-      echo $x
+      set tmp_user_paths $tmp_user_paths $x
     end
   end
-  echo $tmp_user_paths
+  set -U fish_user_paths $tmp_user_paths
 end

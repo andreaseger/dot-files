@@ -3,8 +3,6 @@ if not status --is-interactive
   exit
 end
 
-set fish_greeting ""
-
 set -l fish_path $HOME/.config/fish
 
 # load functions also from subdirectories in functions folder
@@ -35,7 +33,6 @@ begin
 
     set -l x $fish_path/config.$__fish_hostname.fish
     if test -e $x
-      #echo load $x
       . $x
     end
   end

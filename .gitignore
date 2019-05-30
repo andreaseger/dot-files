@@ -57,7 +57,7 @@
 !.tmux.keybindings
 !.vimrc
 !.git
-!.config/redshift.conf
+!.bashrc
 
 !.bundle
 /.bundle/cache
