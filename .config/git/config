@@ -53,3 +53,8 @@
 
 	personal = "config user.email 'dev@eger-andreas.de'"
 	work = "config user.email 'andreas.eger@runtastic.com'"
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
