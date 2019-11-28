@@ -22,6 +22,6 @@ bind-key -n F4 display-panes \; split-window -v -c "#{pane_current_path}"
 bind-key -n F5 previous-window
 bind-key -n F6 next-window
 
-bind-key -n F7 copy-mode
+bind-key -n F8 copy-mode
 
 bind-key -n F12 detach
