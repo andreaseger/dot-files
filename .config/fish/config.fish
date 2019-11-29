@@ -48,6 +48,7 @@ end
 #------------------------------------------------
 
 set -g fish_color_host blue
+set -g fish_color_ruby red
 
 # add keybindings:
 # C-s prefix line with `sudo`
