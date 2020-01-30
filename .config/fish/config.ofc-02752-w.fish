@@ -3,3 +3,4 @@
 set -x KUBECTL_PLUGINS_PATH "$HOME/code/oc-plugins"
 set -x JRUBY_OPTS "--dev -J-noverify"
 alias ls=exa
+alias cat=bat
