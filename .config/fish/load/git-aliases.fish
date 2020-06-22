@@ -5,7 +5,7 @@ abbr -a g 'git'
 abbr -a gst 'git status -sb'
 
 function gbr; git rebase -p $argv; end
-function gup; git fetch; and git rebase --autostash --preserve-merges (upstream_branch); end
+function gup; git fetch; and git rebase --autostash --rebase-merges (upstream_branch); end
 
 abbr -a ga 'git add'
 abbr -a ga. 'git add --all .'
