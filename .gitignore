@@ -6,6 +6,7 @@
 /.local/*
 !/.local/bin
 .local/bin/kompose
+.local/bin/src
 !/.local/share
 /.local/share/*
 !/.local/share/applications
