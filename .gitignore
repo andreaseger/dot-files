@@ -7,6 +7,9 @@
 !/.local/bin
 .local/bin/kompose
 .local/bin/src
+.local/bin/argocd
+.local/bin/crwctl
+.local/bin/podman-compose
 !/.local/share
 /.local/share/*
 !/.local/share/applications
