@@ -9,6 +9,9 @@
   ui = auto
 [init]
   templatedir = ~/.config/git/template
+  defaultBranch = main
+[log]
+  date=iso
 [merge]
   ; ff = false
   stat = true
@@ -34,12 +37,12 @@
   
   ; better git log
   ; lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  lg   = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=relative --graph
+  lg   = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=iso --graph
   ll   = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=relative --numstat
   ls   = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=short
   out  = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=relative @{upstream}..
   in   = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=relative ..@{upstream}
-  hist = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=short --follow --patch
+  hist = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Cgreen(%ad)" --decorate --date=iso --follow --patch
 
   assume = update-index --assume-unchanged
   unassume = update-index --no-assume-unchanged
