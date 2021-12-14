@@ -11,9 +11,9 @@ set fish_function_path $fish_function_path (find $fish_path/functions/* -type d)
 abbr -a ! sudo
 abbr -a h ~
 function !!; sudo su; end
-function l  --wraps ls; ls -lah --git $argv; end
+function l  --wraps ls; ls -lah $argv; end
 function l. --wraps ls; ls -d .* $argv; end
-function ll --wraps ls; ls -lh --git $argv; end
+function ll --wraps ls; ls -lh $argv; end
 
 abbr -a b bundle
 abbr -a be 'bundle exec'
