@@ -63,7 +63,13 @@ function fish_title
   true
 end
 
+# base16
+set BASE16_SHELL "$HOME/.config/base16-shell/"
+source "$BASE16_SHELL/profile_helper.fish"
+base16-default-dark
+
+
 # fix colors (for solarized light)
-set fish_color_search_match --background='eee8d5'
-set fish_color_command 586e75
-set fish_pager_color_prefix 93a1a1
+#set fish_color_search_match --background='eee8d5'
+#set fish_color_command 586e75
+#set fish_pager_color_prefix 93a1a1

@@ -31,6 +31,8 @@
 /.config/Code/User/*
 !/.config/Code/User/settings.json
 
+
+!/.config/base16-shell
 !/.rbenv
 
 !/.aria2
