@@ -1,6 +1,6 @@
 [submodule ".rbenv"]
 	path = .rbenv
 	url = https://github.com/rbenv/rbenv.git
-[submodule "/home/ane/.config/base16-shell"]
-	path = /home/ane/.config/base16-shell
+[submodule ".config/base16-shell"]
+	path = .config/base16-shell
 	url = https://github.com/chriskempson/base16-shell.git
