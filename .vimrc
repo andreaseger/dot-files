@@ -4,7 +4,7 @@ let &t_ut=''
 
 set background=dark
 let base16colorspace=256
-colorscheme solarized
+colorscheme base16-default-dark
 
 let mapleader = "\<Space>"
 
