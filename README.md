@@ -57,18 +57,12 @@ cd ruby-install-0.7.0/
 env PREFIX=~/.local make install
 ```
 
-### Flatpak
-```
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub com.getpostman.Postman
-flatpak install flathub com.slack.Slack
-flatpak install flathub com.visualstudio.code
-flatpak install flathub org.gnu.emacs
-flatpak install flathub org.keepassxc.KeePassXC
-flatpak install flathub org.videolan.VLC
+### rust, exa, bat
 
-flatpak remote-add --from org.mozilla.FirefoxRepo https://firefox-flatpak.mojefedora.cz/org.mozilla.FirefoxRepo.flatpakrepo
-flatpak install org.mozilla.FirefoxRepo org.mozilla.FirefoxDevEdition
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+cargo install exa
+cargo install bat
 ```
 
 ### other things
