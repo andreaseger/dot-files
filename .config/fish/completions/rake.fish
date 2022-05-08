@@ -1,6 +1,6 @@
 # fish completion for rake
 function __fish_rake_tasks
-  rake -P ^/dev/null | grep rake | cut -c 6-
+  rake -P 2>/dev/null | grep rake | cut -c 6-
 end
 
 ### commands
