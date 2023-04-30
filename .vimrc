@@ -2,10 +2,6 @@ set nocompatible
 runtime! plugin/sensible.vim
 let &t_ut=''
 
-set background=dark
-let base16colorspace=256
-colorscheme base16-default-dark
-
 let mapleader = "\<Space>"
 
 "Column indicators {{{
@@ -90,3 +86,8 @@ augroup END
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
+
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif

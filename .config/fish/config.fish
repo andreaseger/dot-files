@@ -1,12 +1,6 @@
-# starship config
-# function starship_transient_prompt_func
-#   starship module character
-# end
-# function starship_transient_rprompt_func
-#   starship module time
-# end
+# skip all config if fish in non interactive shells
+if not status --is-interactive
+  exit
+end
 
-starship init fish | source
-# enable_transience
-
-
+base16-default-dark
