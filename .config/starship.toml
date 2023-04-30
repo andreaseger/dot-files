@@ -1,11 +1,60 @@
 # A minimal left prompt
-format = """$character"""
+format = """
+$git_status\
+$character
+"""
 
 # move the rest of the prompt to the right
-right_format = """$all"""
+# right_format = """$all"""
+right_format = """
+$username\
+$hostname\
+$localip\
+$kubernetes\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$docker_context\
+$package\
+$cmake\
+$golang\
+$helm\
+$nodejs\
+$python\
+$ruby\
+$rust\
+$memory_usage\
+$custom\
+$sudo\
+$cmd_duration\
+$line_break\
+$jobs\
+$time\
+$status\
+$os\
+$container\
+$shell
+"""
 
 # Wait 10 milliseconds for starship to check files under the current directory.
 scan_timeout = 10
+command_timeout = 100
 
 # Disable the blank line at the start of the prompt
 add_newline = false
+
+
+[character]
+success_symbol = '[➜](bold green) '
+error_symbol = '[✗](bold red) '
+
+# ~/.config/starship.toml
+
+[time]
+disabled = false
+format = '🕙[\[$time\]]($style) '
+time_format = '%T'
+#utc_time_offset = '-5'
+
