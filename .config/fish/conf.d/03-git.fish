@@ -2,7 +2,7 @@ abbr -a g 'git'
 abbr -a gst 'git status -sb'
 
 function gbr; git rebase -p $argv; end
-function gup; git fetch; and git rebase --autostash --rebase-merges (__git_upstream_branch); end
+function gup; git fetch; and git rebase --autostash --rebase-merges (.git_upstream_branch); end
 
 abbr -a ga 'git add'
 abbr -a ga. 'git add --all .'
@@ -30,4 +30,4 @@ end
 
 
 
-abbr -a ggpush 'git push -u origin (__git_current_branch)'
+abbr -a ggpush 'git push -u origin (.git_current_branch)'
