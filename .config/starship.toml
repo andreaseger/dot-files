@@ -1,5 +1,6 @@
 # A minimal left prompt
 format = """
+$directory\
 $git_status\
 $character
 """
@@ -11,7 +12,6 @@ $username\
 $hostname\
 $localip\
 $kubernetes\
-$directory\
 $git_branch\
 $git_commit\
 $git_state\
@@ -31,8 +31,8 @@ $sudo\
 $cmd_duration\
 $line_break\
 $jobs\
-$time\
 $status\
+$time\
 $os\
 $container\
 $shell
@@ -70,4 +70,11 @@ modified = '📝'
 staged = '[++\($count\)](yellow)'
 renamed = '👅'
 deleted = '🗑'
+
+# ~/.config/starship.toml
+
+[status]
+style = 'bg:red'
+map_symbol = true
+disabled = false
 
