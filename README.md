@@ -7,6 +7,12 @@ Collection of my ever evolving dot-files
 ---
 
 ```sh
+# install starship https://github.com/starship/starship
+curl -sS https://starship.rs/install.sh | sh
+```
+
+```sh
+# init home directory
 git clone git@github.com:andreaseger/dot-files.git /tmp/dot-files --no-checkout
 mv /tmp/dot-files/.git ~/.git
 rm /tmp/dot-files -rf
@@ -15,6 +21,7 @@ git reset HEAD
 git checkout .
 git submodule update --init
 ```
+
 
 Feature
 ---

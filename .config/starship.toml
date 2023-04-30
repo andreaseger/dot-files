@@ -1,0 +1,11 @@
+# A minimal left prompt
+format = """$character"""
+
+# move the rest of the prompt to the right
+right_format = """$all"""
+
+# Wait 10 milliseconds for starship to check files under the current directory.
+scan_timeout = 10
+
+# Disable the blank line at the start of the prompt
+add_newline = false
