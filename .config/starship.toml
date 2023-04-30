@@ -38,13 +38,11 @@ $container\
 $shell
 """
 
-# Wait 10 milliseconds for starship to check files under the current directory.
-scan_timeout = 10
-command_timeout = 100
+scan_timeout = 10 # timeout for file scans
+command_timeout = 200 # timeout for commands called from starship
 
 # Disable the blank line at the start of the prompt
 add_newline = false
-
 
 [character]
 success_symbol = '[➜](bold green) '
@@ -65,11 +63,11 @@ conflicted = '🏳'
 ahead = '🏎💨'
 behind = '😰'
 diverged = '😵'
-up_to_date = '✓'
+up_to_date = '[✓](green)'
 untracked = '🤷'
 stashed = '📦'
 modified = '📝'
-staged = '[++\($count\)](green)'
+staged = '[++\($count\)](yellow)'
 renamed = '👅'
 deleted = '🗑'
 

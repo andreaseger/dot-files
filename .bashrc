@@ -36,6 +36,3 @@ alias l.="ls -d .*"
 alias ll="ls -lh"
 alias g="git"
 alias gst="git status"
-. "$HOME/.cargo/env"
-
-
