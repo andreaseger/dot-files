@@ -2,6 +2,7 @@
   excludesfile = ~/.gitignore.global
   attributesfile = ~/.gitattributes.global
   pager = less -r
+	autocrlf = input
 [user]
   name = Andreas Eger
   useconfigonly = true
@@ -52,7 +53,7 @@
 
   aliases = "!git config -l | grep alias | cut -c 7-"
 
-  personal = "config user.email 'dev@eger-andreas.de'"
+  personal = "config user.email 'andreaseger@users.noreply.github.com'"
   work = "config user.email 'andreas.eger@runtastic.com'"
 [filter "lfs"]
 	clean = git-lfs clean -- %f
