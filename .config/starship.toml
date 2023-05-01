@@ -2,6 +2,7 @@
 format = """
 $directory\
 $git_status\
+$status\
 $character
 """
 
@@ -31,7 +32,6 @@ $sudo\
 $cmd_duration\
 $line_break\
 $jobs\
-$status\
 $time\
 $os\
 $container\
@@ -71,10 +71,23 @@ staged = '[++\($count\)](yellow)'
 renamed = '👅'
 deleted = '🗑'
 
-# ~/.config/starship.toml
+[git_branch]
+ignore_branches = ['m']
+truncation_length = 5
 
 [status]
 style = 'bg:red'
 map_symbol = true
 disabled = false
 
+[python]
+style = "green bold"
+format = '[${symbol}${pyenv_prefix}(${version} )]($style)[(\($virtualenv\) )](yellow)'
+
+[username]
+format = '[$user]($style) on '
+
+[hostname]
+ssh_symbol = '🌐'
+format = '[$ssh_symbol$hostname]($style) '
+trim_at = ''
