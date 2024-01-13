@@ -12,6 +12,11 @@ curl -sS https://starship.rs/install.sh | sh
 ```
 
 ```sh
+sudo apt install git-lfs
+```
+
+
+```sh
 # init home directory
 git clone git@github.com:andreaseger/dot-files.git /tmp/dot-files --no-checkout
 mv /tmp/dot-files/.git ~/.git

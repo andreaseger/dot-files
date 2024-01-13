@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-version=$1
-echo "Version: $version"
-
-oc tag --source=docker docker.io/sourcegraph/server:$version server:$version --scheduled=true --reference-policy='local' -n inf-sourcegraph
-oc tag --alias=true server:$version server:latest -n inf-sourcegraph

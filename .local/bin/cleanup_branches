@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-git fetch
-git remote prune origin
-git branch -r --merged origin/master | egrep -v "(^\*|master|deploy32|deploy)" | sed 's/origin\///' | xargs git push --delete origin
-git remote prune origin
