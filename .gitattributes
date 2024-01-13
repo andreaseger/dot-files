@@ -1,0 +1,4 @@
+.local/bin/age filter=lfs diff=lfs merge=lfs -text
+.local/bin/age-keygen filter=lfs diff=lfs merge=lfs -text
+.local/bin/kubectl filter=lfs diff=lfs merge=lfs -text
+.local/bin/sops filter=lfs diff=lfs merge=lfs -text

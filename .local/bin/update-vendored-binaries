@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+pushd ~/.local/bin
+
+# kubectl
+curl -sLO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+kubectl version
+
+# age
+curl -sL 'https://dl.filippo.io/age/latest?for=linux/amd64' | tar xz -C ~/.local/bin --strip-components 1
+rm ~/.local/bin/LICENSE
+age --version
+
+# sops
+
+SOPS_URL=$(curl -sL https://api.github.com/repos/getsops/sops/releases/latest  |  jq -r '[.assets[] | select(.name | contains ("linux.amd64")) | .browser_download_url] | first')
+echo $SOPS_URL
+curl -Lo sops $SOPS_URL
+sops --version

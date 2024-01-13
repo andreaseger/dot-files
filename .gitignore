@@ -6,6 +6,13 @@
 /.local/*
 !/.local/bin
 /.local/bin/*
+
+!/.local/bin/kubectl
+!/.local/bin/age*
+!/.local/bin/sops*
+!/.local/bin/256color
+!/.local/bin/update-vendored-binaries
+
 !/.local/share
 /.local/share/*
 !/.local/share/applications
@@ -53,6 +60,7 @@
 !.gitignore.global
 !.gitattributes.global
 !.gitmodules
+!.gitattributes
 !.irbrc
 !.pryrc
 !.psqlrc
