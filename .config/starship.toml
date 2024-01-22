@@ -39,7 +39,7 @@ $shell
 """
 
 scan_timeout = 10 # timeout for file scans
-command_timeout = 200 # timeout for commands called from starship
+command_timeout = 300 # timeout for commands called from starship
 
 # Disable the blank line at the start of the prompt
 add_newline = false
@@ -72,6 +72,7 @@ renamed = '👅'
 deleted = '🗑'
 
 [git_branch]
+symbol = '🌱 '
 ignore_branches = ['m']
 truncation_length = 5
 
@@ -91,3 +92,13 @@ format = '[$user]($style) on '
 ssh_symbol = '🌐'
 format = '[$ssh_symbol$hostname]($style) '
 trim_at = ''
+
+[kubernetes]
+disabled = false
+symbol = '🐳☸ '
+#style = "bg:#3E6091 fg:white"
+format = '[$symbol$context(| $namespace)]($style) '
+[kubernetes.context_aliases]
+'kind-local-cluster' = 'local'
+'.*staging.*' = 'stg'
+'rancher-desktop' = 'k3s'

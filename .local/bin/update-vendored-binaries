@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Check if running on macOS and exit
+if [[ "$(uname)" == "Darwin" ]]; then
+  echo "This script cannot be run on macOS. Just use homebrew "
+  exit 1
+fi
+
 # kubectl
 echo "kubectl:"
 curl -sLo ~/.local/bin/kubectl "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -15,3 +21,4 @@ age --version
 SOPS_URL=$(curl -sL https://api.github.com/repos/getsops/sops/releases/latest | jq -r '[.assets[] | select(.name | contains ("linux.amd64")) | .browser_download_url] | first')
 curl -sLo sops $SOPS_URL
 sops --version
+

@@ -7,11 +7,8 @@
 !/.local/bin
 /.local/bin/*
 
-!/.local/bin/kubectl
-!/.local/bin/age*
-!/.local/bin/sops*
 !/.local/bin/256color
-!/.local/bin/update-vendored-binaries
+!/.local/bin/update-tools
 
 !/.local/share
 /.local/share/*
@@ -23,6 +20,7 @@
 /.config/*
 !/.config/fish
 /.config/fish/fish_history*
+/.config/fish/conf.d/06-src-cli.fish
 !/.config/termite
 !/.config/htop
 !/.config/systemd
