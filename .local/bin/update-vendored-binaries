@@ -22,3 +22,7 @@ SOPS_URL=$(curl -sL https://api.github.com/repos/getsops/sops/releases/latest | 
 curl -sLo sops $SOPS_URL
 sops --version
 
+# helm
+echo "helm:"
+curl -s https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | env HELM_INSTALL_DIR=$HOME/.local/bin env USE_SUDO="false" bash
+helm version
