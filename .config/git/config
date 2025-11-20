@@ -1,7 +1,6 @@
 [core]
   excludesfile = ~/.gitignore.global
   attributesfile = ~/.gitattributes.global
-  ;pager = cat
   pager = less -r
 	autocrlf = input
 [user]

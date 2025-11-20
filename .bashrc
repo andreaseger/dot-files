@@ -1,8 +1,10 @@
 # If not running interactively, don't do anything (leave this at the top of this file)
 [[ $- != *i* ]] && return
 
-# Omarchy default config
-source ~/.local/share/omarchy/default/bash/rc
+if [[ -d ~/.local/share/omarchy ]]; then
+  # Omarchy default config
+  source ~/.local/share/omarchy/default/bash/rc
+fi
 
 # ~/.bashrc — fall back to a simple prompt in Agent sessions
 export PYTHONPYCACHEPREFIX="/home/ane/.pycache"
@@ -24,7 +26,7 @@ else
   alias ll="ls -lh"
   alias g="git"
   alias gst="git status"
-  
+  alias dotf='git --git-dir=$HOME/.local/share/dot-files/ --work-tree=$HOME'
+
   . <(asdf completion bash)
 fi
-
