@@ -1,6 +1,6 @@
-set -x EDITOR vim
-set -x GIT_EDITOR vim
-set -x VISUAL vim
+set -x EDITOR nvim
+set -x GIT_EDITOR nvim
+set -x VISUAL nvim
 
 set -x LANGUAGE en_US.UTF-8
 set -x LANG en_US.UTF-8
