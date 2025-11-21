@@ -1,0 +1,9 @@
+# ignore everything here by default
+*
+!.gitignore
+
+# bins I want to keep
+!256color
+!update-vendored-binaries
+!bootstrap-dotf
+!truecolor

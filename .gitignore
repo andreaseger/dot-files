@@ -1,82 +1,41 @@
-# Ignore almost everything
+# Ignore everything by default
 /*
-!/README.md
+!.gitignore
 
-!/.local/
-/.local/*
-!/.local/bin
-/.local/bin/*
 
-!/.local/bin/256color
-!/.local/bin/update-tools
+# pattern:
+# allow directory
+# either let a .gitignore in that directory handle it
+# or ignore everything in directory, again
+# and allow specific files/subdirectories
 
-!/.local/share
-/.local/share/*
-!/.local/share/applications
-/.local/share/applications/*
-!/.local/share/applications/termite_tmux.desktop
 
+# .local -> see .local/.gitignore for exceptions
+!/.local
+
+# .config -> see .config/.gitignore for exceptions
 !/.config/
-/.config/*
-!/.config/fish
-/.config/fish/fish_history*
-/.config/fish/conf.d/06-src-cli.fish
-!/.config/termite
-!/.config/htop
-!/.config/systemd
-!/.config/git
-!/.config/kitty
-!/.config/Code
-/.config/Code/*
-!/.config/Code/User
-/.config/Code/User/*
-!/.config/Code/User/settings.json
-/.config/systemd
 
-!/.config/starship.toml
-
-!/.config/base16-shell
-!/.rbenv
-
-!/.aria2
-/.aria2/dht.dat
-
+# .ssh -> allow only config file
 !/.ssh/
 /.ssh/*
 !/.ssh/config
 
-!/.vim
-/.vim/tmp
-/.vim/.netrwhist
+# .bundle -> allow only  config file
+!.bundle
+/.bundle/*
+!.bundle/config
 
-!/.share
+# root dot-files to allow
+!/.xprofile
 
-# execptions for more important dot-files
-!.xprofile
-!.gemrc
-!.gitconfig
-!.gitignore
+!/.gemrc
+
 !.gitignore.global
 !.gitattributes.global
-!.gitmodules
-!.gitattributes
-!.irbrc
-!.pryrc
+
 !.psqlrc
 !.tmux.conf
-!.tmux.keybindings
+
 !.vimrc
-!.git
 !.bashrc
-
-!.bundle
-/.bundle/cache
-
-#emacs
-!/.emacs.d
-!/.spacemacs
-!/.spacemacs.d
-.local/bin/oc
-.local/bin/svcat
-.local/bin/ruby-install
-.config/fish/fish_variables

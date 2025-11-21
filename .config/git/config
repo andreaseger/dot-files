@@ -32,6 +32,11 @@
   autosquash = true
 [fetch]
   prune = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
 [alias]
   cp   = cherry-pick
   gg   = grep --break --heading -n
@@ -54,9 +59,4 @@
   aliases = "!git config -l | grep alias | cut -c 7-"
 
   personal = "config user.email 'andreaseger@users.noreply.github.com'"
-  work = "config user.email 'andreas.eger@runtastic.com'"
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  ; work = "config user.email 'andreas.eger@runtastic.com'"

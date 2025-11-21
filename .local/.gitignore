@@ -1,0 +1,11 @@
+# ignore everything here by default
+/*
+!/.gitignore
+
+!/bin
+/bin/*
+
+!/share
+/share/*
+# FYI bare repo is in .local/share/dot-files, make sure it's ignored to prevent recursion weirdness
+!/share/DOT-FILES-README.md

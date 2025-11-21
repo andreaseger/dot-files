@@ -1,2 +1,16 @@
+# ignore history files
+/fish_history*
+
+# ignore corals plugin files
 /corals
 /functions/fish_prompt.fish
+
+# ignore base16 plugin files
+functions/base16*
+functions/__base16_fish_shell_color_test.fish
+functions/__base16_fish_shell_create_vimrc_background.fish
+functions/__base16_fish_shell_set_background.fish
+functions/__put_template.fish
+functions/__put_template_custom.fish
+functions/__put_template_var.fish
+
