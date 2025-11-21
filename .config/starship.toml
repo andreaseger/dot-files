@@ -1,3 +1,5 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
 # A minimal left prompt
 format = """
 $directory\
@@ -41,28 +43,22 @@ $shell
 scan_timeout = 10 # timeout for file scans
 command_timeout = 300 # timeout for commands called from starship
 
-# Disable the blank line at the start of the prompt
 add_newline = false
 
 [character]
 success_symbol = '[➜](bold green) '
 error_symbol = '[✗](bold red) '
 
-# ~/.config/starship.toml
-
 [time]
 disabled = false
 format = '🕙[\[$time\]]($style) '
 time_format = '%T'
-#utc_time_offset = '-5'
-
-# ~/.config/starship.toml
 
 [git_status]
 conflicted = '🏳'
-ahead = '🏎💨'
-behind = '😰'
-diverged = '😵'
+ahead = '⇡${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+behind = '⇣${count}'
 up_to_date = '[✓](green)'
 untracked = '🤷'
 stashed = '📦'
@@ -72,18 +68,18 @@ renamed = '👅'
 deleted = '🗑'
 
 [git_branch]
-symbol = '🌱 '
-ignore_branches = ['m']
-truncation_length = 5
+symbol = ' '
+#ignore_branches = ['m']
+truncation_length = 8
 
 [status]
 style = 'bg:red'
 map_symbol = true
 disabled = false
 
-[python]
-style = "green bold"
-format = '[${symbol}${pyenv_prefix}(${version} )]($style)[(\($virtualenv\) )](yellow)'
+# [python]
+# style = "green bold"
+# format = '[${symbol}${pyenv_prefix}(${version} )]($style)[(\($virtualenv\) )](yellow)'
 
 [username]
 format = '[$user]($style) on '
@@ -96,9 +92,6 @@ trim_at = ''
 [kubernetes]
 disabled = false
 symbol = '🐳☸ '
-#style = "bg:#3E6091 fg:white"
 format = '[$symbol$context(| $namespace)]($style) '
+
 [kubernetes.context_aliases]
-'kind-local-cluster' = 'local'
-'.*staging.*' = 'stg'
-'rancher-desktop' = 'k3s'
