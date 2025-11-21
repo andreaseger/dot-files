@@ -14,7 +14,6 @@
 [log]
   date=iso
 [merge]
-  ; ff = false
   stat = true
 [push]
   default = simple
