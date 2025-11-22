@@ -1,4 +1,4 @@
-set -l coral "IlanCosman/tide"
+set -l coral "plttn/tide"
 if not test -e "$__fish_config_dir/corals/$coral"
     reef install $coral
     echo "Installed Tide prompt. You might need a NerfFont to see all icons properly."
@@ -15,6 +15,8 @@ if not test -e "$__fish_config_dir/corals/$coral"
         case '*'
             echo "get something from here https://github.com/ryanoasis/nerd-fonts"
     end
+    # set theme (in case we have other plugins with a fish_prompt function)
+    reef theme plttn/tide
     # load tide for current session
     source (path resolve $__fish_config_dir/corals/$coral/conf.d/*.fish)
 end
