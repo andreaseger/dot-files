@@ -1,1 +1,1 @@
-.add_uniquely_to_user_paths "/home/ane/.bun/bin"
+fish_add_path -U "/home/ane/.bun/bin"

@@ -1,3 +1,3 @@
 if test -d $HOME/.cargo/bin
-  .add_uniquely_to_user_paths $HOME/.cargo/bin
+  fish_add_path -U $HOME/.cargo/bin
 end
