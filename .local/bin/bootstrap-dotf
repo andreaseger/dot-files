@@ -20,12 +20,12 @@ LOCAL_BIN="$HOME/.local/bin"
 PACKAGES_COMMON="git git-lfs fish curl wget neovim unzip tar"
 
 # OS Specific Build Tools
-PACKAGES_MACOS="coreutils starship"
 PACKAGES_UBUNTU="build-essential libssl-dev zlib1g-dev libreadline-dev"
-PACKAGES_ARCH="base-devel openssh starship"
-PACKAGES_ALPINE="build-base bash openssh shadow linux-headers starship"
-# Note: We install 'bash' in Alpine specifically because many asdf plugins
-# depend on bash scripts internally, even if you use Fish.
+PACKAGES_ARCH="base-devel openssh"
+PACKAGES_ALPINE="build-base bash openssh shadow linux-headers"
+
+# only OS where we're sure we have a desktop and need a nerdfont all other might be servers
+PACKAGES_MACOS="coreutils font-fira-code-nerd-font"
 
 # -------------------------------------------------------------------------
 # Helpers
