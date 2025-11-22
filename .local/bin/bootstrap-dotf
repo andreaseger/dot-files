@@ -199,6 +199,10 @@ setup_dotfiles() {
 
   log "Checking out dotfiles..."
   dotf config status.showUntrackedFiles no
+  dotf personal
+  # Create aliases for convenience
+  dotf config --local alias.hide-untracked "config status.showUntrackedFiles no"
+  dotf config --local alias.show-untracked "config status.showUntrackedFiles yes"
 
   if dotf checkout; then
     log "Checked out configuration."
