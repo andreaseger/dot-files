@@ -1,6 +1,6 @@
 # ignore history files
 /fish_history*
-/fish_variables
+/fish_variables*
 
 # ignore fish prompt function - is set via reef / tide
 /functions/fish_prompt.fish
