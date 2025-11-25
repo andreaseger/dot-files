@@ -1,0 +1,219 @@
+#!/usr/bin/env sh
+#
+# clip: simple cross-platform clipboard CLI helper
+#
+# Subcommands:
+#   clip copy   – read from stdin and put into system clipboard
+#   clip paste  – print clipboard contents to stdout
+#   clip info   – show detected clipboard backend
+#   clip help   – show this help
+#
+# Supported backends (auto-detected):
+#   - macOS/*BSD: pbcopy/pbpaste
+#   - Wayland   : wl-copy/wl-paste
+#   - X11       : xclip, xsel
+#   - Windows   : clip.exe (+ powershell.exe Get-Clipboard when available)
+#
+# This script is POSIX-sh, so it should work in bash, dash, ksh, etc.
+
+# --- OS / Environment detection ---------------------------------------------
+
+_clip_os() {
+    # Normalize uname output
+    uname_s=$(uname -s 2>/dev/null || echo unknown)
+    case "$uname_s" in
+        Darwin)  echo "macOS"   ;;
+        Linux)   echo "Linux"   ;;
+        FreeBSD) echo "FreeBSD" ;;
+        NetBSD)  echo "NetBSD"  ;;
+        OpenBSD) echo "OpenBSD" ;;
+        CYGWIN*|MSYS*|MINGW*) echo "Windows" ;;
+        *)       echo "Unknown" ;;
+    esac
+}
+
+_clip_is_wsl() {
+    # Detect WSL 1 & 2
+    case "$(uname -r 2>/dev/null)" in
+        *Microsoft*|*microsoft*) return 0 ;;
+    esac
+
+    if [ -r /proc/version ]; then
+        if grep -qi "microsoft" /proc/version 2>/dev/null; then
+            return 0
+        fi
+    fi
+
+    return 1
+}
+
+# --- Backend detection -------------------------------------------------------
+
+# We'll cache the detection into these variables when first needed:
+_CLIP_COPY_CMD=""
+_CLIP_PASTE_CMD=""
+
+_clip_detect_backend() {
+    # Already detected?
+    if [ -n "$_CLIP_COPY_CMD" ] || [ -n "$_CLIP_PASTE_CMD" ]; then
+        return 0
+    fi
+
+    os=$(_clip_os)
+
+    # 1. macOS / *BSD: pbcopy/pbpaste
+    if command -v pbcopy >/dev/null 2>&1 && command -v pbpaste >/dev/null 2>&1
+    then
+        _CLIP_COPY_CMD="pbcopy"
+        _CLIP_PASTE_CMD="pbpaste"
+        return 0
+    fi
+
+    # 2. Wayland: wl-copy / wl-paste
+    if command -v wl-copy >/dev/null 2>&1 && command -v wl-paste >/dev/null 2>&1
+    then
+        _CLIP_COPY_CMD="wl-copy"
+        _CLIP_PASTE_CMD="wl-paste"
+        return 0
+    fi
+
+    # 3. X11: xclip
+    if command -v xclip >/dev/null 2>&1; then
+        _CLIP_COPY_CMD="xclip -selection clipboard"
+        _CLIP_PASTE_CMD="xclip -selection clipboard -o"
+        return 0
+    fi
+
+    # 4. X11: xsel
+    if command -v xsel >/dev/null 2>&1; then
+        _CLIP_COPY_CMD="xsel --clipboard --input"
+        _CLIP_PASTE_CMD="xsel --clipboard --output"
+        return 0
+    fi
+
+    # 5. Windows / WSL / Git-Bash: clip.exe (+ powershell.exe)
+    if command -v clip.exe >/dev/null 2>&1; then
+        _CLIP_COPY_CMD="clip.exe"
+        if command -v powershell.exe >/dev/null 2>&1; then
+            # PowerShell may output CRLF, adjust in caller if desired
+            _CLIP_PASTE_CMD="powershell.exe -NoProfile -Command Get-Clipboard"
+        else
+            _CLIP_PASTE_CMD=""
+        fi
+        return 0
+    fi
+
+    # 6. WSL – try absolute Windows paths
+    if _clip_is_wsl; then
+        if [ -x "/mnt/c/Windows/System32/clip.exe" ]; then
+            _CLIP_COPY_CMD="/mnt/c/Windows/System32/clip.exe"
+            if [ -x "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" ]
+            then
+                _CLIP_PASTE_CMD="/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -Command Get-Clipboard"
+            else
+                _CLIP_PASTE_CMD=""
+            fi
+            return 0
+        fi
+    fi
+
+    # No backend found
+    _CLIP_COPY_CMD=""
+    _CLIP_PASTE_CMD=""
+    return 1
+}
+
+# --- Core operations ---------------------------------------------------------
+
+_clip_copy() {
+    if ! _clip_detect_backend; then
+        printf '%s\n' "clip: no clipboard backend found." >&2
+        printf '%s\n' "Install one of: pbcopy/pbpaste, wl-clipboard, xclip, xsel, or clip.exe." >&2
+        return 1
+    fi
+
+    if [ -z "$_CLIP_COPY_CMD" ]; then
+        printf '%s\n' "clip: clipboard backend does not support write (copy)." >&2
+        return 1
+    fi
+
+    # Use eval to allow commands with arguments (xclip options, etc)
+    # shellcheck disable=SC2086
+    eval "$_CLIP_COPY_CMD" || {
+        printf '%s\n' "clip: copy command failed: $_CLIP_COPY_CMD" >&2
+        return 1
+    }
+}
+
+_clip_paste() {
+    if ! _clip_detect_backend; then
+        printf '%s\n' "clip: no clipboard backend found." >&2
+        printf '%s\n' "Install one of: pbcopy/pbpaste, wl-clipboard, xclip, xsel, or clip.exe." >&2
+        return 1
+    fi
+
+    if [ -z "$_CLIP_PASTE_CMD" ]; then
+        printf '%s\n' "clip: clipboard backend does not support read (paste)." >&2
+        return 1
+    fi
+
+    # shellcheck disable=SC2086
+    eval "$_CLIP_PASTE_CMD" || {
+        printf '%s\n' "clip: paste command failed: $_CLIP_PASTE_CMD" >&2
+        return 1
+    }
+}
+
+_clip_info() {
+    if ! _clip_detect_backend; then
+        echo "Clipboard backend: none"
+        return 1
+    fi
+    echo "OS                : $(_clip_os)"
+    echo "Clipboard copy cmd: ${_CLIP_COPY_CMD:-<none>}"
+    echo "Clipboard paste cmd: ${_CLIP_PASTE_CMD:-<none>}"
+}
+
+_clip_usage() {
+    cat <<EOF
+Usage: clip <command>
+
+Commands:
+  copy    Read from stdin and copy to system clipboard
+  paste   Print clipboard contents to stdout
+  info    Show detected clipboard backend
+  help    Show this help
+
+Examples:
+  echo "hello" | clip copy
+  clip paste
+  some-command | clip copy
+  clip paste | other-command
+EOF
+}
+
+# --- CLI dispatcher ----------------------------------------------------------
+
+cmd=$1
+case "$cmd" in
+    copy)
+        shift
+        _clip_copy "$@"
+        ;;
+    paste)
+        shift
+        _clip_paste "$@"
+        ;;
+    info)
+        shift
+        _clip_info "$@"
+        ;;
+    help|-h|--help|"")
+        _clip_usage
+        ;;
+    *)
+        printf '%s\n' "clip: unknown command: $cmd" >&2
+        printf '%s\n' "Try 'clip help'." >&2
+        exit 1
+        ;;
+esac
