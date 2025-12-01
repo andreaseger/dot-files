@@ -4,7 +4,7 @@ end
 
 function dotf-up
     dotf fetch
-    dotf rebase --autostash --rebase-merges m
+    dotf rebase --autostash --rebase-merges origin/m
 end
 
 function dotf-push

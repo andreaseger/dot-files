@@ -8,4 +8,4 @@
 /share/*
 # FYI bare repo is in .local/share/dot-files, make sure it's ignored to prevent recursion weirdness
 /share/dot-files.git
-!/share/DOT-FILES-README.md
+!/share/dot-files
