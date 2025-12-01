@@ -8,6 +8,7 @@
 !/htop
 !/systemd
 !/tmux
+!/nvim
 
 # plain dot-files to allow
 !/starship.toml
