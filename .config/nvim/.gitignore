@@ -1,7 +1,0 @@
-# ignore everything here by default
-/*
-!/.gitignore
-
-# lazy.nvim config
-!/init.lua
-!/config/lazy.lua
