@@ -48,3 +48,17 @@ Note: We set `dotf config status.showUntrackedFiles no`, so we're not seeing any
 - basic vim config
 - bootstrap script
 - dot-files should work on Ubuntu, Alpine, Archlinux & macOS
+
+## TBD - issues
+
+
+Currently not sure if the git config for the dot-files bare repo is 100% correct. It should have these bits
+
+```
+[remote "origin"]
+	url = git@github.com:andreaseger/dot-files.git
+  fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "m"]
+	remote = origin
+	merge = refs/heads/m
+```
