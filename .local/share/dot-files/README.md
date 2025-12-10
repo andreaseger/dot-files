@@ -42,12 +42,22 @@ Note: We set `dotf config status.showUntrackedFiles no`, so we're not seeing any
 
 - fish shell
 - global git config
-- starship
+- starship (*fish uses tide instead)
 - tmux
-- lazy.nvim bootstrap
+- lazy.vim starter
 - basic vim config
 - bootstrap script
 - dot-files should work on Ubuntu, Alpine, Archlinux & macOS
+
+## MacOS things
+
+```sh
+brew install --cask \
+  ghostty \
+  rectangle \
+  scroll-reverser
+
+```
 
 ## TBD - issues
 

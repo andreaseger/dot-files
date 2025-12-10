@@ -1,3 +1,3 @@
-function dotf-push
-    dotf push -u origin m
+function dotf --wraps git --description 'Manage dotfiles with bare git repo'
+    command git --git-dir=$HOME/.local/share/dot-files.git/ --work-tree=$HOME $argv
 end
