@@ -1,1 +1,3 @@
-fish_add_path -U "/home/ane/.bun/bin"
+if test -d "$HOME/.bun/bin"
+    fish_add_path -U "$HOME/.bun/bin"
+end
