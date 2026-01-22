@@ -70,10 +70,9 @@ tmux set-option -g window-status-format "$window_status_format"
 tmux set-option -g window-status-bell-style "bg=${fg_prefix},fg=${bg},bold"
 tmux set-option -g window-status-activity-style "bg=${fg_current},fg=${bg}"
 
-# Conditionally apply bold to window-status-current-format, respecting bell/activity notifications
+# Conditionally apply bold to window-status-current-format
 if [ "$bold_current_window" = true ]; then
-  # Use conditionals to respect bell and activity states, with bold as default for current window
-  tmux set-option -g window-status-current-format "#{?#{||:#{window_bell_flag},#{window_activity_flag}},#[default],#[bg=${bg},fg=${fg_current},bold]}${window_status_format}#[fg=#39BAE6,bg=${bg}]#{?window_zoomed_flag,${maximized_pane_icon},}#[fg=${bg},bg=default]"
+  tmux set-option -g window-status-current-format "#[bg=${bg},fg=${fg_current},bold]${window_status_format}"
 else
-  tmux set-option -g window-status-current-format "#{?#{||:#{window_bell_flag},#{window_activity_flag}},#[default],#[bg=${bg},fg=${fg_current}]}${window_status_format}#[fg=#39BAE6,bg=${bg}]#{?window_zoomed_flag,${maximized_pane_icon},}#[fg=${bg},bg=default]"
+  tmux set-option -g window-status-current-format "#[bg=${bg},fg=${fg_current}]${window_status_format}"
 fi
