@@ -10,3 +10,8 @@ GRTAGS
 
 .\#*
 .vscode
+.workmux.yml
+.workmux.yaml
+
+node_modules
+.codex
