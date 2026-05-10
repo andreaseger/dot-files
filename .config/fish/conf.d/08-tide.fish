@@ -1,14 +1,14 @@
-set -l coral "plttn/tide"
+set -l coral plttn/tide
 if not test -e "$__fish_config_dir/corals/$coral"
     reef install $coral
-    echo "Installed Tide prompt. You might need a NerfFont to see all icons properly."
+    echo "Installed Tide prompt. You might need a NerdFont to see all icons properly."
     switch (uname)
-        case 'Linux'
-            echo "On Archlinux, you can install NerfFonts via your package manager, e.g.,"
+        case Linux
+            echo "On Archlinux, you can install NerdFonts via your package manager, e.g.,"
             echo "  sudo pacman -S ttf-meslo-nerd"
             echo "  sudo pacman -S ttf-firacode-nerd"
-        case 'Darwin'
-            echo "On macOS, you can install NerfFonts via Homebrew, e.g.,"
+        case Darwin
+            echo "On macOS, you can install NerdFonts via Homebrew, e.g.,"
             echo "  brew tap homebrew/cask-fonts"
             echo "  brew install --cask font-meslo-lg-nerd-font"
             echo "  brew install --cask font-fira-code-nerd-font"
