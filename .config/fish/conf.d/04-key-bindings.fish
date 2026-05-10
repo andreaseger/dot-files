@@ -5,6 +5,5 @@ function fish_user_key_bindings
   bind \cs "_prefix_sudo"
   if type -q bundle
     bind \cb "_prefix_bundle_exec"
-    return
   end
 end
