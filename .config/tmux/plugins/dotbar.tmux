@@ -66,9 +66,9 @@ tmux set-option -g window-status-style "bg=${bg},fg=${fg}"
 tmux set-option -g window-status-format "$window_status_format"
 "$show_maximized_icon_for_all_tabs" && tmux set-option -g window-status-format "${window_status_format}#{?window_zoomed_flag,${maximized_pane_icon},}"
 
-# Set bell and activity styles that work with the theme
-tmux set-option -g window-status-bell-style "bg=${fg_prefix},fg=${bg},bold"
-tmux set-option -g window-status-activity-style "bg=${fg_current},fg=${bg}"
+# Set bell and activity styles — subtle: just slightly brighter text, no background change
+tmux set-option -g window-status-bell-style "bg=${bg},fg=${fg_prefix}"
+tmux set-option -g window-status-activity-style "bg=${bg},fg=${fg_session}"
 
 # Conditionally apply bold to window-status-current-format
 if [ "$bold_current_window" = true ]; then

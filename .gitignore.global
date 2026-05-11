@@ -16,4 +16,7 @@ GRTAGS
 node_modules
 .codex
 
+.cursor
+.claude/scheduled_tasks.lock
 .claude/settings.local.json
+.claude/worktrees
