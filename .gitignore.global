@@ -10,6 +10,7 @@ GRTAGS
 
 .\#*
 .vscode
+.workmux/
 .workmux.yml
 .workmux.yaml
 
@@ -20,3 +21,4 @@ node_modules
 .claude/scheduled_tasks.lock
 .claude/settings.local.json
 .claude/worktrees
+.claude/plans
