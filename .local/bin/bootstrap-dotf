@@ -197,6 +197,11 @@ setup_dotfiles() {
     git clone --bare "$DOTFILES_REPO" "$DOTFILES_DIR"
   fi
 
+  # Bare clones do not create conventional remote-tracking refs.
+  dotf config --local remote.origin.fetch \
+    '+refs/heads/*:refs/remotes/origin/*'
+  dotf fetch origin
+
   log "Checking out dotfiles..."
   dotf config status.showUntrackedFiles no
   dotf personal
