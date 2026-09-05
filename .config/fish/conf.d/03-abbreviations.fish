@@ -1,3 +1,5 @@
+status is-interactive; or return
+
 if type -q sudo
     abbr -a ! sudo
     function !!
@@ -22,4 +24,3 @@ end
 if type -q nvim
     abbr -a vim nvim
 end
-

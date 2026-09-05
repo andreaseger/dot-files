@@ -28,6 +28,14 @@ For details checkout `.local/bin/bootstrap-dotf`
 
 The script is idempotent, rerun it to update packages, mise tools and tmux plugins.
 
+macOS and Arch Linux are the primary targets. Alpine and Debian/Ubuntu use
+their standard packages: Neovim older than 0.11.2 loads `~/.vimrc` without
+LazyVim, and older tmux versions skip unsupported optional settings. Bootstrap
+does not add an Ubuntu Neovim PPA.
+
+Noninteractive Fish commands (`fish -c`) load environment settings and mise
+shims, but skip prompt/plugin setup, abbreviations and key bindings.
+
 ### Usage / Maintenance
 
 The dot-files include the following alias / function for both bash and fish respectively.

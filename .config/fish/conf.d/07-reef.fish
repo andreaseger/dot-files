@@ -1,3 +1,5 @@
+status is-interactive; or return
+
 set -a fish_function_path (path resolve $__fish_config_dir/corals/*/*/functions)
 set -a fish_complete_path (path resolve $__fish_config_dir/corals/*/*/completions)
 
@@ -11,4 +13,3 @@ for conf in (path resolve $__fish_config_dir/corals/*/*/conf.d/*.fish)
         source $conf
     end
 end
-

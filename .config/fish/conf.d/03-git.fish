@@ -1,3 +1,5 @@
+status is-interactive; or return
+
 abbr -a g 'git'
 abbr -a gst 'git status -sb'
 

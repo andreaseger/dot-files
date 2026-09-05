@@ -1,3 +1,5 @@
+status is-interactive; or return
+
 set -l coral plttn/tide
 if not test -e "$__fish_config_dir/corals/$coral"
     reef install $coral

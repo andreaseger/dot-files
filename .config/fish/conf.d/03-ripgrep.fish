@@ -1,3 +1,5 @@
+status is-interactive; or return
+
 if type -q rg
   abbr -a a 'rg --hidden -p -i --fixed-strings'
 end

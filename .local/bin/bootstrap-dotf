@@ -1,14 +1,6 @@
 #!/bin/sh
 set -e
 
-# 1. RECLAIM STDIN
-# When piped (curl ... | sh) stdin is the script, so reattach it to the terminal.
-# /dev/tty exists but cannot be opened without a controlling terminal
-# (containers, CI, cron), hence the open test instead of a plain -e.
-if [ ! -t 0 ] && ( : </dev/tty ) 2>/dev/null; then
-  exec </dev/tty
-fi
-
 # -------------------------------------------------------------------------
 # Configuration
 # -------------------------------------------------------------------------
@@ -130,12 +122,6 @@ install_packages() {
 
   elif [ -f /etc/debian_version ]; then
     log "Debian/Ubuntu detected."
-    if grep -q "Ubuntu" /etc/os-release; then
-      log "Adding Neovim PPA..."
-      run_privileged apt-get update
-      run_privileged apt-get install -y software-properties-common
-      run_privileged add-apt-repository -y ppa:neovim-ppa/stable
-    fi
     run_privileged apt-get update
     # shellcheck disable=SC2086
     run_privileged apt-get install -y $PACKAGES_COMMON $PACKAGES_UBUNTU
@@ -297,6 +283,13 @@ check_shell() {
 # Run
 # -------------------------------------------------------------------------
 main() {
+  # All function definitions have been read before changing stdin. Doing this
+  # at the top level would stop `curl | sh` from reading the rest of the script.
+  # Only reconnect when a controlling terminal is available (not CI/cron).
+  if [ ! -t 0 ] && ( : </dev/tty ) 2>/dev/null; then
+    exec </dev/tty
+  fi
+
   check_ssh_key
   install_packages
   install_mise
@@ -313,4 +306,5 @@ main() {
   log "3. Install more tools: 'mise use -g node@lts' (see ~/.config/mise/config.toml)"
 }
 
-main "$@"
+# Parse exit together with main so a piped shell cannot read more from the tty.
+main "$@"; exit
