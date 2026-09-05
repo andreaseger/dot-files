@@ -3,7 +3,7 @@ function extract -d "Extract a variety of archive files"
     if test (count $argv) -eq 0
         echo "Usage: extract <archive> [archive...]"
         echo "  Extracts archives into a directory named after the archive"
-        echo "  Supported: tar, tar.gz, tar.bz2, tar.xz, zip, rar, 7z, gz, bz2, xz, Z, pax"
+        echo "  Supported: tar, tar.gz, tar.bz2, tar.xz, tar.zst, zip, rar, 7z, gz, bz2, xz, zst, Z, pax"
         return 1
     end
 
@@ -15,6 +15,7 @@ function extract -d "Extract a variety of archive files"
 
         # Determine output directory name by stripping known extensions
         set output_dir (basename $file .tar.xz)
+        set output_dir (basename $output_dir .tar.zst)
         set output_dir (basename $output_dir .tar.gz)
         set output_dir (basename $output_dir .tar.bz2)
         set output_dir (basename $output_dir .tar)
@@ -22,7 +23,9 @@ function extract -d "Extract a variety of archive files"
         set output_dir (basename $output_dir .tgz)
         set output_dir (basename $output_dir .tbz)
         set output_dir (basename $output_dir .tbz2)
+        set output_dir (basename $output_dir .tzst)
         set output_dir (basename $output_dir .xz)
+        set output_dir (basename $output_dir .zst)
         set output_dir (basename $output_dir .bz2)
         set output_dir (basename $output_dir .gz)
         set output_dir (basename $output_dir .zip)
@@ -47,8 +50,10 @@ function extract -d "Extract a variety of archive files"
         echo -s "Extracting '" (set_color --bold blue) $file (set_color normal) "' → " (set_color green) $output_dir (set_color normal)
 
         switch $file
-            case "*.tar" "*.tar.xz" "*.txz" "*.tar.bz2" "*.tbz" "*.tbz2" "*.tar.gz" "*.tgz"
+            case "*.tar" "*.tar.xz" "*.txz" "*.tar.bz2" "*.tbz" "*.tbz2" "*.tar.gz" "*.tgz" "*.tar.zst" "*.tzst"
                 tar -xf $file -C $output_dir
+            case "*.zst"
+                zstd --decompress --keep --stdout $file >$output_dir/(basename $file .zst)
             case "*.xz"
                 unxz --keep --stdout $file >$output_dir/(basename $file .xz)
             case "*.bz2"

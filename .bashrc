@@ -10,8 +10,6 @@ fi
 export PYTHONPYCACHEPREFIX="/home/ane/.pycache"
 # go
 export PATH=/home/ane/go/bin:$PATH
-# asdf
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 if [[ -n "$CURSOR_AGENT" ]]; then
   PS1='\u@\h \W \$ '
@@ -33,6 +31,6 @@ fi
 
 # AsyncAPI CLI Autocomplete
 
-ASYNCAPI_AC_BASH_SETUP_PATH=/Users/ane/Library/Caches/@asyncapi/cli/autocomplete/bash_setup && test -f $ASYNCAPI_AC_BASH_SETUP_PATH && source $ASYNCAPI_AC_BASH_SETUP_PATH; # asyncapi autocomplete setup
+ASYNCAPI_AC_BASH_SETUP_PATH=/Users/ane/Library/Caches/@asyncapi/cli/autocomplete/bash_setup && test -f $ASYNCAPI_AC_BASH_SETUP_PATH && source $ASYNCAPI_AC_BASH_SETUP_PATH # asyncapi autocomplete setup
 
-
+. "$HOME/.cargo/env"

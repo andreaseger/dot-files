@@ -22,3 +22,6 @@ node_modules
 .claude/settings.local.json
 .claude/worktrees
 .claude/plans
+
+.lsmcp
+.lsmcp/cache
