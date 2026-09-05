@@ -1,0 +1,12 @@
+# Global tool versions managed by mise (https://mise.jdx.dev)
+# Install everything listed here with `mise install`.
+# Add more with `mise use -g <tool>@<version>`.
+[tools]
+# needed by `mise completion` to generate shell completions
+usage = "latest"
+
+# replaces the old update-vendored-binaries script
+kubectl = "latest"
+helm = "latest"
+sops = "latest"
+age = "latest"

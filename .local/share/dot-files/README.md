@@ -17,12 +17,16 @@ wget -qO- https://up.a6.io | sh
 
 For details checkout `.local/bin/bootstrap-dotf`
 
-1. Install a couple system packages (OS agnostic archlinux, ubuntu, alpine, macOS/homebrew)
-2. install asdf
-3. validate ssh-key setup for github
-4. clone this dot-files repo as bare repo into .local/share/dot-files.git
-5. checkout default branch into `$HOME`
-6. check that we're using fish shell
+1. check that an ssh key exists
+2. install a couple system packages (OS agnostic archlinux, ubuntu, alpine, macOS/homebrew)
+3. install [mise](https://mise.jdx.dev) to `~/.local/bin`
+4. validate ssh-key setup for github
+5. clone this dot-files repo as bare repo into `.local/share/dot-files.git`, set up remote tracking and checkout the default branch into `$HOME`
+6. install the tools listed in `.config/mise/config.toml`
+7. clone tmux plugins (resurrect, continuum) into `.config/tmux/plugins`
+8. check that we're using fish shell
+
+The script is idempotent, rerun it to update packages, mise tools and tmux plugins.
 
 ### Usage / Maintenance
 
@@ -30,18 +34,31 @@ The dot-files include the following alias / function for both bash and fish resp
 
 ```
 dotf() {
-  git --git-dir=".local/share/dot-files.git/" --work-tree="$HOME" "$@"
+  git --git-dir="$HOME/.local/share/dot-files.git/" --work-tree="$HOME" "$@"
 }
 ```
 
 So you can interact with it like with normal git just using `dotf` instead.
+`dotf-up` rebases onto `origin/m`, `dotf-push` pushes.
 
 Note: We set `dotf config status.showUntrackedFiles no`, so we're not seeing any untracked files.
+Toggle with `dotf show-untracked` / `dotf hide-untracked`.
+
+### Tools
+
+Global CLI tools (kubectl, helm, sops, age, ...) are managed by mise via `.config/mise/config.toml`.
+
+```sh
+mise install              # install everything from the config
+mise use -g node@lts      # add a tool
+mise upgrade              # update all
+```
 
 ## Highlights
 
 - fish shell
 - global git config
+- mise for tool versions
 - starship (*fish uses tide instead)
 - tmux
 - lazy.vim starter
@@ -57,18 +74,4 @@ brew install --cask \
   rectangle \
   scroll-reverser
 
-```
-
-## TBD - issues
-
-
-Currently not sure if the git config for the dot-files bare repo is 100% correct. It should have these bits
-
-```
-[remote "origin"]
-	url = git@github.com:andreaseger/dot-files.git
-  fetch = +refs/heads/*:refs/remotes/origin/*
-[branch "m"]
-	remote = origin
-	merge = refs/heads/m
 ```

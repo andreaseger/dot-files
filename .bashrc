@@ -6,11 +6,17 @@ if [[ -d ~/.local/share/omarchy ]]; then
   source ~/.local/share/omarchy/default/bash/rc
 fi
 
-# ~/.bashrc — fall back to a simple prompt in Agent sessions
-export PYTHONPYCACHEPREFIX="/home/ane/.pycache"
-# go
-export PATH=/home/ane/go/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
+export PYTHONPYCACHEPREFIX="$HOME/.pycache"
 
+# go
+[[ -d "$HOME/go/bin" ]] && export PATH="$HOME/go/bin:$PATH"
+# rust
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
+# mise
+command -v mise >/dev/null 2>&1 && eval "$(mise activate bash)"
+
+# ~/.bashrc — fall back to a simple prompt in Agent sessions
 if [[ -n "$CURSOR_AGENT" ]]; then
   PS1='\u@\h \W \$ '
 else
@@ -24,13 +30,13 @@ else
   alias ll="ls -lh"
   alias g="git"
   alias gst="git status"
-  alias dotf='git --git-dir=$HOME/.local/share/dot-files/ --work-tree=$HOME'
-
-  . <(asdf completion bash)
+  alias dotf='git --git-dir=$HOME/.local/share/dot-files.git/ --work-tree=$HOME'
 fi
 
-# AsyncAPI CLI Autocomplete
-
-ASYNCAPI_AC_BASH_SETUP_PATH=/Users/ane/Library/Caches/@asyncapi/cli/autocomplete/bash_setup && test -f $ASYNCAPI_AC_BASH_SETUP_PATH && source $ASYNCAPI_AC_BASH_SETUP_PATH # asyncapi autocomplete setup
-
-. "$HOME/.cargo/env"
+# AsyncAPI CLI autocomplete (macOS cache dir first, XDG cache dir on Linux)
+for _asyncapi_setup in \
+  "$HOME/Library/Caches/@asyncapi/cli/autocomplete/bash_setup" \
+  "${XDG_CACHE_HOME:-$HOME/.cache}/@asyncapi/cli/autocomplete/bash_setup"; do
+  [[ -f "$_asyncapi_setup" ]] && source "$_asyncapi_setup"
+done
+unset _asyncapi_setup

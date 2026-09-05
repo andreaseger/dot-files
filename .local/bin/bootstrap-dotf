@@ -2,27 +2,35 @@
 set -e
 
 # 1. RECLAIM STDIN
-# Check if file descriptor 0 is a terminal. If not, try to use /dev/tty.
-if [ ! -t 0 ] && [ -e /dev/tty ]; then
+# When piped (curl ... | sh) stdin is the script, so reattach it to the terminal.
+# /dev/tty exists but cannot be opened without a controlling terminal
+# (containers, CI, cron), hence the open test instead of a plain -e.
+if [ ! -t 0 ] && ( : </dev/tty ) 2>/dev/null; then
   exec </dev/tty
 fi
 
 # -------------------------------------------------------------------------
 # Configuration
 # -------------------------------------------------------------------------
-DOTFILES_REPO="git@github.com:andreaseger/dot-files.git"
+# Overridable for testing (e.g. point at a local clone in a container)
+DOTFILES_REPO="${DOTFILES_REPO:-git@github.com:andreaseger/dot-files.git}"
+# Set to 1 to skip the SSH key / GitHub auth checks (tests, HTTPS clones)
+DOTFILES_SKIP_SSH="${DOTFILES_SKIP_SSH:-0}"
 DOTFILES_DIR="$HOME/.local/share/dot-files.git"
 BACKUP_DIR="$HOME/.dotfiles-backup"
 LOCAL_BIN="$HOME/.local/bin"
+TMUX_PLUGIN_DIR="$HOME/.config/tmux/plugins"
+TMUX_PLUGINS="tmux-resurrect tmux-continuum"
 
 # Package Lists (Space separated strings work fine in sh)
-# Note: 'unzip' and 'tar' are needed for asdf plugins
-PACKAGES_COMMON="git git-lfs fish curl wget neovim unzip tar"
+# Note: 'unzip' is needed by some mise backends
+PACKAGES_COMMON="git git-lfs fish tmux curl wget neovim unzip"
 
 # OS Specific Build Tools
 PACKAGES_UBUNTU="build-essential libssl-dev zlib1g-dev libreadline-dev"
 PACKAGES_ARCH="base-devel openssh"
-PACKAGES_ALPINE="build-base bash openssh shadow linux-headers"
+# busybox tar is missing features some tools rely on, so install GNU tar
+PACKAGES_ALPINE="build-base bash openssh shadow linux-headers tar"
 
 # only OS where we're sure we have a desktop and need a nerdfont all other might be servers
 PACKAGES_MACOS="coreutils font-fira-code-nerd-font"
@@ -55,98 +63,8 @@ run_privileged() {
   fi
 }
 
-# -------------------------------------------------------------------------
-# 1. Package Installation
-# -------------------------------------------------------------------------
-install_packages() {
-  log "Detecting OS for package installation..."
-
-  # Use uname for POSIX OS detection
-  OS="$(uname -s)"
-
-  if [ "$OS" = "Darwin" ]; then
-    log "macOS detected."
-    if ! has_cmd brew; then
-      log "Homebrew not found. Installing..."
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      if [ -d "/opt/homebrew/bin" ]; then eval "$(/opt/homebrew/bin/brew shellenv)"; fi
-      if [ -d "/usr/local/bin" ]; then eval "$(/usr/local/bin/brew shellenv)"; fi
-    fi
-    # Word splitting works in sh variables, so no quotes around packages
-    brew install $PACKAGES_COMMON $PACKAGES_MACOS
-
-  elif [ -f /etc/alpine-release ]; then
-    log "Alpine Linux detected."
-    run_privileged apk add --no-cache $PACKAGES_COMMON $PACKAGES_ALPINE
-
-  elif [ -f /etc/arch-release ]; then
-    log "Arch Linux detected."
-    run_privileged pacman -Syu --noconfirm $PACKAGES_COMMON $PACKAGES_ARCH
-
-  elif [ -f /etc/debian_version ]; then
-    log "Debian/Ubuntu detected."
-    if grep -q "Ubuntu" /etc/os-release; then
-      log "Adding Neovim PPA..."
-      run_privileged apt-get update
-      run_privileged apt-get install -y software-properties-common
-      run_privileged add-apt-repository -y ppa:neovim-ppa/stable
-    fi
-    run_privileged apt-get update
-    run_privileged apt-get install -y $PACKAGES_COMMON $PACKAGES_UBUNTU
-  fi
-}
-
-# -------------------------------------------------------------------------
-# 2. Install ASDF (Binary)
-# -------------------------------------------------------------------------
-install_asdf() {
-  log "Installing asdf binary..."
-
+ensure_local_bin_in_path() {
   mkdir -p "$LOCAL_BIN"
-
-  # Detect OS/Arch for download
-  OS_LOWER="$(uname -s | tr '[:upper:]' '[:lower:]')"
-  ARCH_RAW="$(uname -m)"
-
-  case "$ARCH_RAW" in
-  x86_64) ARCH="amd64" ;;
-  arm64) ARCH="arm64" ;;
-  aarch64) ARCH="arm64" ;;
-  *)
-    error "Unsupported Architecture: $ARCH_RAW"
-    exit 1
-    ;;
-  esac
-
-  # Determine version
-  # We use a safe fallback if we can't fetch the latest tag
-  LATEST_VERSION="v0.16.3"
-
-  # Try to fetch latest tag if curl is available (it was installed in step 1)
-  if has_cmd curl; then
-    FETCHED_VER=$(curl -s https://api.github.com/repos/asdf-vm/asdf/releases/latest | grep '"tag_name":' | sed 's/.*"tag_name": "\(.*\)".*/\1/')
-    if [ -n "$FETCHED_VER" ]; then
-      LATEST_VERSION="$FETCHED_VER"
-    fi
-  fi
-
-  FILENAME="asdf-${LATEST_VERSION}-${OS_LOWER}-${ARCH}.tar.gz"
-  DOWNLOAD_URL="https://github.com/asdf-vm/asdf/releases/download/${LATEST_VERSION}/${FILENAME}"
-
-  log "Downloading asdf $LATEST_VERSION..."
-  # Use curl (installed in step 1) or wget (default in alpine)
-  if has_cmd curl; then
-    curl -fL "$DOWNLOAD_URL" -o "/tmp/$FILENAME"
-  else
-    wget -O "/tmp/$FILENAME" "$DOWNLOAD_URL"
-  fi
-
-  log "Extracting to $LOCAL_BIN..."
-  tar -xzf "/tmp/$FILENAME" -C "$LOCAL_BIN" asdf
-  rm "/tmp/$FILENAME"
-  chmod +x "$LOCAL_BIN/asdf"
-
-  # Path bridge
   case ":$PATH:" in
   *":$LOCAL_BIN:"*) ;;
   *) export PATH="$LOCAL_BIN:$PATH" ;;
@@ -154,10 +72,11 @@ install_asdf() {
 }
 
 # -------------------------------------------------------------------------
-# 3. SSH Guard
+# 1. SSH key guard (cheap, so run it before the slow package installs)
 # -------------------------------------------------------------------------
-check_ssh() {
-  log "Checking SSH configuration..."
+check_ssh_key() {
+  if [ "$DOTFILES_SKIP_SSH" = "1" ]; then return; fi
+  log "Checking for SSH keys..."
   # sh doesn't handle wildcard expansion failures gracefully in variables,
   # so we check existence carefully
   KEYS_EXIST=0
@@ -173,7 +92,89 @@ check_ssh() {
     echo "  Generate one: ssh-keygen -t ed25519 -C 'your@email.com'"
     exit 1
   fi
+}
 
+# -------------------------------------------------------------------------
+# 2. Package Installation
+# -------------------------------------------------------------------------
+install_packages() {
+  log "Detecting OS for package installation..."
+
+  # Use uname for POSIX OS detection
+  OS="$(uname -s)"
+
+  if [ "$OS" = "Darwin" ]; then
+    log "macOS detected."
+    if ! has_cmd brew; then
+      log "Homebrew not found. Installing..."
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      if [ -x "/opt/homebrew/bin/brew" ]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+      elif [ -x "/usr/local/bin/brew" ]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+      fi
+    fi
+    # Word splitting works in sh variables, so no quotes around packages
+    # shellcheck disable=SC2086
+    brew install $PACKAGES_COMMON $PACKAGES_MACOS
+
+  elif [ -f /etc/alpine-release ]; then
+    log "Alpine Linux detected."
+    # shellcheck disable=SC2086
+    run_privileged apk add --no-cache $PACKAGES_COMMON $PACKAGES_ALPINE
+
+  elif [ -f /etc/arch-release ]; then
+    log "Arch Linux detected."
+    # shellcheck disable=SC2086
+    run_privileged pacman -Syu --noconfirm $PACKAGES_COMMON $PACKAGES_ARCH
+
+  elif [ -f /etc/debian_version ]; then
+    log "Debian/Ubuntu detected."
+    if grep -q "Ubuntu" /etc/os-release; then
+      log "Adding Neovim PPA..."
+      run_privileged apt-get update
+      run_privileged apt-get install -y software-properties-common
+      run_privileged add-apt-repository -y ppa:neovim-ppa/stable
+    fi
+    run_privileged apt-get update
+    # shellcheck disable=SC2086
+    run_privileged apt-get install -y $PACKAGES_COMMON $PACKAGES_UBUNTU
+
+  else
+    error "Unsupported OS: $OS ($(cat /etc/os-release 2>/dev/null | head -1 || echo 'unknown distribution'))"
+    echo "  Supported: macOS, Alpine, Arch Linux, Debian/Ubuntu."
+    echo "  Install these manually, then rerun: $PACKAGES_COMMON"
+    exit 1
+  fi
+}
+
+# -------------------------------------------------------------------------
+# 3. Install mise (tool version manager, https://mise.jdx.dev)
+# -------------------------------------------------------------------------
+install_mise() {
+  ensure_local_bin_in_path
+
+  if has_cmd mise; then
+    log "mise already installed at $(command -v mise). Skipping."
+    return
+  fi
+
+  log "Installing mise to $LOCAL_BIN..."
+  # The installer picks the right build for OS/arch (including musl for Alpine).
+  # Use curl (installed in step 2) or wget (default in alpine)
+  if has_cmd curl; then
+    curl -fsSL https://mise.run | MISE_INSTALL_PATH="$LOCAL_BIN/mise" sh
+  else
+    wget -qO- https://mise.run | MISE_INSTALL_PATH="$LOCAL_BIN/mise" sh
+  fi
+}
+
+# -------------------------------------------------------------------------
+# 4. SSH auth guard (needs the ssh client, which Alpine only has after step 2)
+# -------------------------------------------------------------------------
+check_ssh_auth() {
+  if [ "$DOTFILES_SKIP_SSH" = "1" ]; then return; fi
+  log "Checking GitHub SSH authentication..."
   # sh doesn't have pipefail, but we can check grep output
   # ssh -T usually returns 1, so we check strict logic
   OUT=$(ssh -T -o StrictHostKeyChecking=accept-new git@github.com 2>&1 || true)
@@ -187,7 +188,7 @@ check_ssh() {
 }
 
 # -------------------------------------------------------------------------
-# 4. Dotfiles Setup
+# 5. Dotfiles Setup
 # -------------------------------------------------------------------------
 setup_dotfiles() {
   if [ -d "$DOTFILES_DIR" ]; then
@@ -202,31 +203,70 @@ setup_dotfiles() {
     '+refs/heads/*:refs/remotes/origin/*'
   dotf fetch origin
 
-  log "Checking out dotfiles..."
+  # Track the remote branch so plain `dotf pull` / `dotf push` work.
+  BRANCH="$(dotf symbolic-ref --short HEAD)"
+  dotf branch --set-upstream-to="origin/$BRANCH" "$BRANCH"
+
   dotf config status.showUntrackedFiles no
-  dotf personal
   # Create aliases for convenience
   dotf config --local alias.hide-untracked "config status.showUntrackedFiles no"
   dotf config --local alias.show-untracked "config status.showUntrackedFiles yes"
 
+  log "Checking out dotfiles..."
   if dotf checkout; then
     log "Checked out configuration."
   else
-    warn "Checkout conflict. Backing up existing files..."
+    warn "Checkout conflict. Backing up existing files to $BACKUP_DIR..."
     mkdir -p "$BACKUP_DIR"
 
-    # Capture conflict files. 'grep -E' might not be in busybox grep, use standard grep
-    dotf checkout 2>&1 | grep "^\s\+" | awk '{print $1}' | while read -r file; do
-      DIRNAME=$(dirname "$file")
-      mkdir -p "$BACKUP_DIR/$DIRNAME"
-      mv "$HOME/$file" "$BACKUP_DIR/$file"
+    # Move every tracked path that already exists in $HOME out of the way.
+    # This avoids parsing git's error output, which is not stable across versions.
+    dotf ls-tree -r --name-only HEAD | while IFS= read -r file; do
+      if [ -e "$HOME/$file" ] || [ -L "$HOME/$file" ]; then
+        mkdir -p "$BACKUP_DIR/$(dirname "$file")"
+        mv "$HOME/$file" "$BACKUP_DIR/$file"
+      fi
     done
     dotf checkout
+  fi
+
+  # `personal` is an alias from the global git config that was just checked out.
+  # user.useConfigOnly is set there, so commits in this repo need an explicit email.
+  dotf personal
+}
+
+# -------------------------------------------------------------------------
+# 6. Tools managed by mise (~/.config/mise/config.toml, checked out above)
+# -------------------------------------------------------------------------
+install_tools() {
+  log "Installing tools via mise..."
+  mise install --yes
+
+  # fish completions are generated, not tracked (they embed the mise version's spec)
+  if has_cmd fish; then
+    mkdir -p "$HOME/.config/fish/completions"
+    mise completion fish >"$HOME/.config/fish/completions/mise.fish" 2>/dev/null ||
+      warn "Could not generate mise fish completions."
   fi
 }
 
 # -------------------------------------------------------------------------
-# 5. Shell Check
+# 7. tmux plugins (not tracked in the repo, cloned into ~/.config/tmux/plugins)
+# -------------------------------------------------------------------------
+install_tmux_plugins() {
+  log "Installing tmux plugins..."
+  mkdir -p "$TMUX_PLUGIN_DIR"
+  for plugin in $TMUX_PLUGINS; do
+    if [ -d "$TMUX_PLUGIN_DIR/$plugin" ]; then
+      git -C "$TMUX_PLUGIN_DIR/$plugin" pull --ff-only --quiet || warn "Could not update $plugin"
+    else
+      git clone --depth 1 --quiet "https://github.com/tmux-plugins/$plugin.git" "$TMUX_PLUGIN_DIR/$plugin"
+    fi
+  done
+}
+
+# -------------------------------------------------------------------------
+# 8. Shell Check
 # -------------------------------------------------------------------------
 check_shell() {
   log "Checking shell..."
@@ -235,7 +275,7 @@ check_shell() {
 
   # POSIX way to get current user shell usually involves grep /etc/passwd
   if [ "$(uname -s)" = "Darwin" ]; then
-    CURRENT_SHELL=$(dscl . -read /Users/$USER UserShell | sed 's/UserShell: //')
+    CURRENT_SHELL=$(dscl . -read "/Users/$USER" UserShell | sed 's/UserShell: //')
   else
     # $(id -u -n) gets username, then lookup in passwd
     CURRENT_SHELL=$(grep "^$(id -u -n):" /etc/passwd | cut -d: -f7)
@@ -257,17 +297,20 @@ check_shell() {
 # Run
 # -------------------------------------------------------------------------
 main() {
+  check_ssh_key
   install_packages
-  install_asdf
-  check_ssh
+  install_mise
+  check_ssh_auth
   setup_dotfiles
+  install_tools
+  install_tmux_plugins
   check_shell
 
   echo ""
   log "SUCCESS! System bootstrapped."
   log "1. Restart your terminal."
   log "2. Run 'dotf' to manage your dotfiles."
-  log "3. Install tools: 'asdf plugin add nodejs && asdf install nodejs latest'"
+  log "3. Install more tools: 'mise use -g node@lts' (see ~/.config/mise/config.toml)"
 }
 
 main "$@"

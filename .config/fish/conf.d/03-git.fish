@@ -1,7 +1,6 @@
 abbr -a g 'git'
 abbr -a gst 'git status -sb'
 
-function gbr; git rebase -p $argv; end
 function gup; git fetch; and git rebase --autostash --rebase-merges (_git_upstream_branch); end
 
 abbr -a ga 'git add'

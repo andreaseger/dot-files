@@ -1,7 +1,6 @@
 [core]
-  excludesfile = ~/.gitignore.global
   attributesfile = ~/.gitattributes.global
-  pager = less -r
+  pager = less -R
 	autocrlf = input
 [user]
   name = Andreas Eger

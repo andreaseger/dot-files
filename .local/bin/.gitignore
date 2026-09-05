@@ -4,7 +4,6 @@
 
 # bins I want to keep
 !256color
-!update-vendored-binaries
 !bootstrap-dotf
 !truecolor
 !clip

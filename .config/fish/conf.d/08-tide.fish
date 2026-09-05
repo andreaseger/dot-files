@@ -9,7 +9,6 @@ if not test -e "$__fish_config_dir/corals/$coral"
             echo "  sudo pacman -S ttf-firacode-nerd"
         case Darwin
             echo "On macOS, you can install NerdFonts via Homebrew, e.g.,"
-            echo "  brew tap homebrew/cask-fonts"
             echo "  brew install --cask font-meslo-lg-nerd-font"
             echo "  brew install --cask font-fira-code-nerd-font"
         case '*'
@@ -17,7 +16,9 @@ if not test -e "$__fish_config_dir/corals/$coral"
     end
     # set theme (in case we have other plugins with a fish_prompt function)
     reef theme $coral
-    # load tide for current session
+    # load tide for current session (07-reef ran before tide existed, so add its paths now)
+    set -a fish_function_path (path resolve $__fish_config_dir/corals/$coral/functions)
+    set -a fish_complete_path (path resolve $__fish_config_dir/corals/$coral/completions)
     source (path resolve $__fish_config_dir/corals/$coral/conf.d/*.fish)
 end
 
