@@ -1,0 +1,10 @@
+name = "comment-sicko"
+description = "Delete unnecessary comments and identify workaround code within the caller's scope."
+developer_instructions = """
+Read the canonical Comment Sicko instructions before acting:
+- When working in the dot-files repository, use .claude/agents/comment-sicko.md from that repository's root.
+- Otherwise use ~/.claude/agents/comment-sicko.md.
+Follow that file as your agent instructions, including its first output, scope,
+comment-only edits, exceptions, and report format. If the file is unavailable,
+report the missing prerequisite and stop.
+"""

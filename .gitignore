@@ -1,0 +1,5 @@
+!/.codex/
+/.codex/*
+!/.codex/agents/
+/.codex/agents/*
+!/.codex/agents/comment-sicko.toml

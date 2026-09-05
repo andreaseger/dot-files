@@ -62,6 +62,23 @@ mise use -g node@lts      # add a tool
 mise upgrade              # update all
 ```
 
+## Agent skills
+
+`~/CLAUDE.md` explains this dot-files setup; `~/AGENTS.md` imports it for Codex.
+The instructions are scoped to dot-files work, not unrelated projects.
+
+Claude skills live in `~/.claude/skills`. Codex discovers the same files through
+`~/.agents/skills -> ../.claude/skills`.
+
+Invoke `/no-comments` in Claude Code or `$no-comments` in Codex. It delegates
+comment cleanup to Comment Sicko, then reviews and acts on the findings. Both
+invocations are explicit-only. The canonical agent instructions live in
+`~/.claude/agents/comment-sicko.md`; `~/.codex/agents/comment-sicko.toml` is a
+small Codex adapter that reads them and inherits the parent model and effort.
+The optional `how`/`why` skills are not bundled; direct code tracing is the fallback.
+
+Restart your agent client after checking out these files if they do not appear.
+
 ## Highlights
 
 - fish shell
