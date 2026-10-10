@@ -2,6 +2,7 @@
 
 - Interactive shell: Fish. Check the execution shell before using shell-specific syntax; keep `fish -c` free of prompt/plugin setup.
 - mise manages tool versions (`~/.config/mise/config.toml` and project configs). Use `mise exec -- <command>` when tools are missing from PATH; respect project versions.
+- do NOT use `docker` use `podman` instead
 
 For dot-files work:
 
