@@ -11,3 +11,7 @@ gh = "latest"
 go = "latest"
 git-lfs = "latest"
 neovim = "latest"
+"npm:@openai/codex" = "latest"
+
+[settings]
+minimum_release_age_excludes = ["npm:@openai/codex"]
