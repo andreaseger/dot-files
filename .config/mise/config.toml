@@ -2,11 +2,12 @@
 # Install everything listed here with `mise install`.
 # Add more with `mise use -g <tool>@<version>`.
 [tools]
-# needed by `mise completion` to generate shell completions
 usage = "latest"
-
-# replaces the old update-vendored-binaries script
 kubectl = "latest"
 helm = "latest"
 sops = "latest"
 age = "latest"
+gh = "latest"
+go = "latest"
+git-lfs = "latest"
+neovim = "latest"
