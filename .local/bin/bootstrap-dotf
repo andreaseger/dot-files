@@ -16,7 +16,7 @@ TMUX_PLUGINS="tmux-resurrect tmux-continuum"
 
 # Package Lists (Space separated strings work fine in sh)
 # Note: 'unzip' is needed by some mise backends
-PACKAGES_COMMON="git git-lfs fish tmux curl wget neovim unzip"
+PACKAGES_COMMON="git git-lfs fish tmux curl wget unzip"
 
 # OS Specific Build Tools
 PACKAGES_UBUNTU="build-essential libssl-dev zlib1g-dev libreadline-dev"
@@ -286,7 +286,7 @@ main() {
   # All function definitions have been read before changing stdin. Doing this
   # at the top level would stop `curl | sh` from reading the rest of the script.
   # Only reconnect when a controlling terminal is available (not CI/cron).
-  if [ ! -t 0 ] && ( : </dev/tty ) 2>/dev/null; then
+  if [ ! -t 0 ] && (: </dev/tty) 2>/dev/null; then
     exec </dev/tty
   fi
 
