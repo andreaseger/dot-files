@@ -117,8 +117,17 @@ install_packages() {
 
   elif [ -f /etc/arch-release ]; then
     log "Arch Linux detected."
-    # shellcheck disable=SC2086
-    run_privileged pacman -Syu --noconfirm $PACKAGES_COMMON $PACKAGES_ARCH
+    if has_cmd omarchy-update; then
+      # Omarchy wraps the system update (snapshots, migrations, etc.) and
+      # elevates itself, so run it as the current user, not via sudo.
+      log "Omarchy detected. Updating via omarchy-update..."
+      omarchy-update -y
+      # shellcheck disable=SC2086
+      run_privileged pacman -S --needed --noconfirm $PACKAGES_COMMON $PACKAGES_ARCH
+    else
+      # shellcheck disable=SC2086
+      run_privileged pacman -Syu --noconfirm $PACKAGES_COMMON $PACKAGES_ARCH
+    fi
 
   elif [ -f /etc/debian_version ]; then
     log "Debian/Ubuntu detected."
